@@ -1,0 +1,15 @@
+.overHead {
+    text-align: center;
+    color: var(--main-bg-color);
+    background-color: var(--pls-color-5);
+    padding: .3rem;
+    font-size: 1rem;
+}
+
+
+
+@media screen and (max-width: 560px) {
+    .overHead {
+        font-size: .8rem;
+    }
+}

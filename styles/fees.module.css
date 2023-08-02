@@ -1,0 +1,76 @@
+.Fees {
+    width: 100%;
+    margin-block: 7rem;
+}
+
+.Fees_box {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.Fees_box_info {
+    text-align: center;
+    line-height: 0;
+}
+
+.Fees_box_info h1 {
+    font-size: 4rem;
+    line-height: .5;
+}
+
+.Fees_box_info p {
+    font-size: 1.6rem;
+    line-height: .5;
+}
+
+.Fees_box_box {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    margin-top: 7rem;
+}
+
+@media screen and (max-width: 560px) {
+
+    .Fees {
+        margin-block: 4rem;
+    }
+
+    .Fees_box {
+        width: 90%;
+    }
+
+    .Fees_box_info h1 {
+        font-size: 2rem;
+    }
+
+    .Fees_box_info p {
+        font-size: 1rem;
+    }
+
+    .Fees_box_box {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (min-width: 561px) and (max-width: 1024px) {
+    .Fees {
+        margin-block: 4rem;
+    }
+
+    .Fees_box {
+        width: 90%;
+    }
+
+    .Fees_box_info h1 {
+        font-size: 2rem;
+    }
+
+    .Fees_box_info p {
+        font-size: 1rem;
+    }
+
+    .Fees_box_box {
+        grid-template-columns: 1fr 1fr;
+    }
+}

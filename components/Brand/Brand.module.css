@@ -1,0 +1,60 @@
+
+.Brand{
+    width: 100%;
+    margin-top: 10rem;
+    margin-bottom: 7rem;
+}
+
+.Brand_box{
+    width: 80%;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: 1.5fr 2fr;
+    gap: 5rem;
+    align-items: center;
+}
+
+.Brand_box_left h1{
+    font-size: 5rem;
+    line-height: 1;
+    font-weight: bolder;
+}
+
+.Brand_box_left h2{
+    font-size: 3rem;
+    line-height: 1;
+    font-weight: bolder;
+}
+
+.Brand_box_left p{
+    font-size: 1.2rem;
+    margin-top: -1rem;
+}
+
+.Brand_box_left_btn{
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+
+@media screen and (max-width: 560px) {
+    .Brand_box{
+        grid-template-columns: 1fr;
+    }
+    .Brand_box_left h1{
+        font-size: 2.5rem;
+    }
+    .Brand_box_left h2{
+        font-size: 1.8rem;
+    }
+    .Brand_box_left p{
+        font-size: 1rem;
+        margin-top: -.5rem;
+    }
+    .Brand_box_left_btn{
+        gap: 1.5rem;
+    }
+}

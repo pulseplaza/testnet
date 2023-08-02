@@ -1,0 +1,121 @@
+.sideBar {
+    background-color: var(--main-bg-color);
+}
+
+:global(body.dark-mode) .sideBar {
+    background-color: var(--main-bg-color-dark);
+}
+
+.sideBar_box {
+    padding: 2rem;
+    border-bottom: 1px solid var(--icons-color);
+    background-color: var(--main-bg-color);
+}
+
+:global(body.dark-mode) .sideBar_box {
+    border-bottom: 1px solid var(--icons-color-2);
+    background-color: var(--main-bg-color-dark);
+}
+
+
+
+
+
+
+.sideBar_box_logo {
+    font-size: 5rem;
+    margin-bottom: 3rem;
+    margin-top: 2rem;
+}
+
+
+.sideBar_closeBtn {
+    position: absolute;
+    top: 3rem;
+    right: 2rem;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+    box-shadow: none;
+}
+
+
+:global(body.dark-mode) .sideBar_closeBtn {
+    filter: invert(1);
+}
+
+
+
+.sideBar_closeBtn:hover {
+    transform: rotate(45deg);
+}
+
+.sideBar_box p {
+    margin-top: -2rem;
+}
+
+.sideBar_social {
+    display: flex;
+    gap: 1.3rem;
+    font-size: 1.5rem;
+    align-items: center;
+}
+
+.sideBar_social a {
+    padding: .2rem;
+    border-radius: 50%;
+    transition: all .3s ease-in;
+    display: grid;
+}
+
+.sideBar_social a:hover {
+    background-color: var(--icons-color);
+    color: var(--main-bg-color);
+    box-shadow: 1px solid var(--icons-color);
+}
+
+:global(body.dark-mode) .sideBar_social a:hover {
+    background-color: var(--icons-color-2);
+    color: var(--main-bg-color-dark);
+    box-shadow: 1px solid var(--icons-color-2);
+}
+
+.sideBar_menu {
+    padding: 2rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    border-bottom: 1px solid var(--icons-color);
+}
+
+:global(body.dark-mode) .sideBar_menu {
+    border-bottom: 1px solid var(--icons-color-2);
+}
+
+.sideBar_menu_box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.sideBar_discover {
+    padding-inline: 1rem;
+}
+
+
+.sideBar_button {
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.sideBar_button button {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}

@@ -1,0 +1,81 @@
+.audioPlayer_box {
+    display: grid;
+    grid-template-columns: 2fr 5fr 1fr;
+    align-items: center;
+    gap: 1rem;
+    line-height: 0;
+    background-color: var(--bg-second-light);
+    padding: .3rem 1rem;
+    border-radius: 1rem;
+    height: 8rem;
+    transition: all .3s ease-in;
+    cursor: pointer;
+}
+
+:global(body.dark-mode) .audioPlayer_box {
+    background-color: var(--bg-second-dark);
+}
+
+
+.audioPlayer_box:hover {
+    box-shadow: var(--box-shadow-2);
+}
+
+.audioPlayer_box_info_box {
+    display: flex;
+    gap: 1rem;
+    padding-bottom: .5rem;
+}
+
+.audioPlayer_box_img {
+    border-radius: .5rem;
+}
+
+.audioPlayer_box_info_box_price {
+    margin-top: .8rem;
+
+    border: 2px solid var(--icons-color);
+    font-size: .8rem;
+    width: flex;
+    font-weight: 600;
+    border-radius: .5rem;
+    padding: .2rem .3rem;
+}
+
+:global(body.dark-mode) .audioPlayer_box_info_box_price {
+    border: 2px solid var(--icons-color-2);
+}
+
+.audioPlayer_box_info_box_price small {
+    background-color: var(--icons-color);
+    color: var(--main-bg-color);
+    padding: .1rem .3rem;
+    border-radius: .2rem;
+}
+
+:global(body.dark-mode) .audioPlayer_box_info_box_price small {
+    background-color: var(--icons-color-2);
+}
+
+.audioPlayer_box_info_box_price p {
+    margin-top: 1rem;
+}
+
+.audioPlayer_box_playBtn {
+    font-size: 6rem;
+    background-color: var(--icons-color);
+    border-radius: 50%;
+    color: var(--main-bg-color);
+    padding: 1rem;
+    cursor: pointer;
+    box-sizing: border-box;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+:global(body.dark-mode) .audioPlayer_box_playBtn {
+    background-color: var(--icons-color-2);
+}

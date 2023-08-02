@@ -1,0 +1,68 @@
+
+
+.SearchBar{
+    width: 100%;
+}
+
+.SearchBar_box{
+    width: 40%;
+    margin:  0 auto;
+    background-color: var(--main-bg-color);
+    color: var(--main-bg-color);
+    display: flex;
+    border-radius: 5rem;
+    align-items: center;
+    margin-top: 8rem;
+    margin-bottom: 3rem;
+    box-shadow: var(--box-shadow-2);
+}
+
+:global(body.dark-mode) .SearchBar_box{
+    background-color: var(--main-bg-color-dark);
+    color: var(--main-bg-color-dark);
+}
+
+.SearchBar_box_icon{
+    font-size: 3rem;
+    padding: .5rem .8rem;
+    cursor: pointer;
+    color: var(--main-bg-color-dark);
+    margin-left: .5rem;
+    margin-right: .5rem;
+}
+
+:global(body.dark-mode) .SearchBar_box_icon{
+    color: var(--main-bg-color);
+}
+
+.SearchBar_box input{
+    width: 85%;
+    border: 0;
+    outline: 0;
+    padding: 1.5rem;
+    background-color: var(--main-bg-color);
+    font-size: 1.2rem;
+    color: var(--main-bg-color-dark);
+}
+
+:global(body.dark-mode) .SearchBar_box input{
+    background-color: var(--main-bg-color-dark);
+    color: var(--main-bg-color);
+}
+
+.SearchBar_box input::placeholder{
+    color: var(--main-bg-color-dark);
+    font-size: 1.2rem;
+}
+
+:global(body.dark-mode) .SearchBar_box input::placeholder{
+    color: var(--main-bg-color);
+}
+
+@media screen and (max-width: 1024px) {
+    .SearchBar_box{
+        width: 90%;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+}

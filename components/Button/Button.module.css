@@ -1,0 +1,23 @@
+.button {
+    background-color: var(--icons-color);
+    padding: 1rem 2rem;
+    border: 1px solid var(--icons-color);
+    border-radius: 2rem;
+    font-size: 1.1rem;
+    color: var(--main-bg-color);
+    cursor: pointer;
+    box-shadow: var(--box-shadow-2);
+}
+
+:global(body.dark-mode) .button {
+    background-color: var(--icons-color-2);
+    border: 1px solid var(--icons-color-2);
+    
+}
+
+
+.button:hover{
+    background: var(--pls-bg);
+    border: 1px solid var(--icons-color);
+    color: var(--main-bg-color);
+}

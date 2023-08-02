@@ -1,0 +1,128 @@
+.FollowerTabCard_box {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background-color: var(--bg-very-light);
+    border-radius: 2rem;
+    transition: all .3s ease-in;
+    cursor: pointer;
+    position: relative;
+}
+
+:global(body.dark-mode) .FollowerTabCard_box {
+    background-color: var(--bg-very-dark);
+}
+
+.FollowerTabCard_box:hover {
+    box-shadow: var(--box-shadow-2);
+}
+
+.FollowerTabCard_rank {
+    position: absolute;
+    z-index: 11111;
+    background-color: var(--icons-color);
+    color: var(--main-bg-color);
+    line-height: 0;
+    margin: 1rem;
+    font-size: .8rem;
+    padding: .1rem .5rem;
+    border-radius: 1rem;
+    border: 2px solid var(--icons-color);
+    transition: all .3s ease-in;
+}
+
+
+:global(body.dark-mode) .FollowerTabCard_rank {
+    background-color: var(--icons-color-2);
+    border: 2px solid var(--icons-color-2);
+}
+
+
+
+.FollowerTabCard_rank:hover {
+    background-color: var(--main-bg-color);
+    color: var(--icons-color);
+}
+
+.FollowerTabCard_box_img {
+    grid-column: 1 / -1;
+}
+
+.FollowerTabCard_box_img_img {
+    border-radius: 2rem;
+    max-width: 100%;
+    height: auto;
+}
+
+.FollowerTabCard_box_profile {
+    grid-column: 1/-1;
+    text-align: center;
+    margin-top: -2rem;
+    position: relative;
+}
+
+.FollowerTabCard_box_profile_img {
+    position: relative;
+    border-radius: 50%;
+    padding: .5rem;
+    z-index: 222;
+    background-color: var(--bg-very-light);
+}
+
+
+:global(body.dark-mode) .FollowerTabCard_box_profile_img {
+    background-color: var(--bg-very-dark);
+}
+
+
+
+.FollowerTabCard_box_info {
+    grid-column: 1/-1;
+    display: flex;
+    align-items: center;
+    line-height: 0;
+    justify-content: space-between;
+    margin-top: -1rem;
+    padding-inline: 1rem;
+    padding-bottom: 1rem;
+}
+
+.FollowerTabCard_box_info h4 {
+    font-size: 1rem;
+    line-height: 0;
+}
+
+.FollowerTabCard_box_info_following a {
+    background-color: var(--bg-second-light);
+    padding: .7rem .8rem;
+    border-radius: 2rem;
+    border: 2px solid var(--bg-second-light);
+    transition: all .3s ease-in;
+}
+
+:global(body.dark-mode) .FollowerTabCard_box_info_following a {
+    background-color: var(--bg-second-dark);
+    border: 2px solid var(--bg-second-dark);
+}
+
+.FollowerTabCard_box_info_following a:hover {
+    background-color: transparent;
+}
+
+:global(body.dark-mode) .FollowerTabCard_box_info_following a:hover {
+    background-color: transparent;
+}
+
+
+@media screen and (min-device-width:320px) {
+
+
+    .FollowerTabCard_box_info {
+        padding-inline: 2rem;
+    }
+
+    .FollowerTabCard_box_img_img {
+        height: 200px;
+    }
+}
+
+
