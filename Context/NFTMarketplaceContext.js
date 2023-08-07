@@ -140,8 +140,10 @@ export const NFTMarketplaceProvider = ({ children }) => {
             const added = await client.add({ content: file });
             const url = `${subdomain}/ipfs/${added.path}`;
             return url;
+            console.log('Project ID:', process.env.INFURA_PROJECT_ID);
+
         } catch (error) {
-            console.log("Error uploading to IPFS.");
+            console.log("Error uploading to IPFS.", error.message);
             //return null;
         }
     };
