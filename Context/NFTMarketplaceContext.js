@@ -71,33 +71,38 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
 
     //------USESTATES
+
+    const [error, setError] = useState("");
+    const [openError, setOpenError] = useState(false);
+
     const [currentAccount, setCurrentAccount] = useState("");
-    //const [error, setError] = useState("");
-    //const [openError, setOpenError] = useState(false);
+
     //const [accountBalance, setAccountBalance] = useState("");
-    //const router = useRouter();
+    const router = useRouter();
 
 
 
     //---CHECK IF WALLET IS CONNECTED
     const checkIfWalletConnected = async () => {
         try {
-            if (!window.ethereum) return console.log("Install Metamask");
+            if (!window.ethereum) return console.log("Install Metamask.");
+
 
             const accounts = await window.ethereum.request({ method: "eth_accounts", });
 
             if (accounts.length) {
                 setCurrentAccount(accounts[0]);
-                console.log(`Account connected: ${accounts[0]}`);
+
             } else {
-                console.log("No account found");
+                console.log("Wallet not connected.");
             }
 
             //console.log(currentAccount);
 
 
         } catch (error) {
-            console.log("Something went wrong while connecting to wallet.");
+            setError("Your wallet is not connected.");
+            setOpenError(true);
         }
     };
 
@@ -114,7 +119,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
     //---CONNECT WALLET FUNCTION
     const connectWallet = async () => {
         try {
-            if (!window.ethereum) return console.log("Install Metamask");
+            if (!window.ethereum) return setOpenError(true), setError("Please install Metamask or another compatible wallet on your browser.");
 
             const accounts = await window.ethereum.request({ method: "eth_requestAccounts", });
 
@@ -127,8 +132,8 @@ export const NFTMarketplaceProvider = ({ children }) => {
             //connectingWithSmartContract();
 
         } catch (error) {
-            console.log("Error while connecting to wallet.");
-            //return null;
+            setError("Could not connect. Please check your wallet and try again.");
+            setOpenError(true);
         }
     };
 
@@ -140,24 +145,23 @@ export const NFTMarketplaceProvider = ({ children }) => {
             const added = await client.add({ content: file });
             const url = `${subdomain}/ipfs/${added.path}`;
             return url;
-            console.log('Project ID:', process.env.INFURA_PROJECT_ID);
 
         } catch (error) {
-            console.log("Error uploading to IPFS.", error.message);
-            //return null;
+            setError("Data could not be uploaded. Check file format and size.");
+            setOpenError(true);
         }
     };
 
-    
+
     //---CREATE NFT FUNCTION
 
     const createNFT = async (name, price, image, description, router) => {
 
 
         if (!name || !description || !price || !image)
-            return console.log("Data Is Missing");
+            return setOpenError(true), setError("There was a problem while creating the NFT.");
 
-            const data = JSON.stringify({ name, description, image });
+        const data = JSON.stringify({ name, description, image });
 
         try {
             const added = await client.add(data);
@@ -166,11 +170,13 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
             await createSale(url, price);
 
+            router.push("/search");
+
             //return url;
 
         } catch (error) {
-            console.log("Error while creating NFT.");
-            //setOpenError(true);
+            setError("There was a problem while creating the NFT.");
+            setOpenError(true);
         }
     };
 
@@ -201,9 +207,11 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
             console.log(transaction);
 
-        } catch (error) {
-            console.log("Error while creating sale.");
 
+
+        } catch (error) {
+            setError("There was a problem while creating the sale.");
+            setOpenError(true);
         }
     };
 
@@ -250,16 +258,16 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
             // }
         } catch (error) {
-            // setError("Error while fetching NFTS");
-            // setOpenError(true);
-            console.log("Error while fetching NFTs.");
+            setError("There was a problem while fetching NFTs.");
+            setOpenError(true);
         }
     };
 
 
-    //useEffect(() => {
-    //    fetchNFTs();
-    //}, []);
+
+    useEffect(() => {
+        fetchNFTs();
+    }, []);
 
 
 
@@ -307,18 +315,16 @@ export const NFTMarketplaceProvider = ({ children }) => {
             }
 
         } catch (error) {
-            console.log("Error while fetching listed NFTs.");
-            // setOpenError(true);
+            setError("There was a problem while fetching listed NFTs.");
+            setOpenError(true);
         }
     };
 
 
-    //useEffect(() => {
-    //    fetchMyNFTsOrListedNFTs();
-    //}, []);
 
-
-
+    useEffect(() => {
+        fetchMyNFTsOrListedNFTs();
+    }, []);
 
 
 
@@ -335,8 +341,11 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
             await transaction.wait();
 
+            router.push("/author");
+
         } catch (error) {
-            console.log("Error while buying NFT.");
+            setError("There was a problem while buying the NFT. Check the source and try again.");
+            setOpenError(true);
         }
     };
 
@@ -355,7 +364,12 @@ export const NFTMarketplaceProvider = ({ children }) => {
                 buyNFT,
                 currentAccount,
                 titleData,
+                setOpenError,
+                openError,
+                error,
             }}>
+
+
             {children}
         </NFTMarketplaceContext.Provider>
     );

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useContext } from "react";
 
 
@@ -19,7 +20,11 @@ import {
   Slider,
   Brand,
   Video,
+  Loader,
 } from "../components/componentsindex";
+
+import { getTopCreators } from "../TopCreators/TopCreators";
+
 
 
 //IMPORTING CONTARCT DATA
@@ -32,7 +37,26 @@ const Home = () => {
     checkIfWalletConnected();
   }, []);
 
-  
+
+
+  const { fetchNFTs } = useContext(NFTMarketplaceContext);
+  const [nfts, setNfts] = useState([]);
+  const [nftsCopy, setNftsCopy] = useState([]);
+
+
+  //CREATOR LIST
+  const creators = getTopCreators(nfts);
+
+
+
+  useEffect(() => {
+    fetchNFTs().then((item) => {
+      setNfts(item.reverse());
+      setNftsCopy(item);
+    });
+  }, []);
+
+
 
   return (
     <div className={Style.homePage}>
@@ -44,7 +68,13 @@ const Home = () => {
         paragraph="Discover the most outstanding NFTs in all topics of life"
       />
       <AudioLive />
-      <FollowerTab />
+      
+      {creators.length == 0 ? (
+      <Loader />
+      ) : (
+        <FollowerTab TopCreators={creators} />
+      )}
+
       <Slider />
       <Collection />
       <Title
@@ -52,7 +82,8 @@ const Home = () => {
         paragraph="Discover the most outstanding NFTs in all topics of life"
       />
       <Filter />
-      <NFTCard />
+      {nfts.length == 0 ? <Loader /> : <NFTCard NFTData={nfts} />}
+
       <Title
         heading="Browse by category"
         paragraph="Explore NFTs in the most featured categories"
@@ -64,6 +95,7 @@ const Home = () => {
     </div>
   );
 };
+
 
 export default Home;
 

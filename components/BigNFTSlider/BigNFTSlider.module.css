@@ -1,3 +1,4 @@
+
 .bigNFTSlider_box{
     margin: 0 auto;
     margin-bottom: 6rem;
@@ -163,20 +164,23 @@
     padding: 1rem;
 }
 
+
 /* //---RIGHT SECTION */
 
 .bigNFTSlider_box_right{
-    grid-column: 6 / -1;
+    grid-column: 6 / span 6;
     grid-row:  1 / -1;
     padding: 1rem;
     background-color: var(--main-bg-color);
     border-radius: 2.5rem;
     box-shadow: var(--box-shadow-2);
-    /* box-shadow: var(--main-bg-color); */
+    width: auto;
 }
+
 
 .bigNFTSlider_box_right_box{
     position: relative;
+    height: auto;
 }
 
 :global(body.dark-mode) .bigNFTSlider_box_right{
@@ -185,6 +189,9 @@
 
 .bigNFTSlider_box_right_box_img{
     border-radius: 2rem;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
 }
 
 .bigNFTSlider_box_right_box_like{

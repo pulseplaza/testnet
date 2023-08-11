@@ -3,6 +3,8 @@ import React, { useState, useEffect, useContext, useRef } from "react";
 import Image from "next/image";
 import { DiJqueryLogo } from "react-icons/di";
 import Link from 'next/link';
+import { useRouter } from "next/router";
+
 
 import { FaWallet } from "react-icons/fa";
 import { MdPermMedia } from "react-icons/md";
@@ -12,7 +14,7 @@ import { MdPermMedia } from "react-icons/md";
 import { MdNotifications } from "react-icons/md";
 import { BsSearch } from "react-icons/bs";
 import { CgMenuLeft, CgMenuRight } from "react-icons/cg";
-import { useRouter } from "next/router";
+
 
 //INTERNAL IMPORT
 import Style from "./NavBar.module.css";
@@ -29,14 +31,13 @@ import { NFTMarketplaceContext } from "../../Context/NFTMarketplaceContext";
 
 
 
-const NavBar = ({ theme }) => {
+const NavBar = ({ theme, setTheme }) => {
   //----USESTATE COMPONNTS
   const [discover, setDiscover] = useState(false);
   const [help, setHelp] = useState(false);
   const [notification, setNotification] = useState(false);
   const [profile, setProfile] = useState(false);
   const [openSideMenu, setOpenSideMenu] = useState(false);
-
 
 
   const router = useRouter();
@@ -100,7 +101,6 @@ const NavBar = ({ theme }) => {
   );
 
 
-
   return (
     <div className={Style.navbar}>
       <div className={Style.navbar_container}>
@@ -160,7 +160,10 @@ const NavBar = ({ theme }) => {
 
           {/* THEME-SWITCH */}
           <div className={Style.navbar_container_right_switch}>
-            <ThemeSwitch />
+            <ThemeSwitch
+              theme={theme}
+              setTheme={setTheme}
+            />
           </div>
 
 
@@ -174,12 +177,10 @@ const NavBar = ({ theme }) => {
               />
             ) : (
 
-
               <Button
                 btnName={<><MdPermMedia /> Create</>}
                 handleClick={() => router.push("/upload-nft")}
               />
-
 
             )}
           </div>
@@ -199,7 +200,7 @@ const NavBar = ({ theme }) => {
                 className={Style.navbar_container_right_profile}
               />
 
-              {profile && <Profile />}
+              {profile && <Profile currentAccount={currentAccount} />}
             </div>
           </div>
 
@@ -226,10 +227,13 @@ const NavBar = ({ theme }) => {
         </div>
       )}
 
+      {openError && <Error />}
+
 
     </div>
   );
 };
+
 
 
 export default NavBar;

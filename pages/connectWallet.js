@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 
@@ -41,8 +42,7 @@ const connectWallet = () => {
                 <div className={Style.connectWallet_box_provider}>
                     {providerArray.map((el, i) => (
                         <div
-                            className={`${Style.connectWallet_box_provider_item} ${
-                                activeBtn == i + 1 ? Style.active : ""
+                            className={`${Style.connectWallet_box_provider_item} ${activeBtn == i + 1 ? Style.active : ""
                                 }`}
                             key={i + 1}
                             onClick={() => (setActiveBtn(i + 1), connectWallet())}
@@ -58,8 +58,9 @@ const connectWallet = () => {
                         </div>
                     ))}
                 </div>
-            </div>
+            </div> <br></br>
         </div>
+        
     );
 };
 

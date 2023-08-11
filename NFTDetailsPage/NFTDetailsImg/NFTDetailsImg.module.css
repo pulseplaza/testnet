@@ -14,12 +14,8 @@
 
 .NFTDetailsImg_box_NFT_img_img{
     border-radius: 1rem;
-    height: 100%;
-    width: 100%;
-    max-width: 900px;
-    object-fit: cover;
+    cursor: pointer;
 }
-
 
 .NFTDetailsImg_box_NFT_like{
     display: flex;
@@ -32,9 +28,10 @@
     padding-inline: 2rem;
 }
 
+
 .NFTDetailsImg_box_NFT_like p{
     background: var(--pls-bg);
-    padding: .2rem 1rem;
+    padding: .5rem 1rem;
     color: var(--main-bg-color);
     display: flex;
     align-items: center;
@@ -44,17 +41,17 @@
 }
 
 .NFTDetailsImg_box_NFT_like_icon{
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     color: white;
 }
 
 .NFTDetailsImg_box_NFT_like_icon_1{
-    font-size: 1.4rem;
-    color: var(--icons-color);
+    font-size: 2rem;
+    color: var(--main-bg-color-dark);
 }
 
 :global(body.dark-mode) .NFTDetailsImg_box_NFT_like_icon_1{
-    color: var(--icons-color-2);
+    color: var(--main-bg-color);
 }
 
 .NFTDetailsImg_box_details,

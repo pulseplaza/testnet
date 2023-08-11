@@ -44,7 +44,7 @@
 
 .NFTCard_box_update_left {
     background: linear-gradient(210deg, #00eaff 0%, #0080ff 25%, #8000ff 50%, #e619e6 75%, #f00 100%);
-    padding: .5rem 1rem;
+    padding: .5rem .8rem;
     color: white;
     border-radius: 2rem;
     margin: 1rem;
@@ -53,8 +53,8 @@
 .NFTCard_box_update_left_like {
     display: flex;
     align-items: center;
-    font-size: 1.2rem;
-    gap: .5rem;
+    font-size: 1rem;
+    gap: .3rem;
 }
 
 .NFTCard_box_update_left_like_icon {
@@ -64,7 +64,7 @@
 .NFTCard_box_update_right {
     background-color: var(--main-bg-color);
     opacity: 95%;
-    padding: .5rem 5rem;
+    padding: .5rem 4rem;
     text-align: center;
     transform: skewX(45deg);
     border-bottom-left-radius: 1rem;
@@ -170,14 +170,15 @@
 }
 
 .NFTCard_box_update_details_category {
-    color: var(--icons-color);
+    color: var(--main-bg-color-dark);
     text-align: end;
     margin: 1.5rem;
     font-size: 1.5rem;
 }
 
+
 :global(body.dark-mode) .NFTCard_box_update_details_category {
-    color: var(--icons-color-2);
+    color: var(--main-bg-color);
 }
 
 

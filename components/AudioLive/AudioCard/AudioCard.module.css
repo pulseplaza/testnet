@@ -14,6 +14,7 @@
 }
 
 
+
 .audioCard_box_like_time {
     grid-column: 1 / -1;
     grid-row: 1 / 2;
@@ -107,17 +108,9 @@
 .audioCard_box_img {
     grid-column: 1 / -1;
     grid-row: 1 / -1;
-    background-size: cover;
-    display: flex;
-    align-items: flex-start;
 }
 
-.audioCard_box_img img {
-    width: 100%;
-    height: 100%;
-    border-bottom-right-radius: 1.5rem;
-    object-fit: cover;
-}
+
 
 .audioCard_box_details {
     grid-column: 1 / -1;

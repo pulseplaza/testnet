@@ -7,6 +7,8 @@
 .like_box{
     border: 3px solid var(--icons-color);
     border-radius: 50%;
+    width: 20px;
+    height: 20px;
 }
 
 :global(body.dark-mode) .like_box{
@@ -15,4 +17,7 @@
 
 .like_box_img{
     border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }

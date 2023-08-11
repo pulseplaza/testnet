@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { MdVerified } from "react-icons/md";
 import { TiTick } from "react-icons/ti";
@@ -6,13 +6,15 @@ import { TiTick } from "react-icons/ti";
 
 //INTERNAL IMPORT
 import Style from "./FollowerTabCard.module.css";
+import images from "../../../img";
+
 
 
 const imageStyle = {
     objectFit: 'cover',
 };
 
-const FollowerTabCard = ({ i, el}) => {
+const FollowerTabCard = ({ i, el }) => {
     const [following, setFollowing] = useState(false);
 
     const followMe = () => {
@@ -22,6 +24,7 @@ const FollowerTabCard = ({ i, el}) => {
             setFollowing(false);
         }
     };
+
 
     return (
         <div className={Style.FollowerTabCard}>
@@ -33,48 +36,49 @@ const FollowerTabCard = ({ i, el}) => {
 
             <div className={Style.FollowerTabCard_box}>
                 <div className={Style.FollowerTabCard_box_img}>
-                    <div style={{position:"relative"}}>
-                        <Image
-                            className={Style.FollowerTabCard_box_img_img}
-                            src={el.background}
-                            alt="Profile background"
-                            width={500}
-                            height={300}
-                            style={{objectFit:"cover"}}
-                        />
-                    </div>
+
+                    <Image
+                        className={Style.FollowerTabCard_box_img_img}
+                        src={el.background || images.creatorbackground1}
+                        alt="Profile background"
+                        width={500}
+                        height={300}
+                        objectFit="cover"
+                    />
+
                 </div>
 
 
                 <div className={Style.FollowerTabCard_box_profile}>
-                    <div style={{position:"relative"}}>
-                    <Image
-                        className={Style.FollowerTabCard_box_profile_img}
-                        src={el.user}
-                        alt="Profile picture"
-                        width={90}
-                        height={90}
-                        style={{objectFit:"cover"}}
-                    />
+
+                    <div className={Style.FollowerTabCard_box_profile_wrapper}>
+                        <Image
+                            className={Style.FollowerTabCard_box_profile_img}
+                            alt="Profile picture"
+                            width={60}
+                            height={60}
+                            src={el.user || images.user1}
+                        />
                     </div>
+
                 </div>
 
                 <div className={Style.FollowerTabCard_box_info}>
                     <div className={Style.FollowerTabCard_box_info_name}>
                         <h4>
-                            Giada Mann{""}{" "}
+                            {el.seller.slice(0, 4)}...{el.seller.slice(-4)}{""}{" "}
                             <span>
-                                <MdVerified/>
+                                <MdVerified />
                             </span>
                         </h4>
-                        <p>420 PLS</p>
+                        <p>{el.total || 0} PLS</p>
                     </div>
 
                     <div className={Style.FollowerTabCard_box_info_following}>
                         {following ? (
-                           <a onClick={() => followMe()}>
-                            Follow
-                           </a> 
+                            <a onClick={() => followMe()}>
+                                Follow
+                            </a>
                         ) : (
                             <a onClick={() => followMe()}>Following</a>
                         )}

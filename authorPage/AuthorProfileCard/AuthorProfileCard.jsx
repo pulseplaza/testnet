@@ -71,12 +71,12 @@ const AuthorProfileCard = ({ currentAccount }) => {
           </h2>
 
           <div className={Style.AuthorProfileCard_box_info_address}>
-            
+
             <FiCopy
               onClick={() => copyAddress()}
               className={Style.AuthorProfileCard_box_info_address_icon}
             />
-            <input type="text" value="0x6BF307Cd0B522fd7e13B9C59E9120e255D570B07" id="myInput" />
+            <input type="text" value={currentAccount} id="myInput" />
           </div>
 
           <p>
@@ -101,7 +101,7 @@ const AuthorProfileCard = ({ currentAccount }) => {
         </div>
 
         <div className={Style.AuthorProfileCard_box_share}>
-          <Button btnName="Follow" handleClick={() => {}} />
+          <Button btnName="Follow" handleClick={() => { }} />
           <MdCloudUpload
             onClick={() => openShare()}
             className={Style.AuthorProfileCard_box_share_icon}

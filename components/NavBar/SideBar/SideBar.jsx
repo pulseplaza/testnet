@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+
+import { useRouter } from "next/router";
+
 import { GrClose } from "react-icons/gr";
+
 import {
   TiSocialTwitter,
   TiSocialFacebook,
@@ -9,6 +13,7 @@ import {
   TiArrowSortedDown,
   TiArrowSortedUp,
 } from "react-icons/ti";
+
 import { RiMastodonFill, RiFacebookBoxFill } from "react-icons/ri";
 import { BsDiscord, BsTwitter } from "react-icons/bs";
 
@@ -26,6 +31,9 @@ const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
   //------USESTATE
   const [openDiscover, setOpenDiscover] = useState(false);
   const [openHelp, setOpenHelp] = useState(false);
+
+  const router = useRouter();
+
 
   //------DISCOVER NAVIGATION MENU
   const discover = [
@@ -192,15 +200,11 @@ const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
         ) : (
           <Button
             btnName={<><MdPermMedia /> Create</>}
-            handleClick={() => { }}
+            handleClick={() => router.push("/upload-nft")}
           />
         )}
 
-
-
-
       </div>
-
 
     </div>
   );

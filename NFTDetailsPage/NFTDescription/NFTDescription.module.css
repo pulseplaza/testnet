@@ -15,6 +15,7 @@
     position: relative;
 }
 
+
 .NFTDescription_box_share_box_icon{
     cursor: pointer;
 }
@@ -97,6 +98,8 @@
     line-height: 1;
 }
 
+
+
 .NFTDescription_box_profile_box_right_info small,
 .NFTDescription_box_profile_box_left_info small{
     font-weight: 500;
@@ -105,6 +108,7 @@
 .NFTDescription_box_profile_box_right_info span,
 .NFTDescription_box_profile_box_left_info span{
     font-weight: 800;
+    cursor: pointer;
 }
 
 .NFTDescription_box_profile_box_left_img{

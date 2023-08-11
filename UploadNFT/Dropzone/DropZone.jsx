@@ -1,13 +1,11 @@
+
 import React, { useState, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import Image from "next/image";
 
-
-
-//INTERNAL IMPORT
+// INTERNAL IMPORT
 import Style from "./DropZone.module.css";
 import images from "../../img";
-
 
 
 const DropZone = ({
@@ -24,20 +22,25 @@ const DropZone = ({
   uploadToIPFS,
   setImage,
 }) => {
+  
   const [fileUrl, setFileUrl] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onDrop = useCallback(async (acceptedFile) => {
+    setIsLoading(true);
     const url = await uploadToIPFS(acceptedFile[0]);
     setFileUrl(url);
     setImage(url);
+    setIsLoading(false);
     console.log(url);
-  });
+  }, [uploadToIPFS, setImage]);
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: "image/*",
     maxSize: 5000000,
   });
+
 
   return (
     <div>
@@ -46,35 +49,38 @@ const DropZone = ({
         <div className={Style.DropZone_box_input}>
           <p>{title}</p>
           <div className={Style.DropZone_box_input_img}>
-            <Image
-              src={images.upload}
-              alt="Upload"
-              width={100}
-              height={100}
-              className={Style.DropZone_box_input_img_img}
-            />
-
+            {isLoading ? (
+              <p>
+                ⌛ Uploading your file. Please wait.
+              </p>
+            ) : (
+              <Image
+                src={images.upload}
+                alt="Upload"
+                width={100}
+                height={100}
+                className={Style.DropZone_box_input_img_img}
+              />
+            )}
           </div>
           <p>{heading}</p>
           <p>{subHeading}</p>
-
         </div>
-
       </div>
 
       {fileUrl && (
         <aside className={Style.DropZone_box_aside}>
           <div className={Style.DropZone_box_aside_box}>
-            <div style={{ position: "relative" }}>
-              <Image
-                src={fileUrl}
-                alt="NFT image"
-                width={200}
-                height={200}
-                className={Style.DropZone_box_aside_box_img}
-                style={{ objectFit: "contain" }}
-              />
-            </div>
+
+            
+            <Image
+              src={fileUrl}
+              alt="NFT image"
+              width={200}
+              height={200}
+              className={Style.DropZone_box_aside_box_img}
+              objectFit="contain"
+            />
 
             <div className={Style.DropZone_box_aside_box_preview}>
               <div className={Style.DropZone_box_aside_box_preview_one}>
@@ -113,17 +119,11 @@ const DropZone = ({
                   {category || ""}
                 </p>
               </div>
-
-
             </div>
-
           </div>
-
         </aside>
       )}
-
     </div>
-
   );
 };
 

@@ -9,7 +9,7 @@ import Link from "next/link";
 import Style from "./Profile.module.css";
 import images from "../../../img";
 
-const Profile = () => {
+const Profile = ({ currentAccount }) => {
   return (
     <div className={Style.profile}>
       <div className={Style.profile_account}>
@@ -23,49 +23,46 @@ const Profile = () => {
 
         <div className={Style.profile_account_info}>
           <p>Account user</p>
-          <small>Address</small>
-
+          <small>{currentAccount.slice(0, 8)}...{currentAccount.slice(-8)}</small>
         </div>
       </div>
       <div className={Style.profile_menu}>
         <div className={Style.profile_menu_one}>
           <div className={Style.profile_menu_one_item}>
-            <FaUserAlt/>
+            <FaUserAlt />
             <p>
-              <Link href={{pathname: "/myprofile"}}>My Profile</Link>
+              <Link href={{ pathname: "/author" }}>My Profile</Link>
             </p>
           </div>
 
           <div className={Style.profile_menu_one_item}>
-            <FaRegImage/>
+            <FaRegImage />
             <p>
-              <Link href={{pathname: "/my-items"}}>My Items</Link>
+              <Link href={{ pathname: "/author" }}>My Items</Link>
             </p>
           </div>
 
           <div className={Style.profile_menu_one_item}>
-            <FaUserEdit/>
+            <FaUserEdit />
             <p>
-              <Link href={{pathname: "/edit-profile"}}>Edit Profile</Link>
+              <Link href={{ pathname: "/account" }}>Edit Profile</Link>
             </p>
           </div>
-
-
 
         </div>
 
         <div className={Style.profile_menu_two}>
           <div className={Style.profile_menu_one_item}>
-            <MdHelpCenter/>
+            <MdHelpCenter />
             <p>
-              <Link href={{pathname: "/help"}}>Help</Link>
+              <Link href={{ pathname: "/contact" }}>Help</Link>
             </p>
           </div>
 
           <div className={Style.profile_menu_one_item}>
-            <TbDownload/>
+            <TbDownload />
             <p>
-              <Link href={{pathname: "/disconnect"}}>Disconnect</Link>
+              <Link href={{ pathname: "" }}>Disconnect</Link>
             </p>
           </div>
 

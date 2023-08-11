@@ -18,6 +18,8 @@ import Brand from "./Brand/Brand";
 import Video from "./Video/Video";
 import ThemeSwitch from "./NavBar/ThemeSwitch/ThemeSwitch";
 import OverHead from "./OverHead/OverHead";
+import Loader from "./Loader/Loader";
+import Error from "./Error/Error";
 
 
 export {
@@ -41,5 +43,7 @@ export {
   Video,
   ThemeSwitch,
   OverHead,
+  Loader,
+  Error,
 };
 

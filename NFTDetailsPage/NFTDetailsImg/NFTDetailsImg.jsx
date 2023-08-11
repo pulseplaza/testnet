@@ -1,24 +1,32 @@
-import React, {useState, useEffect } from "react";
+
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { BsImages } from "react-icons/bs";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 
+import { useRouter } from 'next/router';
+
 
 //INTERNAL IMPORT
 import Style from "./NFTDetailsImg.module.css";
-import images from "../../img";
 
 
-const NFTDetailsImg = () => {
+
+
+const NFTDetailsImg = ({ nft }) => {
+
+  const [isImageLoaded, setImageLoaded] = useState(false);
 
   const [description, setDescription] = useState(true);
   const [details, setDetails] = useState(true);
   const [like, setLike] = useState(false);
 
+  const router = useRouter();
+
 
   const openDescription = () => {
-    if(!description) {
+    if (!description) {
       setDescription(true);
     } else {
       setDescription(false);
@@ -26,7 +34,7 @@ const NFTDetailsImg = () => {
   };
 
   const openDetails = () => {
-    if(!details) {
+    if (!details) {
       setDetails(true);
     } else {
       setDetails(false);
@@ -34,7 +42,7 @@ const NFTDetailsImg = () => {
   };
 
   const likeNFT = () => {
-    if(!like) {
+    if (!like) {
       setLike(true);
     } else {
       setLike(false);
@@ -60,24 +68,29 @@ const NFTDetailsImg = () => {
 
           </div>
 
+
+
           <div className={Style.NFTDetailsImg_box_NFT_img}>
-            <div style={{position:"relative"}}>
-              <Image
-              src={images.nft_image_1} 
+
+
+            <Image
+              src={nft.image}
               className={Style.NFTDetailsImg_box_NFT_img_img}
               alt="NFT image"
               width={800}
               height={800}
-              style={{objectFit:"cover"}}
-              />
-            </div>
+              objectFit="cover"
+              onClick={() => window.open(nft.image, "_blank")}
+            />
 
           </div>
+
         </div>
 
-        <div 
-        className={Style.NFTDetailsImg_box_description}
-        onClick={() => openDescription()}
+
+        <div
+          className={Style.NFTDetailsImg_box_description}
+          onClick={() => openDescription()}
         >
           <p>Description</p>
           {description ? <TiArrowSortedUp /> : <TiArrowSortedDown />}
@@ -88,34 +101,39 @@ const NFTDetailsImg = () => {
           description && (
             <div className={Style.NFTDetailsImg_box_description_box}>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                {nft.description}
               </p>
-
             </div>
 
           )}
 
-          <div className={Style.NFTDetailsImg_box_details}
+        <div className={Style.NFTDetailsImg_box_details}
           onClick={() => openDetails()}
-          >
-            <p>Details</p>
-            {details ? <TiArrowSortedUp /> : <TiArrowSortedDown />}
-          </div>
+        >
+          <p>Details</p>
+          {details ? <TiArrowSortedUp /> : <TiArrowSortedDown />}
+        </div>
 
-          {details && (
-            <div className={Style.NFTDetailsImg_box_details_box}>
-              <small>2000 x 2000 px.IMAGE(685KB)</small>
-              <p>
-                <small>Contract address</small>
-                <br></br>
-                0x6BF307Cd0B522fd7e13B9C59E9120e255D570B07
-              </p>
-              <p>
-                <small>Token ID</small>
-                100300372864
-              </p>
-            </div>
-          )}
+        {details && (
+          <div className={Style.NFTDetailsImg_box_details_box}>
+            <small>2000 x 2000 px.IMAGE(685KB)</small>
+            <p>
+              <small>Current seller</small>
+              <br></br>
+              {nft.seller}
+            </p>
+            <p>
+              <small>Current owner</small>
+              <br></br>
+              {nft.owner}
+            </p>
+            <p>
+              <small>Token ID</small>
+              <br></br>
+              {nft.tokenId}
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

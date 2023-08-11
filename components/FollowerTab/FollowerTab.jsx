@@ -8,8 +8,9 @@ import FollowerTabCard from "./FollowerTabCard/FollowerTabCard";
 import images from "../../img";
 
 
-const FollowerTab = () => {
-  const CardArray = [
+const FollowerTab = ({ TopCreators }) => {
+
+  /* const CardArray = [
     {
       background: images.creatorbackground1,
       user: images.user1,
@@ -42,28 +43,34 @@ const FollowerTab = () => {
       background: images.creatorbackground8,
       user: images.user8,
     },
-  ];
+  ]; */
+
 
   const FollowingArray = [
     {
       background: images.creatorbackground1,
       user: images.user1,
+      seller: "0000000000000000",
     },
     {
       background: images.creatorbackground2,
       user: images.user2,
+      seller: "0000000000000000",
     },
     {
       background: images.creatorbackground3,
       user: images.user3,
+      seller: "0000000000000000",
     },
     {
       background: images.creatorbackground5,
       user: images.user5,
+      seller: "0000000000000000",
     },
     {
       background: images.creatorbackground6,
       user: images.user6,
+      seller: "0000000000000000",
     },
   ];
 
@@ -71,18 +78,22 @@ const FollowerTab = () => {
     {
       background: images.creatorbackground1,
       user: images.user1,
+      seller: "0000000000000000",
     },
     {
       background: images.creatorbackground2,
       user: images.user2,
+      seller: "0000000000000000",
     },
     {
       background: images.creatorbackground3,
       user: images.user3,
+      seller: "0000000000000000",
     },
     {
       background: images.creatorbackground5,
       user: images.user5,
+      seller: "0000000000000000",
     },
   ];
 
@@ -144,7 +155,7 @@ const FollowerTab = () => {
 
       {popular && (
         <div className={Style.followerTab_box}>
-          {CardArray.map((el, i) => (
+          {TopCreators.map((el, i) => (
             <FollowerTabCard key={i + 1} i={i} el={el} />
           ))}
         </div>

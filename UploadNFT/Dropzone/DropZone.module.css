@@ -28,6 +28,12 @@
     filter: invert(0);
 }
 
+.DropZone_box_input_img p{
+    font-size: 2rem;
+    font-weight: 600;
+    padding: 2rem 0 2rem 0;
+}
+
 
 .DropZone_box_aside_box_img {
     border-radius: 1rem;

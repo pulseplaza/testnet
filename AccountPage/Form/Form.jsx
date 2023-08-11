@@ -22,7 +22,7 @@ const Form = () => {
     navigator.clipboard.writeText(copyText.value);
   };
 
-  
+
   return (
     <div className={Style.Form}>
       <div className={Style.Form_box}>
@@ -30,12 +30,11 @@ const Form = () => {
 
           <div className={Style.Form_box_input}>
             <label htmlFor="name">Username</label>
-            <input 
-              type="text" 
-              placeholder="John Doe" 
+            <input
+              type="text"
+              placeholder="John Doe"
               className={Style.Form_box_input_userName}
             />
-
           </div>
 
           <div className={Style.Form_box_input}>
@@ -105,7 +104,7 @@ const Form = () => {
                 <input type="text" placeholder="https://instagram.com/" />
               </div>
             </div>
-            
+
           </div>
 
           <div className={Style.Form_box_input}>
@@ -116,7 +115,7 @@ const Form = () => {
               </div>
               <input
                 type="text"
-                placeholder="0x6BF307Cd0B522fd7e13B9C59E9120e255D570B07" 
+                placeholder="0x6BF307Cd0B522fd7e13B9C59E9120e255D570B07"
                 id="myInput"
               />
               <div className={Style.Form_box_input_box_icon}>
@@ -129,7 +128,7 @@ const Form = () => {
           <div className={Style.Form_box_btn}>
             <Button
               btnName="Update profile"
-              handleClick={() => {}} 
+              handleClick={() => { }}
               classStyle={Style.button}
             />
 
