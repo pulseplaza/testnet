@@ -57,6 +57,9 @@ import loader from "./loadergif.gif";
 import errorgif from "./error.gif";
 import transfer from "./transfer.gif";
 import transferEther from "./ethereTransfer.gif";
+import hero3 from "./hero3.png";
+import hero4 from "./hero4.png";
+
 
 
 export default {
@@ -119,4 +122,6 @@ export default {
   errorgif,
   transfer,
   transferEther,
+  hero3,
+  hero4,
 };
