@@ -1,3 +1,4 @@
+
 .sideBar {
     background-color: var(--main-bg-color);
 }
@@ -16,8 +17,6 @@
     border-bottom: 1px solid var(--icons-color-2);
     background-color: var(--main-bg-color-dark);
 }
-
-
 
 
 
@@ -81,7 +80,6 @@
 
 .sideBar_menu {
     padding: 2rem;
-    text-transform: uppercase;
     font-weight: 500;
     border-bottom: 1px solid var(--icons-color);
 }
@@ -96,6 +94,19 @@
     align-items: center;
     cursor: pointer;
 }
+
+.sideBar_menu_box {
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+
+.sideBar_menu_box:hover {
+    text-decoration: overline 4px var(--icons-color);
+}
+
+
 
 .sideBar_discover {
     padding-inline: 1rem;
@@ -119,3 +130,5 @@
     padding-top: 1rem;
     padding-bottom: 1rem;
 }
+
+

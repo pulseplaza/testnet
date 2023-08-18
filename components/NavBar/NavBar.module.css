@@ -1,3 +1,4 @@
+
 .navbar {
     width: 100%;
     padding-block: 1.5rem;
@@ -18,16 +19,15 @@
     padding-top: .5rem;
 
     display: grid;
-    grid-template-columns: 2fr 3fr;
+    grid-template-columns: 2fr 4fr;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
-
+    gap: .5rem;
 }
 
 .navbar_container_left {
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 2fr 3fr;
     align-items: center;
 }
 
@@ -37,6 +37,8 @@
     padding-right: 2rem;
     padding-left: 0rem;
     cursor: pointer;
+    min-height: 40px;
+    min-width: 40px;
 }
 
 .navbar_container_left_box_input_box {
@@ -45,11 +47,12 @@
     border-color: var(--icons-color);
     display: flex;
     align-items: center;
-    justify-content: center; 
+    justify-content: flex-start; 
     margin: auto;
     padding: .5rem;
     border-radius: 2rem;
     background-color: var(--main-bg-color);
+    margin-left: 0;
 }
 
 
@@ -94,43 +97,62 @@
 
 .navbar_container_right {
     display: grid;
-    grid-template-columns: 1fr 1fr .5fr .5fr 1.5fr .5fr;
-    gap: 1rem;
+    grid-template-columns: 1fr 1fr 1fr .5fr .5fr 1.5fr .5fr;
+    gap: .5rem;
     align-items: center;
     /* align-self: flex-end; */
 }
 
-.navbar_container_right_discover {
+.navbar_container_right_marketplace {
     position: relative;
     cursor: pointer;
     justify-self: center;
-
+    font-size: 1.2rem;
 }
 
-.navbar_container_right_discover:hover {
+.navbar_container_right_marketplace:hover {
     text-decoration: overline 4px var(--icons-color);
 }
 
-:global(body.dark-mode) .navbar_container_right_discover:hover {
+:global(body.dark-mode) .navbar_container_right_marketplace:hover {
     text-decoration: overline 4px var(--icons-color-2);
 }
 
-.navbar_container_right_help {
+
+.navbar_container_right_coin {
     position: relative;
     cursor: pointer;
     justify-self: center;
+    font-size: 1.2rem;
 }
 
-.navbar_container_right_help:hover {
+.navbar_container_right_coin:hover {
     text-decoration: overline 4px var(--icons-color);
 }
 
-:global(body.dark-mode) .navbar_container_right_help:hover {
+:global(body.dark-mode) .navbar_container_right_coin:hover {
     text-decoration: overline 4px var(--icons-color-2);
 }
 
-.navbar_container_right_discover_box,
-.navbar_container_right_help_box {
+
+.navbar_container_right_more {
+    position: relative;
+    cursor: pointer;
+    justify-self: center;
+    font-size: 1.2rem;
+}
+
+.navbar_container_right_more:hover {
+    text-decoration: overline 4px var(--icons-color);
+}
+
+:global(body.dark-mode) .navbar_container_right_more:hover {
+    text-decoration: overline 4px var(--icons-color-2);
+}
+
+.navbar_container_right_marketplace_box,
+.navbar_container_right_coin_box,
+.navbar_container_right_more_box {
     position: absolute;
     padding: 1rem .5rem;
     box-shadow: var(--box-shadow-2);
@@ -146,8 +168,9 @@
 }
 
 
-:global(body.dark-mode) .navbar_container_right_discover_box,
-:global(body.dark-mode) .navbar_container_right_help_box {
+:global(body.dark-mode) .navbar_container_right_marketplace_box,
+:global(body.dark-mode) .navbar_container_right_coin_box,
+:global(body.dark-mode) .navbar_container_right_more_box {
     background-color: var(--bg-very-dark);
 }
 
@@ -180,6 +203,7 @@
 }
 
 .navbar_container_right_button button {
+    padding: 1rem 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -194,6 +218,9 @@
 
 .navbar_container_right_profile {
     border-radius: 50%;
+    min-width: 40px;
+    min-height: 40px;
+    object-fit: cover;
 }
 
 .navbar_container_right_menuBtn {
@@ -241,22 +268,27 @@
     }
 
     .navbar_container_right {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
     }
 
     .navbar_container_right_menuBtn {
         display: block;
+        justify-self: end;
     }
 
     .navbar_container_left_box_input_box {
         display: none;
     }
 
-    .navbar_container_right_discover {
+    .navbar_container_right_marketplace {
         display: none;
     }
 
-    .navbar_container_right_help {
+    .navbar_container_right_coin {
+        display: none;
+    }
+
+    .navbar_container_right_more {
         display: none;
     }
 
@@ -271,4 +303,14 @@
     .sideBar {
         display: block;
     }
+}
+
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .navbar_container_right_marketplace,
+    .navbar_container_right_coin,
+    .navbar_container_right_more {
+        font-size: 1rem;
+    }
+
 }

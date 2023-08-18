@@ -170,7 +170,7 @@
 }
 
 .NFTCard_box_update_details_category {
-    color: var(--main-bg-color-dark);
+    color: var(--main-bg-color);
     text-align: end;
     margin: 1.5rem;
     font-size: 1.5rem;
@@ -178,7 +178,7 @@
 
 
 :global(body.dark-mode) .NFTCard_box_update_details_category {
-    color: var(--main-bg-color);
+    color: var(--main-bg-color-dark);
 }
 
 

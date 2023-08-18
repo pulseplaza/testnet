@@ -211,7 +211,8 @@ return (
                     <Image
                         src={sliderData[idNumber].nftImage}
                         alt="NFT image"
-                        height={1000}
+                        width={900}
+                        height={900}
                         className={Style.bigNFTSlider_box_right_box_img}
                     />
 

@@ -16,8 +16,8 @@ const Profile = ({ currentAccount }) => {
         <Image
           src={images.user1}
           alt="User profile"
-          width={50}
-          height={50}
+          width={60}
+          height={60}
           className={Style.profile_account_img}
         />
 

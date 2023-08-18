@@ -47,11 +47,11 @@
 
 .NFTDetailsImg_box_NFT_like_icon_1{
     font-size: 2rem;
-    color: var(--main-bg-color-dark);
+    color: var(--main-bg-color);
 }
 
 :global(body.dark-mode) .NFTDetailsImg_box_NFT_like_icon_1{
-    color: var(--main-bg-color);
+    color: var(--main-bg-color-dark);
 }
 
 .NFTDetailsImg_box_details,

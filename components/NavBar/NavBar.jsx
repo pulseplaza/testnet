@@ -18,7 +18,7 @@ import { CgMenuLeft, CgMenuRight } from "react-icons/cg";
 
 //INTERNAL IMPORT
 import Style from "./NavBar.module.css";
-import { Discover, HelpCenter, ThemeSwitch, Notification, Profile, SideBar } from "./index";
+import { Marketplace, More, ThemeSwitch, Notification, Profile, SideBar, Coin } from "./index";
 import { Button, Error } from "../componentsindex";
 import images from "../../img";
 
@@ -33,11 +33,12 @@ import { NFTMarketplaceContext } from "../../Context/NFTMarketplaceContext";
 
 const NavBar = ({ theme, setTheme }) => {
   //----USESTATE COMPONNTS
-  const [discover, setDiscover] = useState(false);
-  const [help, setHelp] = useState(false);
+  const [marketplace, setMarketplace] = useState(false);
+  const [more, setMore] = useState(false);
   const [notification, setNotification] = useState(false);
   const [profile, setProfile] = useState(false);
   const [openSideMenu, setOpenSideMenu] = useState(false);
+  const [coin, setCoin] = useState(false);
 
 
   const router = useRouter();
@@ -45,30 +46,40 @@ const NavBar = ({ theme, setTheme }) => {
 
   const openMenu = (e) => {
     const btnText = e.target.innerText;
-    if (btnText == "Discover") {
-      setDiscover(!discover);
-      setHelp(false);
+    if (btnText == "Marketplace") {
+      setMarketplace(!marketplace);
+      setMore(false);
       setNotification(false);
       setProfile(false);
-    } else if (btnText == "Help Center") {
-      setDiscover(false);
-      setHelp(!help);
+      setCoin(false);
+    } else if (btnText == "More") {
+      setMarketplace(false);
+      setMore(!more);
       setNotification(false);
       setProfile(false);
+      setCoin(false);
+    } else if (btnText == "Coin") {
+      setMarketplace(false);
+      setMore(false);
+      setNotification(false);
+      setProfile(false);
+      setCoin(!coin);
     } else {
-      setDiscover(false);
-      setHelp(false);
+      setMarketplace(false);
+      setMore(false);
       setNotification(false);
       setProfile(false);
+      setCoin(false);
     }
   };
 
   const openNotification = () => {
     if (!notification) {
       setNotification(true);
-      setDiscover(false);
-      setHelp(false);
+      setMarketplace(false);
+      setMore(false);
       setProfile(false);
+      setCoin(false);
     } else {
       setNotification(false);
     }
@@ -77,9 +88,10 @@ const NavBar = ({ theme, setTheme }) => {
   const openProfile = () => {
     if (!profile) {
       setProfile(true);
-      setHelp(false);
-      setDiscover(false);
+      setMore(false);
+      setMarketplace(false);
       setNotification(false);
+      setCoin(false);
     } else {
       setProfile(false);
     }
@@ -87,10 +99,11 @@ const NavBar = ({ theme, setTheme }) => {
 
   const openSideBar = () => {
     setOpenSideMenu(!openSideMenu);
-    setDiscover(false);
-    setHelp(false);
+    setMarketplace(false);
+    setMore(false);
     setNotification(false);
     setProfile(false);
+    setCoin(false);
   };
 
 
@@ -128,22 +141,34 @@ const NavBar = ({ theme, setTheme }) => {
 
         <div className={Style.navbar_container_right}>
 
-          {/* DISCOVER MENU */}
-          <div className={Style.navbar_container_right_discover}>
-            <p onClick={(e) => openMenu(e)}>Discover</p>
-            {discover && (
-              <div className={Style.navbar_container_right_discover_box}>
-                <Discover />
+          {/* MARKETPLACE MENU */}
+          <div className={Style.navbar_container_right_marketplace}>
+            <p onClick={(e) => openMenu(e)}>Marketplace</p>
+            {marketplace && (
+              <div className={Style.navbar_container_right_marketplace_box}>
+                <Marketplace />
               </div>
             )}
           </div>
 
-          {/* HELP CENTER MENU */}
-          <div className={Style.navbar_container_right_help}>
-            <p onClick={(e) => openMenu(e)}>Help Center</p>
-            {help && (
-              <div className={Style.navbar_container_right_help_box}>
-                <HelpCenter />
+
+          {/* COIN MENU */}
+          <div className={Style.navbar_container_right_coin}>
+            <p onClick={(e) => openMenu(e)}>Coin</p>
+            {coin && (
+              <div className={Style.navbar_container_right_coin_box}>
+                <Coin />
+              </div>
+            )}
+          </div>
+
+
+          {/* MORE MENU */}
+          <div className={Style.navbar_container_right_more}>
+            <p onClick={(e) => openMenu(e)}>More</p>
+            {more && (
+              <div className={Style.navbar_container_right_more_box}>
+                <More />
               </div>
             )}
           </div>

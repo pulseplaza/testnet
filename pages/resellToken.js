@@ -29,7 +29,6 @@ const resellToken = () => {
 
         const { data } = await axios.get(tokenURI);
 
-
         setImage(data.image);
     };
 

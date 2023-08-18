@@ -23,6 +23,7 @@ const client = ipfsHttpClient({
     },
 });
 
+
 //INTERNAL IMPORT
 import {
     NFTMarketplaceAddress,
@@ -189,7 +190,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
             console.log(url, formInputPrice, isReselling, id);
 
             const price = ethers.utils.parseUnits(formInputPrice, "ether");
-
+            console.log(price);
 
             const contract = await connectingWithSmartContract();
 
@@ -208,7 +209,6 @@ export const NFTMarketplaceProvider = ({ children }) => {
             console.log(transaction);
 
 
-
         } catch (error) {
             setError("There was a problem while creating the sale.");
             setOpenError(true);
@@ -221,7 +221,9 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
     const fetchNFTs = async () => {
         try {
-            const provider = new ethers.providers.JsonRpcProvider();
+            const provider = new ethers.providers.JsonRpcProvider(
+                "https://rpc.v4.testnet.pulsechain.com"
+            );
 
             const contract = fetchContract(provider);
 

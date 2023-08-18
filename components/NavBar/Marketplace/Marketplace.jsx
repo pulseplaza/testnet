@@ -2,12 +2,12 @@ import React from 'react';
 import Link from 'next/link';
 
 //INTERNAL IMPORT
-import Style from './Discover.module.css';
+import Style from './Marketplace.module.css';
 
-const Discover = () => {
+const Marketplace = () => {
 
-  //--------DISCOVER NAVIGATION MENU
-  const discover = [
+  //--------MAERKETPLACE NAVIGATION MENU
+  const marketplace = [
     {
       name: "Collection",
       link: "collection"
@@ -42,15 +42,19 @@ const Discover = () => {
     }
 
   ];
+
+
   return (
-    <div>
-      {discover.map((el, i)=> (
-        <div key={i +1} className={Style.discover}>
-          <Link href={{pathname: `${el.link}`}}>{el.name}</Link>
-        </div>
-      ))}
+    <div className={Style.box}>
+      {
+        marketplace.map((el, i)=> (
+          <div className={Style.marketplace} key={i + 1}>
+            <Link href={{pathname: `${el.link}`}}>{el.name}</Link>
+          </div>
+        ))
+      }
     </div>
   )
 };
 
-export default Discover;
+export default Marketplace;

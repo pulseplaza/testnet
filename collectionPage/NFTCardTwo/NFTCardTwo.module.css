@@ -56,14 +56,14 @@
 }
 
 .NFTCardTwo_box_like_box_box_icon{
-    color: var(--main-bg-color-dark);
+    color: var(--main-bg-color);
     font-size: 1.4rem;
 }
 
 
 
 :global(body.dark-mode) .NFTCardTwo_box_like_box_box_icon{
-    color: var(--main-bg-color);
+    color: var(--main-bg-color-dark);
 }
 
 

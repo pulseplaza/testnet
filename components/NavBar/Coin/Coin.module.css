@@ -1,0 +1,17 @@
+
+.coin{
+    padding: .5rem 1rem;
+    transition: all .3s ease-in;
+    z-index: 2222222;
+}
+
+.coin:hover{
+    background-color: var(--icons-color);
+    color: var(--main-bg-color);
+    border-radius: .3rem;
+}
+
+
+:global(body.dark-mode) .coin:hover{
+    background-color: var(--icons-color-2);
+}

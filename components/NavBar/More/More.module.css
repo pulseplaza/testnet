@@ -1,16 +1,16 @@
-.helpCenter{
+.more{
     padding: .5rem 1rem;
     transition: all .3s ease-in;
     z-index: 2222222;
 }
 
-.helpCenter:hover{
+.more:hover{
     background-color: var(--icons-color);
     color: var(--main-bg-color);
     border-radius: .3rem;
 }
 
 
-:global(body.dark-mode) .helpCenter:hover{
+:global(body.dark-mode) .more:hover{
     background-color: var(--icons-color-2);
 }

@@ -45,7 +45,9 @@ typechain-types
 # Hardhat files
 cache
 artifacts
+hardhat.config.js
+
 
 # Additional files
-hardhat.config.js
+
 

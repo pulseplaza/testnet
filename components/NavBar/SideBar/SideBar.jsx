@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -29,14 +30,15 @@ import Button from "../../Button/Button";
 
 const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
   //------USESTATE
-  const [openDiscover, setOpenDiscover] = useState(false);
-  const [openHelp, setOpenHelp] = useState(false);
+  const [openMarketplace, setOpenMarketplace] = useState(false);
+  const [openCoin, setOpenCoin] = useState(false);
+  const [openMore, setOpenMore] = useState(false);
 
   const router = useRouter();
 
 
   //------DISCOVER NAVIGATION MENU
-  const discover = [
+  const marketplace = [
     {
       name: "Collection",
       link: "collection"
@@ -66,23 +68,35 @@ const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
       link: "news"
     },
   ];
-  //------HELP CENTER
-  const helpCenter = [
+
+
+  //------COIN MENU
+  const coin = [
+    {
+      name: "Trade",
+      link: "coin/trade"
+    },
+  ];
+
+
+
+  //------MORE
+  const more = [
     {
       name: "About",
-      link: "about",
+      link: "aboutus",
     },
     {
       name: "Contact Us",
-      link: "contact-us",
+      link: "contact",
     },
     {
       name: "Sign Up",
-      link: "sign-up",
+      link: "signup",
     },
     {
-      name: "Sign In",
-      link: "sign-in",
+      name: "Log In",
+      link: "login",
     },
     {
       name: "Subscription",
@@ -90,25 +104,29 @@ const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
     },
   ];
 
-  const openDiscoverMenu = () => {
-    if (!openDiscover) {
-      setOpenDiscover(true);
-    } else {
-      setOpenDiscover(false);
-    }
+  const openMarketplaceMenu = () => {
+    setOpenMarketplace(!openMarketplace);
+    setOpenCoin(false);
+    setOpenMore(false);
   };
 
-  const openHelpMenu = () => {
-    if (!openHelp) {
-      setOpenHelp(true);
-    } else {
-      setOpenHelp(false);
-    }
+  const openCoinMenu = () => {
+    setOpenCoin(!openCoin);
+    setOpenMarketplace(false);
+    setOpenMore(false);
+  };
+
+  const openMoreMenu = () => {
+    setOpenMore(!openMore);
+    setOpenMarketplace(false);
+    setOpenCoin(false);
   };
 
   const closeSideBar = () => {
     setOpenSideMenu(false);
   };
+
+
 
   return (
     <div className={Style.sideBar}>
@@ -149,15 +167,15 @@ const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
         <div>
           <div
             className={Style.sideBar_menu_box}
-            onClick={() => openDiscoverMenu()}
+            onClick={() => openMarketplaceMenu()}
           >
-            <p>Discover</p>
+            <p>Marketplace</p>
             <TiArrowSortedDown />
           </div>
 
-          {openDiscover && (
-            <div className={Style.sideBar_discover}>
-              {discover.map((el, i) => (
+          {openMarketplace && (
+            <div className={Style.sideBar_marketplace}>
+              {marketplace.map((el, i) => (
                 <p key={i + 1}>
                   <Link href={{ pathname: `${el.link}` }}>{el.name}</Link>
                 </p>
@@ -166,20 +184,22 @@ const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
             </div>
           )}
         </div>
+
+
 
         <div>
           <div
             className={Style.sideBar_menu_box}
-            onClick={() => openHelpMenu()}
+            onClick={() => openCoinMenu()}
           >
-            <p>Help Center</p>
+            <p>Coin</p>
             <TiArrowSortedDown />
 
           </div>
 
-          {openHelp && (
-            <div className={Style.sideBar_discover}>
-              {discover.map((el, i) => (
+          {openCoin && (
+            <div className={Style.sideBar_coin}>
+              {coin.map((el, i) => (
                 <p key={i + 1}>
                   <Link href={{ pathname: `${el.link}` }}>{el.name}</Link>
                 </p>
@@ -188,6 +208,35 @@ const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
             </div>
           )}
         </div>
+
+
+
+
+
+        <div>
+          <div
+            className={Style.sideBar_menu_box}
+            onClick={() => openMoreMenu()}
+          >
+            <p>More</p>
+            <TiArrowSortedDown />
+
+          </div>
+
+          {openMore && (
+            <div className={Style.sideBar_more}>
+              {more.map((el, i) => (
+                <p key={i + 1}>
+                  <Link href={{ pathname: `${el.link}` }}>{el.name}</Link>
+                </p>
+              ))}
+
+            </div>
+          )}
+        </div>
+
+
+
       </div>
 
       <div className={Style.sideBar_button}>
@@ -211,3 +260,5 @@ const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
 };
 
 export default SideBar;
+
+

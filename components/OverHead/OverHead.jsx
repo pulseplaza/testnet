@@ -8,7 +8,7 @@ import Style from "./OverHead.module.css";
 const OverHead = () => {
     return (
         <div className={Style.overHead}>
-           PULSE PLAZA IS IN TEST MODE
+           Pulse Plaza is in beta test mode, running on PulseChain Testnet V4. Many functionalities are still not working!
         </div>
     )
 };

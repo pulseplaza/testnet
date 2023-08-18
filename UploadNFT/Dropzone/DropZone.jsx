@@ -38,7 +38,7 @@ const DropZone = ({
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: "image/*",
-    maxSize: 5000000,
+    maxSize: 20000000,
   });
 
 

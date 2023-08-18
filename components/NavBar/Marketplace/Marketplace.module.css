@@ -1,17 +1,17 @@
-.discover{
+.marketplace{
     padding: .5rem 1rem;
     transition: all .3s ease-in;
     z-index: 2222222;
 }
 
-.discover:hover{
+.marketplace:hover{
     background-color: var(--icons-color);
     color: var(--main-bg-color);
     border-radius: .3rem;
 }
 
 
-:global(body.dark-mode) .discover:hover{
+:global(body.dark-mode) .marketplace:hover{
     background-color: var(--icons-color-2);
 }
 

@@ -1,9 +1,9 @@
 .followerTab {
   width: 100%;
-  padding-block: 6rem;
+  padding-block: 2rem;
   border: 1px;
   position: relative;
-  padding-bottom: 13rem;
+  padding-bottom: 10rem;
 }
 
 .followerTab_title {
