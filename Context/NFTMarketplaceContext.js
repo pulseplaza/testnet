@@ -197,7 +197,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
         try {
             if (!window.ethereum) {
-                throw new Error("Please install MetaMask or another compatible web3 wallet.");
+                throw new Error("Please install Metamask or another compatible web3 wallet.");
             }
 
             await window.ethereum.request({ method: 'eth_requestAccounts' });
