@@ -59,9 +59,9 @@ const fetchContract = (signerOrProvider) =>
 //---CONNECTING WITH MARKETPLACE SMART CONTRACT
 const connectingWithSmartContract = async () => {
     try {
-        
+
         if (!window.ethereum) {
-            throw new Error("Object not found, install Metamask.");
+            throw new Error("Object not found, install Metamask or another compatible web3 wallet.");
         }
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
@@ -156,18 +156,18 @@ export const NFTMarketplaceProvider = ({ children }) => {
                 console.log("Install Metamask.");
                 return;
             }
-    
+
             const walletConnected = localStorage.getItem('walletConnected');
             if (walletConnected === 'false') {
                 // User had previously disconnected
                 console.log("Wallet not connected.");
                 return;
             }
-    
+
             const accounts = await window.ethereum.request({
                 method: "eth_accounts",
             });
-    
+
             if (accounts.length) {
                 setCurrentAccount(accounts[0]);
                 localStorage.setItem('walletConnected', 'true');
@@ -179,7 +179,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
             setOpenError(true);
         }
     };
-    
+
     useEffect(() => {
         checkIfWalletConnected();
     }, []);
@@ -197,7 +197,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
         try {
             if (!window.ethereum) {
-                throw new Error("Please install MetaMask.");
+                throw new Error("Please install MetaMask or another compatible web3 wallet.");
             }
 
             await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -215,7 +215,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
             console.log("Connected account:", accounts[0]);
         } catch (error) {
             console.error("Connection error:", error);
-            setError(`Could not connect. Error: ${error.message}`);
+            setError(`Could not connect. ${error.message}`);
             setOpenError(true);
         }
     };
@@ -309,8 +309,11 @@ export const NFTMarketplaceProvider = ({ children }) => {
         }
 
         try {
-            if (typeof window.ethereum === 'undefined') alert('Connect wallet!');
-
+            if (typeof window.ethereum === 'undefined') {
+                setError("Connect Metamask or another compatible web3 wallet.");
+                setOpenError(true);
+                return;
+            }
 
 
             const contract = await connectingWithSmartContract();
@@ -334,7 +337,12 @@ export const NFTMarketplaceProvider = ({ children }) => {
     //--- Fetch Collections by user
     const getCollectionsByUser = async () => {
         try {
-            if (typeof window.ethereum === 'undefined') alert('Connect wallet!');
+            if (typeof window.ethereum === 'undefined') {
+                setError("Connect Metamask or another compatible web3 wallet.");
+                setOpenError(true);
+                return;
+            }
+
 
             if (!currentAccount) return [];
 
