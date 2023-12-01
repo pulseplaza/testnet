@@ -1,4 +1,4 @@
-import DropZone from "./DropZone/DropZone";
+import DropZone from "./Dropzone/DropZone";
 import UploadNFT from "./UploadNFT";
 import CreateCollection from "./CreateCollection";
 
