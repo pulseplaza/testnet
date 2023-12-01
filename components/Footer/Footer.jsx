@@ -40,7 +40,7 @@ const Footer = () => {
             />
           </a>
           <p>
-            The NFT marketplace on PulseChain
+            The NFT Marketplace on PulseChain
           </p>
 
           <div className={Style.footer_social}>
@@ -88,7 +88,7 @@ const Footer = () => {
           </div>
           <div className={Style.subscribe_box_info}>
             <p>
-              The NFT marketplace on PulseChain
+              The NFT Marketplace on PulseChain
             </p>
           </div>
         </div>

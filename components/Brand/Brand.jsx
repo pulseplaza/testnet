@@ -31,7 +31,7 @@ const Brand = () => {
                         height={100}
                     />
                     <h1>PULSE PLAZA</h1>
-                    <h2>The NFT marketplace on PulseChain!</h2>
+                    <h2>The NFT Marketplace on PulseChain</h2>
                     <p>Buy, sell, and discover exclusive digital items on your fully decentralized and pure P2P NFT marketplace.</p>
                     <div className={Style.Brand_box_left_btn}>
                         {currentAccount === "" ? (
