@@ -4,12 +4,24 @@
     background-color: var(--pls-color-5);
     padding: .3rem;
     font-size: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 20000;
+    height: 1.8rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 768px) {
     .overHead {
+        height: 2.5rem;
         font-size: .8rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }

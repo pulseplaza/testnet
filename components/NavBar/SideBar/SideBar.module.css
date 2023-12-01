@@ -1,6 +1,7 @@
 
 .sideBar {
     background-color: var(--main-bg-color);
+    margin-top: 3rem;
 }
 
 :global(body.dark-mode) .sideBar {
@@ -19,12 +20,10 @@
 }
 
 
-
-
 .sideBar_box_logo {
     font-size: 5rem;
     margin-bottom: 3rem;
-    margin-top: 2rem;
+    margin-top: 0rem;
 }
 
 
@@ -39,7 +38,7 @@
 
 
 :global(body.dark-mode) .sideBar_closeBtn {
-    filter: invert(1);
+    filter: invert(0);
 }
 
 
@@ -93,18 +92,43 @@
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-}
 
-.sideBar_menu_box {
     font-size: 1.2rem;
     font-weight: 600;
     text-transform: uppercase;
 }
 
 
+.sideBar_gallery,
+.sideBar_coin,
+.sideBar_more {
+    cursor: pointer;
+}
+
+
+/* Target the <a> tags within paragraphs in each specific section */
+.sideBar_gallery p a,
+.sideBar_coin p a,
+.sideBar_more p a {
+    color: var(--main-bg-color-dark);
+}
+
+.sideBar_gallery p a:hover,
+.sideBar_coin p a:hover,
+.sideBar_more p a:hover {
+    color: var(--main-bg-color-dark);
+}
+
+
+
+
+
+
 .sideBar_menu_box:hover {
     text-decoration: overline 4px var(--icons-color);
 }
+
+
 
 
 

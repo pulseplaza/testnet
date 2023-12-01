@@ -1,3 +1,4 @@
+
 import React from "react";
 import Image from "next/image";
 import {
@@ -6,14 +7,14 @@ import {
   TiArrowSortedUp,
 } from "react-icons/ti";
 import { RiMastodonFill, RiFacebookBoxFill, RiSendPlaneFill } from "react-icons/ri";
-import { BsDiscord, BsTwitter } from "react-icons/bs";
+import { BsDiscord, BsTwitterX } from "react-icons/bs";
 
 
 
 //INTERNAL IMPORT
 import Style from "./Footer.module.css";
 import images from "../../img";
-import { Marketplace, Coin, More } from "../NavBar/index";
+import { Gallery, Coin, More } from "../NavBar/index";
 
 
 const Footer = () => {
@@ -38,32 +39,33 @@ const Footer = () => {
           </p>
 
           <div className={Style.footer_social}>
-            <a href="#"><BsDiscord /></a>
-            <a href="#"><BsTwitter /></a>
-            <a href="#"><RiFacebookBoxFill /></a>
-            <a href="#"><TiSocialInstagram /></a>
-            <a href="#"><RiMastodonFill /></a>
+            <a href="https://discord.com/invite/w7tVUW9Fb3" target="_blank" rel="noopener noreferrer"><BsDiscord /></a>
+            <a href="https://twitter.com/PulsePlazaio" target="_blank" rel="noopener noreferrer"><BsTwitterX /></a>
+            <a href="https://www.facebook.com/PulsePlazaio" target="_blank" rel="noopener noreferrer"><RiFacebookBoxFill /></a>
+            <a href="https://instagram.com/pulseplazaio" target="_blank" rel="noopener noreferrer"><TiSocialInstagram /></a>
+            <a href="https://mastodon.social/@pulseplaza" target="_blank" rel="noopener noreferrer"><RiMastodonFill /></a>
           </div>
         </div>
 
-        <div className={Style.footer_box_marketplace}>
-          <h3>Marketplace</h3>
-          <Marketplace />
+
+        <div className={Style.footer_box_gallery}>
+          <h3>GALLERY</h3>
+          <Gallery />
         </div>
 
-        <div className={Style.coin}>
-          <h3>Coin</h3>
+        <div className={Style.footer_box_coin}>
+          <h3>COIN</h3>
           <Coin />
         </div>
 
         <div className={Style.footer_box_more}>
-          <h3>More</h3>
+          <h3>MORE</h3>
           <More />
         </div>
 
 
         <div className={Style.subscribe}>
-          <h3>Subscribe</h3>
+          <h3>SUBSCRIBE</h3>
           <div className={Style.subscribe_box}>
             <input type="email" placeholder="Enter your email" />
             <RiSendPlaneFill className={Style.subscribe_box_send} />
@@ -78,7 +80,7 @@ const Footer = () => {
 
       <div className={Style.footer_copyright}>
         <p>
-          © {year} Pulse Plaza
+          © 2023 - {year} Pulse Plaza
         </p>
 
       </div>

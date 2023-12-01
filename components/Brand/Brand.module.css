@@ -1,12 +1,12 @@
 
 .Brand{
     width: 100%;
-    margin-top: 4rem;
-    margin-bottom: 4rem;
+    margin-top: 8rem;
+    margin-bottom: 6rem;
 }
 
 .Brand_box{
-    width: 80%;
+    width: 85%;
     margin: 0 auto;
 
     display: grid;
@@ -16,13 +16,13 @@
 }
 
 .Brand_box_left h1{
-    font-size: 5rem;
+    font-size: 4.5rem;
     line-height: 1;
     font-weight: bolder;
 }
 
 .Brand_box_left h2{
-    font-size: 3rem;
+    font-size: 2.5rem;
     line-height: 1;
     font-weight: bolder;
 }
@@ -40,9 +40,10 @@
 }
 
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 800px) {
     .Brand_box{
         grid-template-columns: 1fr;
+        width: 90%;
     }
     .Brand_box_left h1{
         font-size: 2.5rem;

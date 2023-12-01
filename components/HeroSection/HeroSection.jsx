@@ -13,7 +13,6 @@ import { NFTMarketplaceContext } from "../../Context/NFTMarketplaceContext";
 
 
 
-
 const HeroSection = () => {
   const { titleData } = useContext(NFTMarketplaceContext);
   const router = useRouter();
@@ -22,13 +21,13 @@ const HeroSection = () => {
       <div className={Style.heroSection_box}>
         <div className={Style.heroSection_box_left}>
           <h1>PULSE PLAZA</h1>
-          <h2>{titleData}!</h2>
+          <h2>Decentralized NFT marketplace on PulseChain</h2>
           <p>
-            Discover the most outstanding NTFs in all topics of life. Mint your NTFs and sell them on Pulse Plaza.
+            Discover the most degen NTFs of the metaverse. Mint your NTFs and sell them on Pulse Plaza.
           </p>
           <Button
             btnName="Start your search"
-            handleClick={() => router.push("/searchPage")}
+            handleClick={() => router.push("/search-nfts")}
           />
         </div>
         <div className={Style.heroSection_box_right}>

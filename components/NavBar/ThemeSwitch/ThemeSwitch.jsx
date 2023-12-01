@@ -7,10 +7,12 @@ const ThemeSwitch = ({ theme, setTheme }) => {
     const switchTheme = () => {
         const newTheme = theme === 'light' ? 'dark' : 'light';
         setTheme(newTheme);
+        
     };
 
     return <CgDarkMode onClick={switchTheme} />;
 };
 
 export default ThemeSwitch;
+
 

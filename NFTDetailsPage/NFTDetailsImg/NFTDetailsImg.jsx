@@ -1,23 +1,18 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { BsImages } from "react-icons/bs";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 
 import { useRouter } from 'next/router';
-
-
-//INTERNAL IMPORT
 import Style from "./NFTDetailsImg.module.css";
 
-
-
-
 const NFTDetailsImg = ({ nft }) => {
+  const [blockWidth, setBlockWidth] = useState(0);
+  const blockRef = useRef(null);
 
   const [isImageLoaded, setImageLoaded] = useState(false);
-
   const [description, setDescription] = useState(true);
   const [details, setDetails] = useState(true);
   const [like, setLike] = useState(false);
@@ -25,111 +20,127 @@ const NFTDetailsImg = ({ nft }) => {
   const router = useRouter();
 
 
-  const openDescription = () => {
-    if (!description) {
-      setDescription(true);
-    } else {
-      setDescription(false);
+
+
+  //SLICE ADDRESSES FUNCTION
+  useEffect(() => {
+    const updateWidth = () => {
+      if (blockRef.current) {
+        setBlockWidth(blockRef.current.offsetWidth);
+      }
+    };
+
+    const resizeObserver = new ResizeObserver(updateWidth);
+
+    if (blockRef.current) {
+      updateWidth();
+      resizeObserver.observe(blockRef.current);
     }
+
+    return () => {
+      if (resizeObserver && blockRef.current) {
+        resizeObserver.unobserve(blockRef.current);
+      }
+    };
+  }, []);
+
+  const truncate = (value) => {
+    value = (value ?? '').toLowerCase();
+    if (blockWidth < 420 && value.length > 20) {
+      return `${value.slice(0, 16)}...${value.slice(-14)}`;
+    }
+    return value;
+  };
+
+
+  const truncatedSeller = truncate(nft?.seller);
+  const truncatedOwner = truncate(nft?.owner);
+  const truncatedCreator = truncate(nft?.creator);
+
+
+  //DESCRIPTION & DETAILS FUNCTION
+  const openDescription = () => {
+    setDescription(prevDescription => !prevDescription);
   };
 
   const openDetails = () => {
-    if (!details) {
-      setDetails(true);
-    } else {
-      setDetails(false);
-    }
+    setDetails(prevDetails => !prevDetails);
   };
 
-  const likeNFT = () => {
-    if (!like) {
-      setLike(true);
-    } else {
-      setLike(false);
-    }
-  };
+
+
 
 
   return (
-    <div className={Style.NFTDetailsImg}>
+    <div className={Style.NFTDetailsImg} ref={blockRef}>
       <div className={Style.NFTDetailsImg_box}>
         <div className={Style.NFTDetailsImg_box_NFT}>
-          <div className={Style.NFTDetailsImg_box_NFT_like}>
-            <BsImages className={Style.NFTDetailsImg_box_NFT_like_icon_1} />
-            <p onClick={() => likeNFT()}>
-              {like ? (
-                <AiOutlineHeart className={Style.NFTDetailsImg_box_NFT_like_icon} />
-              ) : (
-                <AiFillHeart className={Style.NFTDetailsImg_box_NFT_like_icon} />
-              )}
-              <span>23</span>
-
-            </p>
-
-          </div>
-
 
 
           <div className={Style.NFTDetailsImg_box_NFT_img}>
-
-
             <Image
               src={nft.image}
               className={Style.NFTDetailsImg_box_NFT_img_img}
-              alt="NFT image"
+              alt="NFT file preview"
               width={800}
               height={800}
+              layout="responsive"
               objectFit="cover"
               onClick={() => window.open(nft.image, "_blank")}
             />
-
           </div>
-
         </div>
-
 
         <div
           className={Style.NFTDetailsImg_box_description}
-          onClick={() => openDescription()}
+          onClick={openDescription}
         >
           <p>Description</p>
           {description ? <TiArrowSortedUp /> : <TiArrowSortedDown />}
-
         </div>
 
         {
           description && (
             <div className={Style.NFTDetailsImg_box_description_box}>
-              <p>
-                {nft.description}
-              </p>
+              <p>{nft.description}</p>
             </div>
+          )
+        }
 
-          )}
 
         <div className={Style.NFTDetailsImg_box_details}
-          onClick={() => openDetails()}
+          onClick={openDetails}
         >
-          <p>Details</p>
+          <p>Additional information</p>
           {details ? <TiArrowSortedUp /> : <TiArrowSortedDown />}
         </div>
 
         {details && (
           <div className={Style.NFTDetailsImg_box_details_box}>
-            <small>2000 x 2000 px.IMAGE(685KB)</small>
+
             <p>
-              <small>Current seller</small>
-              <br></br>
-              {nft.seller}
+              <small>Seller Address</small>
+              <br />
+              {truncatedSeller.startsWith('0x000000') ? "🚫 THIS NFT IS NOT LISTED FOR SALE" : truncatedSeller}
             </p>
+
             <p>
-              <small>Current owner</small>
-              <br></br>
-              {nft.owner}
+              <small>Owner Address</small>
+              <br />
+              {truncatedOwner === '0x118594655792c308a705a437ccd1059a2f2beaf4'.toLowerCase()
+                ? "0x118594655792c308a705a437ccd1059a2f2beaf4 (Pulse Plaza)"
+                : truncatedOwner}
             </p>
+
             <p>
-              <small>Token ID</small>
-              <br></br>
+              <small>Creator Address</small>
+              <br />
+              {truncatedCreator}
+            </p>
+
+            <p>
+              <small>NFT ID</small>
+              <br />
               {nft.tokenId}
             </p>
           </div>
@@ -140,3 +151,4 @@ const NFTDetailsImg = ({ nft }) => {
 };
 
 export default NFTDetailsImg;
+

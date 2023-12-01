@@ -1,0 +1,25 @@
+
+.gallery{
+    padding: .5rem 1rem;
+    transition: all .3s ease-in;
+    z-index: 2222222;
+    text-transform: capitalize;
+}
+
+.gallery:hover{
+    background-color: var(--icons-color);
+    color: var(--main-bg-color);
+    border-radius: .3rem;
+}
+
+.gallery:hover a {
+    color: var(--main-bg-color);
+    transition: all .3s ease-in;
+}
+
+
+
+:global(body.dark-mode) .gallery:hover{
+    background-color: var(--icons-color-2);
+}
+

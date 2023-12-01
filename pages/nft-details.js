@@ -1,5 +1,7 @@
-import React, {useEffect, useState, useContext} from "react";
+
+import React, { useEffect, useState, useContext } from "react";
 import { useRouter } from "next/router";
+import Head from 'next/head';
 
 
 
@@ -26,6 +28,7 @@ const NFTDetails = () => {
     owner: "",
     price: "",
     seller: "",
+    collection: {}
   });
 
   const router = useRouter();
@@ -37,9 +40,17 @@ const NFTDetails = () => {
 
   return (
     <div>
+
+      <Head>
+        <title>{nft.name ? `Pulse Plaza NFT Marketplace - NFT Details: ${nft.name}` : "Pulse Plaza NFT Marketplace - NFT Details"}</title>
+      </Head>
+
       <NFTDetailsPage nft={nft} />
-      <Category />
+
+      {/* <Category /> */}
+
       <Brand />
+
     </div>
   );
 };

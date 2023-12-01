@@ -1,16 +1,21 @@
+
 import React, { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import {
-  MdVerified,
-  MdCloudUpload,
-  MdTimer,
-  MdReportProblem,
-  MdOutlineDeleteSweep,
-} from "react-icons/md";
-import { BsThreeDots, BsDiscord, BsTwitter } from "react-icons/bs";
-import { FaWallet, FaPercentage } from "react-icons/fa";
+
+// import {
+//   MdVerified,
+//   MdCloudUpload,
+//   MdTimer,
+//   MdReportProblem,
+//   MdOutlineDeleteSweep,
+// } from "react-icons/md";
+
+// import { BsThreeDots, BsDiscord, BsTwitter } from "react-icons/bs";
+
+import { FaWallet, FaShareAlt, FaPercentage } from "react-icons/fa";
+
 import {
   TiSocialTwitter,
   TiSocialFacebook,
@@ -20,119 +25,142 @@ import {
   TiSocialLinkedin,
   TiSocialYoutube,
 } from "react-icons/ti";
+
+import { HiOutlineUserCircle } from "react-icons/hi2";
+
 import { RiMastodonFill, RiFacebookBoxFill } from "react-icons/ri";
 import { BiTransferAlt, BiDollar } from "react-icons/bi";
-
-
 
 //INTERNAL IMPORT
 import Style from "./NFTDescription.module.css";
 import images from "../../img";
-import { Button } from "../../components/componentsindex";
+import { Button, Loader } from "../../components/componentsindex";
 import { NFTTabs } from "../NFTDetailsIndex";
-
 
 //IMPORT SMART CONTRACT
 import { NFTMarketplaceContext } from "../../Context/NFTMarketplaceContext";
 
-
-
 const NFTDescription = ({ nft }) => {
+  // const [social, setSocial] = useState(false);
+  // const [owner, setOwner] = useState(false);
 
-  const [social, setSocial] = useState(false);
-  const [NFTMenu, setNFTMenu] = useState(false);
-  const [history, setHistory] = useState(true);
-  const [origin, setOrigin] = useState(false);
-  const [owner, setOwner] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+
+
+  const [screenWidth, setScreenWidth] = useState(undefined);
+
+
+  useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth);
+
+    // Set the initial value
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+
+  const formatAddress = (address) => {
+    return ((screenWidth < 500 || (screenWidth >= 800 && screenWidth <= 1250))
+      ? `${address.slice(0, 10)}...${address.slice(-10)}`
+      : address);
+  };
+
+
+  const formatCollectionName = (name) => {
+    if (!name) return "No Name"; // Or any default/fallback string you prefer
+
+    if (screenWidth > 1400) {
+      return name.length > 50 ? `${name.slice(0, 50)}...` : name;
+    } else if (screenWidth >= 1100 && screenWidth <= 1400) {
+      return name.length > 40 ? `${name.slice(0, 40)}...` : name;
+    } else if (screenWidth >= 800 && screenWidth < 1100) {
+      return name.length > 25 ? `${name.slice(0, 25)}...` : name;
+    } else if (screenWidth >= 500 && screenWidth < 800) {
+      return name.length > 50 ? `${name.slice(0, 50)}...` : name;
+    } else {
+      return name.length > 25 ? `${name.slice(0, 25)}...` : name; // For screens under 500px
+    }
+  };
+
+
+
+
+
+
 
   const router = useRouter();
 
 
-  const historyArray = [
-    images.user1,
-    images.user2,
-    images.user3,
-    images.user4,
-    images.user5,
-  ];
-
-  const originArray = [
-    images.user3,
-    images.user9,
-    images.user8,
-    images.user1,
-    images.user6,
-  ];
-
-  const ownerArray = [
-    images.user6,
-    images.user7,
-    images.user8,
-    images.user9,
-    images.user1,
-  ];
-
-
-  const openSocial = () => {
-    if (!social) {
-      setSocial(true);
-      setNFTMenu(false);
-    } else {
-      setSocial(false);
-    }
-  };
-
-  const openNFTMenu = () => {
-    if (!NFTMenu) {
-      setNFTMenu(true);
-      setSocial(false);
-    } else {
-      setNFTMenu(false);
-    }
-  };
-
-  const openTabs = (e) => {
-    const btnText = e.target.innerText;
-
-    if (btnText == "Bid history") {
-      setHistory(true);
-      setOrigin(false);
-      setOwner(false);
-    } else if (btnText == "Origin") {
-      setHistory(false);
-      setOrigin(true);
-      setOwner(false);
-    }
-  };
-
-  const openOwner = () => {
-    if (!owner) {
-      setOwner(true);
-      setHistory(false);
-      setOrigin(false);
-    } else {
-      setOwner(true);
-    }
-  };
-
-
 
   //SMART CONTRACT DATA
-  const { buyNFT, currentAccount } = useContext(NFTMarketplaceContext);
+  const { buyNFT, currentAccount, fetchMyNFTsOrListedNFTs } = useContext(
+    NFTMarketplaceContext
+  );
+
+
+
+
+  const handleBuyNFT = async () => {
+    setIsLoading(true); // Start loading
+    try {
+      await buyNFT(nft);
+      // Additional logic after purchase can be added here
+    } catch (error) {
+      console.error("Error during NFT purchase:", error);
+    }
+    setIsLoading(false); // Stop loading
+  };
+
+
+
+  // const openSocial = () => {
+  //   setSocial(!social);
+  // };
+
+
+
+  // Prepare the collection query object for the Link component
+  const collectionQuery = {
+    creatorAddress: nft.creator,
+    collectionAddress: nft.collectionAddress,
+    name: nft.collectionName,
+    symbol: nft.collectionSymbol,
+    description: nft.collectionDescription,
+    image: nft.collectionImage
+  };
+
+
+
 
 
   return (
     <div className={Style.NFTDescription}>
-      <div className={Style.NFTDescription_box}>
 
+
+      {isLoading && (
+        <div className={Style.loaderOverlay}>
+          <Loader />
+        </div>
+      )}
+
+
+      <div className={Style.NFTDescription_box}>
         {/* //PART ONE */}
         <div className={Style.NFTDescription_box_share}>
-          <p>Virtual worlds</p>
-          <div className={Style.NFTDescription_box_share_box}>
-            <MdCloudUpload
+          <p>NFT Details</p>
+
+
+
+
+          {/* <div className={Style.NFTDescription_box_share_box}>
+            <FaShareAlt
               className={Style.NFTDescription_box_share_box_icon}
               onClick={() => openSocial()}
             />
+
 
             {social && (
               <div className={Style.NFTDescription_box_share_box_social}>
@@ -151,66 +179,39 @@ const NFTDescription = ({ nft }) => {
                 <a href="#">
                   <TiSocialYoutube /> YouTube
                 </a>
-
               </div>
             )}
+          </div> */}
 
-            <BsThreeDots
-              className={Style.NFTDescription_box_share_box_icon}
-              onClick={() => openNFTMenu()}
-            />
 
-            {NFTMenu && (
-              <div className={Style.NFTDescription_box_share_box_social}>
-                <a href="#">
-                  <BiDollar /> Change price
-                </a>
-                <a href="#">
-                  <BiTransferAlt /> Transfer NFT
-                </a>
-                <a href="#">
-                  <MdReportProblem /> Report abuse
-                </a>
-                <a href="#">
-                  <MdOutlineDeleteSweep /> Delete item
-                </a>
 
-              </div>
-            )}
-
-          </div>
         </div>
 
 
         {/* //PART TWO */}
         <div className={Style.NFTDescription_box_profile}>
-          <h1>
-            {nft.name} #{nft.tokenId}
-          </h1>
+          <h1>{nft.name}</h1>
           <div className={Style.NFTDescription_box_profile_box}>
+
             <div className={Style.NFTDescription_box_profile_box_left}>
-              <Image
-                src={images.user1}
-                alt="Profile"
-                width={50}
-                height={50}
+              <HiOutlineUserCircle
+                size={50}
                 className={Style.NFTDescription_box_profile_box_left_img}
               />
               <div className={Style.NFTDescription_box_profile_box_left_info}>
-                <small>Creator</small> <br />
-                <Link href={{ pathname: "/author", query: `${nft.seller}` }}>
-                  <span>
-                    Karli Costa <MdVerified />
-                  </span>
-                </Link>
+                <small>Creator Address</small> <br />
+                <span>{nft.creator ? formatAddress(nft.creator) : "Loading..."}</span>
 
               </div>
             </div>
 
+
             <div className={Style.NFTDescription_box_profile_box_right}>
               <Image
-                src={images.creatorbackground1}
-                alt="Profile"
+                src={
+                  nft.collectionImage
+                }
+                alt="Collection image"
                 width={50}
                 height={50}
                 className={Style.NFTDescription_box_profile_box_left_img}
@@ -218,119 +219,56 @@ const NFTDescription = ({ nft }) => {
 
               <div className={Style.NFTDescription_box_profile_box_right_info}>
                 <small>Collection</small> <br />
-                <span>
-                  Monkeypunks <MdVerified />
-                </span>
+
+                <Link href={{ pathname: "/collection-details", query: collectionQuery }}>
+                  <a className={Style.NFTDescription_box_profile_box_right_info_txt}>
+                    {formatCollectionName(nft.collectionName)}
+                  </a>
+                </Link>
 
               </div>
+
+
+
             </div>
           </div>
 
 
           <div className={Style.NFTDescription_box_profile_biding}>
-            <p>
-              <MdVerified /> <span>Auction ending in:</span>
-            </p>
-
-            <div className={Style.NFTDescription_box_profile_biding_box_timer}>
-              <div className={Style.NFTDescription_box_profile_biding_box_timer_item}>
-                <p>2</p>
-                <span>days</span>
-              </div>
-              <div className={Style.NFTDescription_box_profile_biding_box_timer_item}>
-                <p>18</p>
-                <span>hours</span>
-              </div>
-              <div className={Style.NFTDescription_box_profile_biding_box_timer_item}>
-                <p>45</p>
-                <span>mins</span>
-              </div>
-              <div className={Style.NFTDescription_box_profile_biding_box_timer_item}>
-                <p>22</p>
-                <span>sec</span>
-              </div>
-
-
-            </div>
-
             <div className={Style.NFTDescription_box_profile_biding_box_price}>
-              <div className={Style.NFTDescription_box_profile_biding_box_price_bid}>
-                <small>Current bid</small>
-                <p>{nft.price} PLS <span>( = $3,221.22)</span>
-                </p>
-
+              <div
+                className={
+                  Style.NFTDescription_box_profile_biding_box_price_bid
+                }
+              >
+                <small>Price</small>
+                <p>{parseFloat(nft.price).toLocaleString(undefined, { minimumFractionDigits: 2 })} PLS</p>
               </div>
-
-              <span>[96 in stock]</span>
-
             </div>
 
             <div className={Style.NFTDescription_box_profile_biding_box_button}>
-
               {currentAccount == nft.seller.toLowerCase() ? (
-                <p>
-                  You hold this NFT
-                </p>
+                <p>You listed this NFT</p>
               ) : currentAccount == nft.owner.toLowerCase() ? (
-
                 <Button
                   icon=<FaWallet />
                   btnName="List on marketplace"
                   handleClick={() =>
                     router.push(
-                      `/resellToken?id=${nft.tokenId}&tokenURI=${nft.tokenURI}`
-                    )}
+                      `/resell-nft?id=${nft.tokenId}&tokenURI=${nft.tokenURI}`
+                    )
+                  }
                   classStyle={Style.button}
                 />
-
               ) : (
-
                 <Button
                   icon=<FaWallet />
                   btnName="Buy NFT"
-                  handleClick={() => buyNFT(nft)}
+                  handleClick={handleBuyNFT}
                   classStyle={Style.button}
                 />
               )}
-
-
-
-
-
-              <Button
-                icon=<FaPercentage />
-                btnName="Make offer"
-                handleClick={() => { }}
-                classStyle={Style.button}
-              />
-
             </div>
-
-            <div className={Style.NFTDescription_box_profile_biding_box_tabs}>
-              <button onClick={(e) => openTabs(e)}>Bid history</button>
-              <button onClick={(e) => openTabs(e)}>Origin</button>
-              <button onClick={(e) => openOwner()}>Owner</button>
-
-            </div>
-
-            {history && (
-              <div className={Style.NFTDescription_box_profile_biding_box_card}>
-                <NFTTabs dataTab={historyArray} />
-              </div>
-            )}
-
-            {origin && (
-              <div className={Style.NFTDescription_box_profile_biding_box_card}>
-                <NFTTabs dataTab={originArray} />
-              </div>
-            )}
-
-            {owner && (
-              <div className={Style.NFTDescription_box_profile_biding_box_card}>
-                <NFTTabs dataTab={ownerArray} icon=<MdVerified /> />
-              </div>
-            )}
-
           </div>
         </div>
       </div>

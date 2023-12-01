@@ -8,15 +8,12 @@ import { useRouter } from "next/router";
 import { GrClose } from "react-icons/gr";
 
 import {
-  TiSocialTwitter,
-  TiSocialFacebook,
   TiSocialInstagram,
   TiArrowSortedDown,
-  TiArrowSortedUp,
 } from "react-icons/ti";
 
 import { RiMastodonFill, RiFacebookBoxFill } from "react-icons/ri";
-import { BsDiscord, BsTwitter } from "react-icons/bs";
+import { BsDiscord, BsTwitterX } from "react-icons/bs";
 
 import { FaWallet } from "react-icons/fa";
 import { MdPermMedia } from "react-icons/md";
@@ -30,7 +27,7 @@ import Button from "../../Button/Button";
 
 const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
   //------USESTATE
-  const [openMarketplace, setOpenMarketplace] = useState(false);
+  const [openGallery, setOpenGallery] = useState(false);
   const [openCoin, setOpenCoin] = useState(false);
   const [openMore, setOpenMore] = useState(false);
 
@@ -38,34 +35,22 @@ const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
 
 
   //------DISCOVER NAVIGATION MENU
-  const marketplace = [
+  const gallery = [
     {
-      name: "Collection",
-      link: "collection"
+      name: "Search NFTs",
+      link: "/search-nfts"
     },
     {
-      name: "Search",
-      link: "search"
+      name: "Search Collections",
+      link: "/search-collections"
     },
     {
-      name: "Author Profile",
-      link: "author-profile"
+      name: "Create NFT",
+      link: "/create-nft"
     },
     {
-      name: "NFT Details",
-      link: "NFT-details"
-    },
-    {
-      name: "Account Settings",
-      link: "account-settings"
-    },
-    {
-      name: "Connect Wallet",
-      link: "connect-wallet"
-    },
-    {
-      name: "News",
-      link: "news"
+      name: "Create Collection",
+      link: "/create-collection"
     },
   ];
 
@@ -73,8 +58,12 @@ const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
   //------COIN MENU
   const coin = [
     {
+      name: "Tokenomics",
+      link: "/coin/tokenomics",
+    },
+    {
       name: "Trade",
-      link: "coin/trade"
+      link: "/coin/trade",
     },
   ];
 
@@ -83,48 +72,65 @@ const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
   //------MORE
   const more = [
     {
-      name: "About",
-      link: "aboutus",
+      name: "About Us",
+      link: "/aboutus",
+    },
+    {
+      name: "News",
+      link: "/news"
+    },
+    {
+      name: "Fees",
+      link: "/fees",
     },
     {
       name: "Contact Us",
-      link: "contact",
+      link: "/contact",
     },
     {
-      name: "Sign Up",
-      link: "signup",
-    },
-    {
-      name: "Log In",
-      link: "login",
-    },
-    {
-      name: "Subscription",
-      link: "subscription",
-    },
+      name: "System Status",
+      link: "https://stats.uptimerobot.com/1kn5YInD1x",
+      external: true
+    }
   ];
 
-  const openMarketplaceMenu = () => {
-    setOpenMarketplace(!openMarketplace);
+
+
+
+  const openGalleryMenu = () => {
+    setOpenGallery(!openGallery);
     setOpenCoin(false);
     setOpenMore(false);
   };
 
   const openCoinMenu = () => {
     setOpenCoin(!openCoin);
-    setOpenMarketplace(false);
+    setOpenGallery(false);
     setOpenMore(false);
   };
 
   const openMoreMenu = () => {
     setOpenMore(!openMore);
-    setOpenMarketplace(false);
+    setOpenGallery(false);
     setOpenCoin(false);
   };
 
   const closeSideBar = () => {
     setOpenSideMenu(false);
   };
+
+
+
+  // Function to handle link clicks
+  const handleLinkClick = (link, isExternal = false) => {
+    if (isExternal) {
+      window.open(link, '_blank');
+    } else {
+      router.push(link);
+    }
+    closeSideBar();
+  };
+
 
 
 
@@ -154,11 +160,11 @@ const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
         </p>
 
         <div className={Style.sideBar_social}>
-          <a href="#"><BsDiscord /></a>
-          <a href="#"><BsTwitter /></a>
-          <a href="#"><RiFacebookBoxFill /></a>
-          <a href="#"><TiSocialInstagram /></a>
-          <a href="#"><RiMastodonFill /></a>
+        <a href="https://discord.com/invite/w7tVUW9Fb3" target="_blank" rel="noopener noreferrer"><BsDiscord /></a>
+            <a href="https://twitter.com/PulsePlazaio" target="_blank" rel="noopener noreferrer"><BsTwitterX /></a>
+            <a href="https://www.facebook.com/PulsePlazaio" target="_blank" rel="noopener noreferrer"><RiFacebookBoxFill /></a>
+            <a href="https://instagram.com/pulseplazaio" target="_blank" rel="noopener noreferrer"><TiSocialInstagram /></a>
+            <a href="https://mastodon.social/@pulseplaza" target="_blank" rel="noopener noreferrer"><RiMastodonFill /></a>
         </div>
       </div>
 
@@ -167,24 +173,23 @@ const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
         <div>
           <div
             className={Style.sideBar_menu_box}
-            onClick={() => openMarketplaceMenu()}
+            onClick={() => openGalleryMenu()}
           >
-            <p>Marketplace</p>
+            <p>Gallery</p>
             <TiArrowSortedDown />
           </div>
 
-          {openMarketplace && (
-            <div className={Style.sideBar_marketplace}>
-              {marketplace.map((el, i) => (
-                <p key={i + 1}>
-                  <Link href={{ pathname: `${el.link}` }}>{el.name}</Link>
+          {openGallery && (
+            <div className={Style.sideBar_gallery}>
+              {gallery.map((el, i) => (
+                <p key={i + 1} onClick={() => handleLinkClick(el.link)}>
+                  {el.name}
                 </p>
               ))}
 
             </div>
           )}
         </div>
-
 
 
         <div>
@@ -200,18 +205,14 @@ const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
           {openCoin && (
             <div className={Style.sideBar_coin}>
               {coin.map((el, i) => (
-                <p key={i + 1}>
-                  <Link href={{ pathname: `${el.link}` }}>{el.name}</Link>
+                <p key={i + 1} onClick={() => handleLinkClick(el.link)}>
+                  {el.name}
                 </p>
               ))}
 
             </div>
           )}
         </div>
-
-
-
-
 
         <div>
           <div
@@ -226,15 +227,15 @@ const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
           {openMore && (
             <div className={Style.sideBar_more}>
               {more.map((el, i) => (
-                <p key={i + 1}>
-                  <Link href={{ pathname: `${el.link}` }}>{el.name}</Link>
+                <p key={i + 1} onClick={() => handleLinkClick(el.link, el.external)}>
+                  {el.name}
                 </p>
               ))}
+
 
             </div>
           )}
         </div>
-
 
 
       </div>
@@ -248,8 +249,8 @@ const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
           />
         ) : (
           <Button
-            btnName={<><MdPermMedia /> Create</>}
-            handleClick={() => router.push("/upload-nft")}
+            btnName={<><MdPermMedia />Create</>}
+            handleClick={() => { router.push("/create-nft"); closeSideBar() }}
           />
         )}
 

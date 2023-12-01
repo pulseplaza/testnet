@@ -1,5 +1,7 @@
 .SearchBar {
     width: 100%;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
 }
 
 .SearchBar_box {
@@ -8,15 +10,17 @@
     background-color: var(--main-bg-color);
     color: var(--main-bg-color);
     display: flex;
+    border: 1px solid var(--bg-second-dark);
     border-radius: 5rem;
     align-items: center;
-    margin-top: 8rem;
+    margin-top: 4rem;
     margin-bottom: 3rem;
     box-shadow: var(--box-shadow-2);
 }
 
 :global(body.dark-mode) .SearchBar_box {
     background-color: var(--main-bg-color-dark);
+    border: 1px solid var(--bg-second-light);
     color: var(--main-bg-color-dark);
 }
 

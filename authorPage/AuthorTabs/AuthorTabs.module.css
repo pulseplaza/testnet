@@ -1,7 +1,7 @@
 
 .AuthorTabs{
     width: 100%;
-    margin: 8rem 0 3rem 0;
+    margin: 5rem 0 3rem 0;
 }
 
 .AuthorTabs_box{
@@ -9,11 +9,12 @@
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
+    gap: 1rem;
 }
 
 .AuthorTabs_box_left_btn{
     display: flex;
-    gap: 2rem;
+    gap: 3rem;
     align-items: center;
 }
 
@@ -21,7 +22,7 @@
     border: 1px solid var(--icons-color);
     outline: 0;
     background-color: var(--main-bg-color);
-    font-size: 1.2rem;
+    font-size: 1rem;
     border-radius: 2rem;
     padding: .5rem 1rem;
     cursor: pointer;
@@ -63,6 +64,7 @@
 }
 
 
+/* 
 .AuthorTabs_box_right{
     position: relative;
 }
@@ -85,12 +87,13 @@
 }
 
 .AuthorTabs_box_right_para p{
-    font-size: 1.2rem;
+    font-size: 1rem;
     line-height: .5;
 }
 
+
 .AuthorTabs_box_right_list{
-    background-color: var(--main-bg-color);
+    background-color: var(--bg-very-light);
     padding: 1rem;
     width: 16rem;
     left: -3rem;
@@ -103,7 +106,7 @@
 }
 
 :global(body.dark-mode) .AuthorTabs_box_right_list{
-    background-color: var(--main-bg-color-dark);
+    background-color: var(--bg-very-dark);
 }
 
 
@@ -131,7 +134,7 @@
 :global(body.dark-mode) .AuthorTabs_box_right_list_item:hover{
     background-color: var(--icons-color-2);
     color: var(--main-bg-color);
-}
+} */
 
 
 @media screen and (max-width: 560px) {
@@ -149,7 +152,7 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
-        box-shadow: var(--box-shadow);
+        box-shadow: var(--box-shadow-2);
         padding: .5rem;
         border-radius: 1rem;
         padding: 2rem 1rem;
@@ -175,6 +178,7 @@
         grid-template-columns: 1fr;
         gap: 2rem;
     }
+
 
     .AuthorTabs_box_right_list{
         left: 7rem;

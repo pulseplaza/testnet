@@ -1,107 +1,147 @@
-import React, { useState } from "react";
+
+import React, { useContext, useState, useEffect } from 'react';
 import { MdOutlineHttp, MdOutlineAttachFile } from "react-icons/md";
 import { FaPercent } from "react-icons/fa";
 import { AiTwotonePropertySafety } from "react-icons/ai";
+import { FaHeartPulse } from "react-icons/fa6";
 import { TiTick } from "react-icons/ti";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import Link from 'next/link';
+
+
+
 
 //INTERNAL IMPORT
 import Style from "./UploadNFT.module.css";
-import formStyle from "../AccountPage/Form/Form.module.css";
+import formStyle from "../components/Form/Form.module.css";
 import images from "../img";
-import { Button } from "../components/componentsindex.js";
+import { Button, Loader } from "../components/componentsindex.js";
 import { DropZone } from "../UploadNFT/uploadNFTIndex.js";
 
 
-const UploadNFT = ({ uploadToIPFS, createNFT }) => {
+import { NFTMarketplaceContext } from '../Context/NFTMarketplaceContext';
+
+import Profile from "../components/componentsindex";
+
+
+const UploadNFT = ({ uploadToIPFS, createNFT, mycollections }) => {
   const [price, setPrice] = useState("");
   const [active, setActive] = useState(0);
   const [name, setName] = useState("");
-  const [website, setWebsite] = useState("");
+  // const [website, setWebsite] = useState("");
   const [description, setDescription] = useState("");
-  const [royalties, setRoyalties] = useState("");
-  const [fileSize, setFileSize] = useState("");
-  const [category, setCategory] = useState(0);
-  const [properties, setProperties] = useState("");
+  // const [royalties, setRoyalties] = useState("");
+  // const [fileSize, setFileSize] = useState("");
+  // const [category, setCategory] = useState(0);
+  const [collection, setCollection] = useState("");
+  // const [properties, setProperties] = useState("");
   const [image, setImage] = useState(null);
+
+  const { validateTextLength } = useContext(NFTMarketplaceContext);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [isWalletConnected, setIsWalletConnected] = useState(false);
+
 
   const router = useRouter();
 
-  const categoryArray = [
-    {
-      image: images.nft_image_1,
-      category: "Sports",
-    },
-    {
-      image: images.nft_image_2,
-      category: "Arts",
-    },
-    {
-      image: images.nft_image_3,
-      category: "Music",
-    },
-    {
-      image: images.nft_image_1,
-      category: "Digital",
-    },
-    {
-      image: images.nft_image_2,
-      category: "Time",
-    },
-    {
-      image: images.nft_image_3,
-      category: "Photography",
-    },
-  ];
+
+  // Function to handle the wallet disconnect
+  const handleWalletDisconnect = () => {
+    setIsWalletConnected(false);
+  };
+
+  // Define a function to handle account changes
+  const handleAccountsChanged = (accounts) => {
+    setIsWalletConnected(accounts.length > 0);
+  };
+
+
+  useEffect(() => {
+    const checkWalletConnection = async () => {
+      if (window.ethereum) {
+        const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+        setIsWalletConnected(accounts.length > 0);
+      }
+    };
+
+    checkWalletConnection();
+
+    // Add the listener
+    window.ethereum?.on('accountsChanged', handleAccountsChanged);
+
+    // Remove the listener on cleanup
+    return () => {
+      window.ethereum?.removeListener('accountsChanged', handleAccountsChanged);
+    };
+  }, []);
+
+
+
+
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
+  };
+
+
+
+  const handleMintNFT = async () => {
+    if (!validateTextLength(name, 'name') || !validateTextLength(description, 'description')) {
+      // If the validation fails, exit the function.
+      return;
+    }
+
+    setIsLoading(true); // Start loading
+    try {
+      await createNFT(
+        name,
+        price,
+        image,
+        description,
+        collection,
+        router
+      );
+      setIsLoading(false); // Stop loading
+      // Redirect if needed
+    } catch (error) {
+      console.error("Error during minting:", error);
+      setIsLoading(false); // Stop loading in case of error
+    }
+  };
+
 
   return (
     <div className={Style.upload}>
+
+      {isLoading && (
+        <div className={Style.loaderOverlay}>
+          <Loader /> {/* Directly using the Loader component */}
+        </div>
+      )}
+
+
+
       <DropZone
-        title="JPG, PNG, WEBM , MAX 100MB"
+        title="BMP, JPG, JPEG, GIF, HEIF, PNG, SVG, TIF, TIFF, WEBP, MAX 20MB"
         heading="Drag & drop file"
-        subHeading="or Browse media on your device"
+        subHeading="or browse media on your device"
         name={name}
-        website={website}
         description={description}
-        royalties={royalties}
-        fileSize={fileSize}
-        category={category}
-        properties={properties}
         setImage={setImage}
         uploadToIPFS={uploadToIPFS}
       />
 
       <div className={Style.upload_box}>
         <div className={formStyle.Form_box_input}>
-          <label htmlFor="nft">Item Name</label>
+          <label htmlFor="nft">NFT Name</label>
           <input
             type="text"
-            placeholder="Beautiful NFT"
+            placeholder="Name of your NFT"
             className={formStyle.Form_box_input_userName}
             onChange={(e) => setName(e.target.value)}
           />
-        </div>
-
-        <div className={formStyle.Form_box_input}>
-          <label htmlFor="website">Website</label>
-          <div className={formStyle.Form_box_input_box}>
-            <div className={formStyle.Form_box_input_box_icon}>
-              <MdOutlineHttp />
-            </div>
-
-            <input
-              type="text"
-              placeholder="website"
-              onChange={(e) => setWebsite(e.target.value)}
-            />
-          </div>
-
-          <p className={Style.upload_box_input_para}>
-            Pulse Plaza will include a link to this URL on this item's detail page,
-            so that users can click to learn more about it. You are welcome to
-            link to your own webpage with more details.
-          </p>
         </div>
 
 
@@ -112,130 +152,112 @@ const UploadNFT = ({ uploadToIPFS, createNFT }) => {
             id=""
             cols="30"
             rows="6"
-            placeholder="something about yourself in few words"
-            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Write a Description about your NFT"
+            value={description}
+            onChange={handleDescriptionChange}
           ></textarea>
           <p>
             The description will be included on the item's detail page
-            underneath its image. Markdown syntax is supported.
+            underneath its image. Between 5 and 500 characters.
           </p>
         </div>
+
+
 
         <div className={formStyle.Form_box_input}>
           <label htmlFor="name">Choose collection</label>
+
           <p className={Style.upload_box_input_para}>
-            Choose an exiting collection or create a new one
+            Choose an existing collection or&nbsp;
+            <Link href="/create-collection">
+              <a className={Style.yourLinkStyle}>create a new one</a>
+            </Link>
           </p>
 
           <div className={Style.upload_box_slider_div}>
-            {categoryArray.map((el, i) => (
-              <div
-                className={`${Style.upload_box_slider} ${
-                  active == i + 1 ? Style.active : ""
-                }`}
-                key={i + 1}
-                onClick={() => (setActive(i + 1), setCategory(el.category))}
-              >
-                <div className={Style.upload_box_slider_box}>
-                  <div className={Style.upload_box_slider_box_img}>
-                    <Image
-                      src={el.image}
-                      alt="background image"
-                      width={70}
-                      height={70}
-                      className={Style.upload_box_slider_box_img_img}
-                    />
+            {mycollections.length > 0 ? (
+              mycollections.map((collection, i) => (
+                <div
+                  className={`${Style.upload_box_slider} ${active === i + 1 ? Style.active : ""}`}
+                  key={i}
+                  onClick={() => {
+                    setCollection({
+                      name: collection.name,
+                      symbol: collection.symbol,
+                      description: collection.description,
+                      image: collection.image,
+                      collectionAddress: collection.collectionAddress,
+                      creatorAddress: collection.creatorAddress,
+                    });
+                    setActive(i + 1);
+                  }}
+                >
+                  <div className={Style.upload_box_slider_box}>
+                    <div className={Style.upload_box_slider_box_img}>
+                      <Image
+                        src={collection.image}
+                        alt="background image"
+                        width={70}
+                        height={70}
+                        className={Style.upload_box_slider_box_img_img}
+                      />
+                    </div>
                   </div>
-                  <div className={Style.upload_box_slider_box_img_icon}>
-                    <TiTick />
-                  </div>
+                  <p>{collection.name}</p>
+                  <small>({collection.symbol})</small>
                 </div>
-                <p>Crypto Legend - {el.category} </p>
+              ))
+            ) : (
+              <div className={Style.upload_box_slider_box_nocollection}>
+                <span>⚠️</span>
               </div>
-            ))}
+            )}
           </div>
+
+          <p className={Style.upload_box_input_para}>
+            Selected Collection:&nbsp;
+            {isWalletConnected && mycollections.length > 0 ? (
+              collection && collection.name ? (
+                collection.name
+              ) : (
+                <span style={{ color: 'red' }}>No Collection Selected</span>
+              )
+            ) : (
+              <span style={{ color: 'red' }}>NO COLLECTION CREATED YET OR NOT CONNECTED WITH WEB3 WALLET!</span>
+            )}
+          </p>
+
+
+
+
+
         </div>
 
-        <div className={formStyle.Form_box_input_social}>
-          <div className={formStyle.Form_box_input}>
-            <label htmlFor="Royalties">Royalties</label>
-            <div className={formStyle.Form_box_input_box}>
-              <div className={formStyle.Form_box_input_box_icon}>
-                <FaPercent />
-              </div>
-              <input
-                type="text"
-                placeholder="20%"
-                onChange={(e) => setRoyalties(e.target.value)}
-              />
-            </div>
-          </div>
-          <div className={formStyle.Form_box_input}>
-            <label htmlFor="size">Size</label>
-            <div className={formStyle.Form_box_input_box}>
-              <div className={formStyle.Form_box_input_box_icon}>
-                <MdOutlineAttachFile />
-              </div>
-              <input
-                type="text"
-                placeholder="165MB"
-                onChange={(e) => setFileSize(e.target.value)}
-              />
-            </div>
-          </div>
-          <div className={formStyle.Form_box_input}>
-            <label htmlFor="Property">Property</label>
-            <div className={formStyle.Form_box_input_box}>
-              <div className={formStyle.Form_box_input_box_icon}>
-                <AiTwotonePropertySafety />
-              </div>
-              <input
-                type="text"
-                placeholder="Property"
-                onChange={(e) => setProperties(e.target.value)}
-              />
-            </div>
-          </div>
-
+        <div className={Style.priceInputContainer}>
           <div className={formStyle.Form_box_input}>
             <label htmlFor="Price">Price</label>
             <div className={formStyle.Form_box_input_box}>
               <div className={formStyle.Form_box_input_box_icon}>
-                <AiTwotonePropertySafety />
+                <FaHeartPulse />
               </div>
               <input
                 type="text"
-                placeholder="Price"
+                placeholder="Price in PLS"
                 onChange={(e) => setPrice(e.target.value)}
               />
             </div>
           </div>
         </div>
 
+
+
         <div className={Style.upload_box_btn}>
           <Button
             btnName="Upload"
-            handleClick={async () =>
-              createNFT(
-                name,
-                price,
-                image,
-                description,
-                router,
-                // website,
-                // royalties,
-                // fileSize,
-                // category,
-                // properties
-              )
-            }
+            handleClick={handleMintNFT}
             classStyle={Style.upload_box_btn_style}
           />
-          <Button
-            btnName="Preview"
-            handleClick={() => {}}
-            classStyle={Style.upload_box_btn_style}
-          />
+
         </div>
       </div>
     </div>

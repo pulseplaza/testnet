@@ -1,13 +1,20 @@
+
 .more{
     padding: .5rem 1rem;
     transition: all .3s ease-in;
     z-index: 2222222;
+    text-transform: capitalize;
 }
 
 .more:hover{
     background-color: var(--icons-color);
     color: var(--main-bg-color);
     border-radius: .3rem;
+}
+
+.more:hover a {
+    color: var(--main-bg-color);
+    transition: all .3s ease-in;
 }
 
 

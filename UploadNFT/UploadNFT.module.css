@@ -1,3 +1,5 @@
+
+
 .upload_box_input_para {
     padding: 0 1rem;
 }
@@ -26,8 +28,25 @@
 
 .upload_box_slider_box_img_img {
     border-radius: 50%;
-    
 }
+
+
+
+.upload_box_slider_box_nocollection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.upload_box_slider_box_nocollection span {
+    font-size: 4rem;
+}
+
+
 
 .upload_box_slider_box_img_icon {
     background-color: var(--icons-color);
@@ -49,15 +68,15 @@
 
 .upload_box_btn {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;;
     margin-block: 4rem;
     gap: 2rem;
+    place-items: center;
 }
 
 .upload_box_btn_style {
-    width: 100%;
-    display: grid;
-    align-self: center;
+    width: 300px;
+    margin: 0 auto;
     font-size: 1.3rem;
 }
 
@@ -70,6 +89,50 @@
 :global(body.dark-mode) .active {
     background-color: var(--icons-color-2);
 }
+
+
+.priceInputContainer {
+    width: 60%; 
+    margin: 2rem auto; 
+}
+
+.priceInputContainer .Form_box_input {
+    width: 100%;
+}
+
+
+.priceInputContainer .Form_box_input_box {
+    width: 100%;
+    display: flex;
+    align-items: center; 
+}
+
+.priceInputContainer .Form_box_input input {
+    width: calc(100% - 40px);
+}
+
+
+.loaderOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 70%);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000000;
+}
+
+
+:global(body.dark-mode) .loaderOverlay {
+    background-color: rgba(0, 0, 0, 70%);
+    color: var(--main-bg-color);
+    color-scheme: dark;
+}
+
 
 
 @media screen and (max-width: 768px) {

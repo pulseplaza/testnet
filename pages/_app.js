@@ -1,10 +1,13 @@
 
-import "../styles/globals.css";
+import  "../styles/globals.css";
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
 
 import { NavBar, Footer, OverHead } from "../components/componentsindex";
 import { NFTMarketplaceProvider } from "../Context/NFTMarketplaceContext";
+
+
+
 
 const MyApp = ({ Component, pageProps }) => {
     const [theme, setTheme] = useState(null);
@@ -28,14 +31,27 @@ const MyApp = ({ Component, pageProps }) => {
         }
     }, [theme]);
 
+
+
+
     useEffect(() => {
         document.documentElement.lang = 'en';
     }, []);
+
+
+
+
+    const defaultTitle = "Pulse Plaza NFT Marketplace";
+    const title = pageProps.title || defaultTitle;
+
+
+
 
     return (
         <div>
             <NFTMarketplaceProvider>
                 <Head>
+                    <title>{title}</title>
                     <meta name='viewport' content='width=device-width, initial-scale=1' />
                     <script
                         dangerouslySetInnerHTML={{
@@ -65,5 +81,6 @@ const MyApp = ({ Component, pageProps }) => {
 };
 
 export default MyApp;
+
 
 

@@ -6,26 +6,32 @@
 .title_box{
     width: 80%;
     margin: 0 auto;
+    margin-bottom: 3rem;
 }
 
 .title_box h2{
-    font-size: 3rem;
+    font-size: 3.5rem;
     line-height: 1;
 }
 
+.title_box p{
+    font-size: 1.2rem;
+    margin-top: -1rem;
+}
 
-@media screen and (min-device-width: 320px) and (max-device-width: 425px) {
+
+@media screen and (max-width: 449px) {
     .title_box{
         width: 90%;
     }
 
     .title_box h2{
-        font-size: 1.8rem;
-        line-height: 0;
+        font-size: 2rem;
+        margin-bottom: 2rem;
     }
 }
 
-@media screen and (min-device-width: 426px) and (max-device-width: 1024px){
+@media screen and (min-width: 450px) and (max-width: 1024px){
     .title_box{
         width: 90%;
     }

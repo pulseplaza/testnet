@@ -1,0 +1,20 @@
+
+
+.trade {
+    width: 100%;
+    margin: 4rem auto 8rem auto;
+}
+
+.trade_box {
+    width: 80%;
+    text-align: center;
+    margin: 4rem auto 0 auto;
+}
+
+
+@media screen and (max-width: 1024px) {
+    .trade_box {
+        width: 90%;
+    }
+}
+

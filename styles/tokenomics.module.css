@@ -1,0 +1,225 @@
+
+
+.tokenomics {
+    width: 100%;
+    margin: auto;
+    margin-block: 5rem; 
+
+}
+
+
+.tokenomics_info {
+    width: 80%;
+    margin: auto;
+}
+
+
+
+.tokenomics_details_boxes {
+    width: 80%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4rem;
+    margin-top: 4rem;
+    overflow: hidden;
+
+    margin-bottom: 4rem;
+    text-align: center;
+    position: relative;
+    justify-content: space-between;
+}
+
+/* Styling for each individual tokenomics box */
+.TokenomicsBox {
+    border: 1px solid var(--icons-color);
+    padding: 2rem;
+    border-radius: 1rem;
+    position: relative;
+    transition: all .3s ease-in;
+    position: relative;
+    margin: .5rem;
+    text-align: center;
+}
+
+:global(body.dark-mode) .TokenomicsBox {
+    border: 1px solid var(--icons-color-2);
+}
+
+
+.TokenomicsBox:hover {
+    box-shadow: var(--box-shadow-2);
+}
+
+.TokenomicsBox svg {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.TokenomicsBox_box_span {
+    font-size: 2.5rem;
+    font-weight: 900;
+    display: block;
+}
+
+.TokenomicsBox_box_description {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    font-weight: 500;
+}
+
+
+/* Arrow styles */
+.TokenomicsBox:not(:last-child)::after {
+    content: '⇨';
+    position: absolute;
+    right: -3.5rem; 
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: var(--icons-color);
+}
+
+
+.tokenomics_info,
+.tokenomics_link {
+    font-size: 1rem;
+}
+
+
+/* Styling for the contract address container */
+.tokenomics_info_address {
+    margin-top: -1rem;
+    margin-bottom: -1rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+}
+
+
+
+/* Styling for the contract address label */
+.tokenomics_info_address_label,
+.tokenomics_info_address p {
+    font-size: 1rem;
+    margin-right: 0.5rem;
+    white-space: nowrap;
+    line-height: 1.2;
+}
+
+/* Styling for the input and icon container */
+.tokenomics_info_address_content {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    /* word-break: break-all; */
+}
+
+
+/* Styling for the input field */
+.tokenomics_info_address input {
+    outline: none;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    background-color: transparent;
+    color: var(--icons-color);
+    overflow-wrap: break-word;
+    word-break: break-all;
+    flex-shrink: 1;
+
+    padding: 0;
+    margin: 0;
+}
+
+/* Styling for the copy icon */
+.tokenomics_info_address_icon {
+    transition: all .3s ease-in;
+    position: relative;
+    margin-right: .2rem;
+    flex-shrink: 0;
+}
+
+.tokenomics_info_address_icon:hover {
+    cursor: pointer;
+    color: var(--icons-color);
+}
+
+/* Dark mode styling */
+:global(body.dark-mode) .tokenomics_info_address input {
+    color: var(--icons-color-2);
+}
+
+:global(body.dark-mode) .tokenomics_info_address_icon:hover {
+    color: var(--icons-color-2);
+}
+
+
+
+/* Responsive styling */
+@media screen and (max-width: 560px) {
+    .tokenomics {
+        margin-block: 4rem;
+        width: 100%;
+    }
+
+    .tokenomics_info {
+        width: 90%;
+    }
+
+    .tokenomics_details_boxes {
+        width: 90%;
+        grid-template-columns: 1fr;
+        flex-direction: column;
+    }
+
+    .TokenomicsBox {
+        margin-bottom: 2rem;
+        position: relative;
+    }
+
+    .TokenomicsBox_box_span {
+        font-size: 1.5rem;
+    }
+
+    .TokenomicsBox_box_description {
+        font-size: 1rem;
+    }
+
+    .TokenomicsBox:not(:last-child)::after {
+        content: '⇩';
+        right: 50%;
+        top: 19.5rem;
+    }
+
+}
+
+@media screen and (min-width: 561px) and (max-width: 1024px) {
+    .tokenomics {
+        margin-block: 4rem;
+        width: 100%;
+    }
+
+    .tokenomics_info {
+        width: 90%;
+    }
+
+    .tokenomics_details_boxes {
+        width: 90%;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .TokenomicsBox_box_span {
+        font-size: 2rem;
+        font-weight: 900;
+    }
+    
+    .TokenomicsBox_box_description {
+        font-size: 1.2rem;
+    }
+}
+
+
+

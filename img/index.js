@@ -59,6 +59,12 @@ import transfer from "./transfer.gif";
 import transferEther from "./ethereTransfer.gif";
 import hero3 from "./hero3.png";
 import hero4 from "./hero4.png";
+import dollars from "./flyingdollars.gif";
+import tomoon from "./tomoon.gif";
+import okay from "./okay.gif";
+import bills from "./flyingbills.gif";
+import pacogif from "./pacogif.gif";
+import pulse1 from "./pulse1.png";
 
 
 
@@ -124,4 +130,10 @@ export default {
   transferEther,
   hero3,
   hero4,
+  dollars,
+  tomoon,
+  okay,
+  bills,
+  pacogif,
+  pulse1,
 };

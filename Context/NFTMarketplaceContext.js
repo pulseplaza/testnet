@@ -1,17 +1,34 @@
 
-import React, { useState, useEffect, useContext } from "react";
-import Web3Modal from "web3modal";
+
+
+import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { create as ipfsHttpClient } from "ipfs-http-client";
+import dynamic from 'next/dynamic';
+
+import { NFTMarketplaceAddress, NFTMarketplaceABI } from "./constants";
+
+// Import Web3 dynamically to ensure it only loads on the client-side
+const Web3 = dynamic(() => import('web3'), { ssr: false });
 
 
 
-// Infura project settings
-const projectId = "2TQbLGIoIn5sKvpMGZSDgRmzBhw";
-const projectSecretKey = "c6b0026e721e283fde46ccb62efd1e68";
+
+// Infura TEST project settings
+const projectId = process.env.NEXT_PUBLIC_IPFS_TEST_PROJECT_ID;
+const projectSecretKey = process.env.NEXT_PUBLIC_IPFS_TEST_PROJECT_SECRET_KEY;
+
+
+// // Infura MAIN project settings
+// const projectId = process.env.NEXT_PUBLIC_IPFS_MAIN_PROJECT_ID;
+// const projectSecretKey = process.env.NEXT_PUBLIC_IPFS_MAIN_PROJECT_SECRET_KEY;
+
+
+
 const auth = `Basic ${Buffer.from(`${projectId}:${projectSecretKey}`).toString("base64")}`;
+
 const subdomain = "https://pulseplazatest.infura-ipfs.io";
 
 const client = ipfsHttpClient({
@@ -24,14 +41,13 @@ const client = ipfsHttpClient({
 });
 
 
-//INTERNAL IMPORT
-import {
-    NFTMarketplaceAddress,
-    NFTMarketplaceABI,
-} from "./constants";
 
 
-//---FETCHING SMART CONTRACT
+
+
+
+
+//---FETCHING MARKETPLACE SMART CONTRACT
 const fetchContract = (signerOrProvider) =>
     new ethers.Contract(
         NFTMarketplaceAddress,
@@ -40,19 +56,23 @@ const fetchContract = (signerOrProvider) =>
     );
 
 
-//---CONNECTING WITH SMART CONTRACT
+//---CONNECTING WITH MARKETPLACE SMART CONTRACT
 const connectingWithSmartContract = async () => {
     try {
-        const web3Modal = new Web3Modal();
-        const connection = await web3Modal.connect();
-        const provider = new ethers.providers.Web3Provider(connection);
+        
+        if (!window.ethereum) {
+            throw new Error("Object not found, install Metamask.");
+        }
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
         const contract = fetchContract(signer);
+
 
         return contract;
 
     } catch (error) {
-        console.log("Something went wrong while connecting with contract.");
+        console.log("Something went wrong while connecting with the marketplace contract.", error);
+        throw error;
     }
 };
 
@@ -68,47 +88,98 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
 
 
-
-
-
-    //------USESTATES
+    //USESTATES
 
     const [error, setError] = useState("");
     const [openError, setOpenError] = useState(false);
-
     const [currentAccount, setCurrentAccount] = useState("");
-
-    //const [accountBalance, setAccountBalance] = useState("");
     const router = useRouter();
 
 
 
-    //---CHECK IF WALLET IS CONNECTED
-    const checkIfWalletConnected = async () => {
-        try {
-            if (!window.ethereum) return console.log("Install Metamask.");
+    // Disconnect wallet function
+    const disconnectWallet = () => {
+        setCurrentAccount("");
+        localStorage.setItem('walletConnected', 'false');
+    };
 
 
-            const accounts = await window.ethereum.request({ method: "eth_accounts", });
-
-            if (accounts.length) {
-                setCurrentAccount(accounts[0]);
-
+    // Add a new function for character length validation
+    const validateTextLength = (text, type) => {
+        if (type === 'description') {
+            if (text.length > 500) {
+                setError('Description must not exceed 500 characters.');
+                setOpenError(true);
+            } else if (text.length < 5) {
+                setError('Description must be at least 5 characters long.');
+                setOpenError(true);
             } else {
-                console.log("Wallet not connected.");
+                setError('');
+                setOpenError(false);
+                return true;
             }
-
-            //console.log(currentAccount);
-
-
-        } catch (error) {
-            setError("Your wallet is not connected.");
-            setOpenError(true);
+        } else if (type === 'name') {
+            if (text.length > 80) {
+                setError('Name must not exceed 80 characters.');
+                setOpenError(true);
+            } else if (text.length < 1) {
+                setError('Name must be at least 1 character long.');
+                setOpenError(true);
+            } else {
+                setError('');
+                setOpenError(false);
+                return true;
+            }
+        } else if (type === 'symbol') {
+            if (text.length > 18) {
+                setError('Symbol must not exceed 18 characters.');
+                setOpenError(true);
+            } else if (text.length < 1) {
+                setError('Symbol must be at least 1 character long.');
+                setOpenError(true);
+            } else {
+                setError('');
+                setOpenError(false);
+                return true;
+            }
         }
+        return false;
     };
 
 
 
+    //---CHECK IF WALLET IS CONNECTED
+
+    const checkIfWalletConnected = async () => {
+        try {
+            if (!window.ethereum) {
+                console.log("Install Metamask.");
+                return;
+            }
+    
+            const walletConnected = localStorage.getItem('walletConnected');
+            if (walletConnected === 'false') {
+                // User had previously disconnected
+                console.log("Wallet not connected.");
+                return;
+            }
+    
+            const accounts = await window.ethereum.request({
+                method: "eth_accounts",
+            });
+    
+            if (accounts.length) {
+                setCurrentAccount(accounts[0]);
+                localStorage.setItem('walletConnected', 'true');
+            } else {
+                console.log("No accounts found.");
+            }
+        } catch (error) {
+            setError("Your wallet is not connected.", error);
+            setOpenError(true);
+        }
+    };
+    
     useEffect(() => {
         checkIfWalletConnected();
     }, []);
@@ -116,27 +187,41 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
 
 
-
     //---CONNECT WALLET FUNCTION
+
     const connectWallet = async () => {
+        if (typeof window === 'undefined') {
+            // Server-side rendering, do nothing
+            return;
+        }
+
         try {
-            if (!window.ethereum) return setOpenError(true), setError("Please install Metamask or another compatible wallet on your browser.");
+            if (!window.ethereum) {
+                throw new Error("Please install MetaMask.");
+            }
 
-            const accounts = await window.ethereum.request({ method: "eth_requestAccounts", });
+            await window.ethereum.request({ method: 'eth_requestAccounts' });
 
-            //console.log(accounts);
+            // Local import inside the function
+            const Web3Module = await import('web3');
+            const web3 = new Web3Module.default(window.ethereum);
+
+            const accounts = await web3.eth.getAccounts();
+            if (accounts.length === 0) {
+                throw new Error("No accounts found.");
+            }
 
             setCurrentAccount(accounts[0]);
-
-            //console.log(`Account connected: ${accounts[0]}`);
-
-            //connectingWithSmartContract();
-
+            console.log("Connected account:", accounts[0]);
         } catch (error) {
-            setError("Could not connect. Please check your wallet and try again.");
+            console.error("Connection error:", error);
+            setError(`Could not connect. Error: ${error.message}`);
             setOpenError(true);
         }
     };
+
+
+
 
 
     //---UPLOAD TO IPFS FUNCTION
@@ -148,7 +233,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
             return url;
 
         } catch (error) {
-            setError("Data could not be uploaded. Check file format and size.");
+            setError("Data could not be uploaded. File rejected by IPFS.", error);
             setOpenError(true);
         }
     };
@@ -156,30 +241,32 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
     //---CREATE NFT FUNCTION
 
-    const createNFT = async (name, price, image, description, router) => {
+    const createNFT = async (name, price, image, description, collection) => {
 
+        if (!name || !description || !price || !image || !collection) {
+            setError("Incomplete data! Necessary fields: Image, name, description, collection and price.");
+            setOpenError(true);
+            return;
+        }
 
-        if (!name || !description || !price || !image)
-            return setOpenError(true), setError("There was a problem while creating the NFT.");
+        const creator = currentAccount;
 
-        const data = JSON.stringify({ name, description, image });
-
+        const data = JSON.stringify({ name, description, image, collection, creator });
         try {
             const added = await client.add(data);
-
             const url = `${subdomain}/ipfs/${added.path}`;
+            console.log(url)
 
             await createSale(url, price);
-
-            router.push("/search");
-
-            //return url;
-
+            router.push("/search-nfts");
         } catch (error) {
-            setError("There was a problem while creating the NFT.");
+            setError("There was a problem while creating the NFT.", error);
             setOpenError(true);
+            console.log("createNFT:", error)
         }
     };
+
+
 
 
 
@@ -187,14 +274,12 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
     const createSale = async (url, formInputPrice, isReselling, id) => {
         try {
-            console.log(url, formInputPrice, isReselling, id);
 
             const price = ethers.utils.parseUnits(formInputPrice, "ether");
-            console.log(price);
 
             const contract = await connectingWithSmartContract();
 
-            const listingPrice = await contract.getListingPrice();
+            const listingPrice = await contract.listingPrice();
 
             const transaction = !isReselling
                 ? await contract.createToken(url, price, {
@@ -206,14 +291,87 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
             await transaction.wait();
 
-            console.log(transaction);
-
-
         } catch (error) {
-            setError("There was a problem while creating the sale.");
+            console.log("createSale:", error)
+            setError("There was a problem with your transaction.", error);
             setOpenError(true);
         }
     };
+
+
+    //--- CREATE COLLECTION
+    const createCollection = async (name, symbol, description, image) => {
+
+        if (!name || !description || !symbol || !image) {
+            setError("Incomplete data! Necessary fields: Image, name, symbol and description.");
+            setOpenError(true);
+            return;
+        }
+
+        try {
+            if (typeof window.ethereum === 'undefined') alert('Connect wallet!');
+
+
+
+            const contract = await connectingWithSmartContract();
+
+            const creatingCollectionFee = await contract.creatingCollectionFee();
+
+            const transaction = await contract.createCollection(name, symbol, description, image,
+                { value: creatingCollectionFee.toString() });
+
+            await transaction.wait();
+
+            router.push("/search-collections");
+
+        } catch (error) {
+            console.log(error)
+            setError("There was a problem while creating the collection.", error);
+            setOpenError(true);
+        }
+    };
+
+    //--- Fetch Collections by user
+    const getCollectionsByUser = async () => {
+        try {
+            if (typeof window.ethereum === 'undefined') alert('Connect wallet!');
+
+            if (!currentAccount) return [];
+
+            const contract = await connectingWithSmartContract();
+
+            const result = await contract.getCollectionsByUser(currentAccount);
+
+            return result;
+        } catch (error) {
+            console.log(error)
+            setError("There was a problem while fetching your collections.", error);
+            setOpenError(true);
+        }
+    };
+
+
+    const getAllCollections = async () => {
+        try {
+            // Using a public provider
+            const provider = new ethers.providers.JsonRpcProvider(
+                "https://pulsechain-testnet.publicnode.com"
+            );
+            const contract = new ethers.Contract(
+                NFTMarketplaceAddress,
+                NFTMarketplaceABI,
+                provider
+            );
+
+            const result = await contract.getCollections();
+            return result;
+        } catch (error) {
+            console.log(error)
+            setError("There was a problem while fetching collections.", error);
+            setOpenError(true);
+        }
+    };
+
 
 
 
@@ -222,40 +380,52 @@ export const NFTMarketplaceProvider = ({ children }) => {
     const fetchNFTs = async () => {
         try {
             const provider = new ethers.providers.JsonRpcProvider(
-                "https://rpc.v4.testnet.pulsechain.com"
+                "https://pulsechain-testnet.publicnode.com"
             );
 
             const contract = fetchContract(provider);
 
             const data = await contract.fetchMarketItems();
 
+            if (!data || data.length === 0) {
+                console.log("No NFTs available.");
+                return [];
+            }
+
             const items = await Promise.all(
-                data.map(
-                    async ({ tokenId, seller, owner, price: unformattedPrice }) => {
-                        const tokenURI = await contract.tokenURI(tokenId);
+                data.map(async ({ tokenId, seller, owner, price: unformattedPrice }) => {
+                    const tokenURI = await contract.tokenURI(tokenId);
 
-                        const {
-                            data: { image, name, description },
-                        } = await axios.get(tokenURI);
-                        const price = ethers.utils.formatUnits(
-                            unformattedPrice.toString(),
-                            "ether"
-                        );
+                    const {
+                        data: { image, name, description, creator, collection },
+                    } = await axios.get(tokenURI);
 
-                        return {
-                            price,
-                            tokenId: tokenId.toNumber(),
-                            seller,
-                            owner,
-                            image,
-                            name,
-                            description,
-                            tokenURI,
-                        };
-                    }
-                )
+                    const price = ethers.utils.formatUnits(
+                        unformattedPrice.toString(),
+                        "ether"
+                    );
+
+                    return {
+                        price,
+                        tokenId: tokenId.toNumber(),
+                        seller,
+                        owner,
+                        image,
+                        name,
+                        description,
+                        tokenURI,
+                        creator,
+                        collectionName: collection.name,
+                        collectionSymbol: collection.symbol,
+                        collectionAddress: collection.collectionAddress,
+                        collectionImage: collection.image,
+                        collectionDescription: collection.description,
+                        collection
+                    };
+                })
             );
 
+            console.log('fetchNFT here: ', items)
             return items;
 
             // }
@@ -273,7 +443,6 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
 
 
-
     //--FETCHING MY NFT OR LISTED NFTS
 
     const fetchMyNFTsOrListedNFTs = async (type) => {
@@ -286,18 +455,22 @@ export const NFTMarketplaceProvider = ({ children }) => {
                         ? await contract.fetchItemsListed()
                         : await contract.fetchMyNFTs();
 
+
                 const items = await Promise.all(
                     data.map(
                         async ({ tokenId, seller, owner, price: unformattedPrice }) => {
                             const tokenURI = await contract.tokenURI(tokenId);
                             const {
-                                data: { image, name, description },
+                                data: { image, name, description, creator, collection },
                             } = await axios.get(tokenURI);
 
                             const price = ethers.utils.formatUnits(
                                 unformattedPrice.toString(),
                                 "ether"
                             );
+
+                            // Ensuring that the collection details are included
+                            const collectionData = collection || { name: 'Unknown', symbol: 'Unknown' };
 
                             return {
                                 price,
@@ -308,16 +481,25 @@ export const NFTMarketplaceProvider = ({ children }) => {
                                 name,
                                 description,
                                 tokenURI,
+                                creator,
+                                collectionName: collection.name,
+                                collectionSymbol: collection.symbol,
+                                collectionAddress: collection.collectionAddress,
+                                collectionImage: collection.image,
+                                collectionDescription: collection.description,
+                                collection
                             };
                         }
                     )
                 );
 
+
+
                 return items;
             }
 
         } catch (error) {
-            setError("There was a problem while fetching listed NFTs.");
+            setError("There was a problem while fetching listed NFTs.", error);
             setOpenError(true);
         }
     };
@@ -327,7 +509,6 @@ export const NFTMarketplaceProvider = ({ children }) => {
     useEffect(() => {
         fetchMyNFTsOrListedNFTs();
     }, []);
-
 
 
 
@@ -343,10 +524,10 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
             await transaction.wait();
 
-            router.push("/author");
+            router.push("/profile");
 
         } catch (error) {
-            setError("There was a problem while buying the NFT. Check the source and try again.");
+            setError("There was a problem while buying the NFT.", error);
             setOpenError(true);
         }
     };
@@ -360,7 +541,10 @@ export const NFTMarketplaceProvider = ({ children }) => {
                 connectWallet,
                 uploadToIPFS,
                 createNFT,
+                createCollection,
                 createSale,
+                getCollectionsByUser,
+                getAllCollections,
                 fetchNFTs,
                 fetchMyNFTsOrListedNFTs,
                 buyNFT,
@@ -369,8 +553,12 @@ export const NFTMarketplaceProvider = ({ children }) => {
                 setOpenError,
                 openError,
                 error,
+                disconnectWallet,
+                // transferEther,
+                // loading,
+                // accountBalance,
+                validateTextLength,
             }}>
-
 
             {children}
         </NFTMarketplaceContext.Provider>

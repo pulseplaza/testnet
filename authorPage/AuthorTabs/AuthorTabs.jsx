@@ -1,22 +1,18 @@
+
 import React, { useState } from "react";
 import Image from "next/image";
 import { TiArrowSortedDown, TiArrowSortedUp, TiTick } from "react-icons/ti";
 
-
 //INTERNAL IMPORT
 import Style from "./AuthorTabs.module.css";
-
-
 
 const AuthorTabs = ({
   setListed,
   setCollectibles,
-  setLike,
-  setFollower,
-  setFollowing,
+  setMyCollections
 }) => {
   const [openList, setOpenList] = useState(false);
-  const [activeBtn, setActiveBtn] = useState(2);
+  const [activeBtn, setActiveBtn] = useState(1);
   const [selectedMenu, setSelectedMenu] = useState("Most recent");
 
   const listArray = [
@@ -40,48 +36,26 @@ const AuthorTabs = ({
     if (btnText == "Listed NFTs") {
       setListed(true);
       setCollectibles(false);
-      setFollower(false);
-      setFollowing(false);
-      setLike(false);
+      setMyCollections(false);
       setActiveBtn(1);
     } else if (btnText == "Owned NFTs") {
       setListed(false);
       setCollectibles(true);
-      setFollower(false);
-      setFollowing(false);
-      setLike(false);
+      setMyCollections(false);
       setActiveBtn(2);
-    } else if (btnText == "Liked NFTs") {
+    } else if (btnText == "My Collections") {
       setListed(false);
       setCollectibles(false);
-      setFollower(false);
-      setFollowing(false);
-      setLike(true);
+      setMyCollections(true);
       setActiveBtn(3);
-    } else if (btnText == "Following") {
-      setListed(false);
-      setCollectibles(false);
-      setFollower(false);
-      setFollowing(true);
-      setLike(false);
-      setActiveBtn(4);
-    } else if (btnText == "Followers") {
-      setListed(false);
-      setCollectibles(false);
-      setFollower(true);
-      setFollowing(false);
-      setLike(false);
-      setActiveBtn(5);
     }
   };
-
 
   return (
     <div className={Style.AuthorTabs}>
       <div className={Style.AuthorTabs_box}>
         <div className={Style.AuthorTabs_box_left}>
           <div className={Style.AuthorTabs_box_left_btn}>
-
             <button
               className={`${activeBtn == 1 ? Style.active : ""}`}
               onClick={(e) => openTab(e)}
@@ -100,32 +74,23 @@ const AuthorTabs = ({
               className={`${activeBtn == 3 ? Style.active : ""}`}
               onClick={(e) => openTab(e)}
             >
-              Liked NFTs{""}
+              My Collections{""}
             </button>
-
-            <button
-              className={`${activeBtn == 4 ? Style.active : ""}`}
-              onClick={(e) => openTab(e)}
-            >
-              Following{""}
-            </button>
-
-            <button
-              className={`${activeBtn == 5 ? Style.active : ""}`}
-              onClick={(e) => openTab(e)}
-            >
-              Followers{""}
-            </button>
-
-
           </div>
         </div>
 
-        <div className={Style.AuthorTabs_box_right}>
-          <div className={Style.AuthorTabs_box_right_para} onClick={() => openDropDownList()}>
+
+
+
+
+
+        {/* <div className={Style.AuthorTabs_box_right}>
+          <div
+            className={Style.AuthorTabs_box_right_para}
+            onClick={() => openDropDownList()}
+          >
             <p>{selectedMenu}</p>
             {openList ? <TiArrowSortedUp /> : <TiArrowSortedDown />}
-
           </div>
 
           {openList && (
@@ -134,23 +99,26 @@ const AuthorTabs = ({
                 <div
                   key={i + 1}
                   onClick={() => setSelectedMenu(el)}
-                  className={Style.AuthorTabs_box_right_list_item}>
+                  className={Style.AuthorTabs_box_right_list_item}
+                >
                   <p>{el}</p>
                   <span>{selectedMenu == el && <TiTick />}</span>
-
                 </div>
-
               ))}
-
             </div>
           )}
+        </div> */}
 
-        </div>
+
+
+
+
+
 
 
       </div>
     </div>
-  )
+  );
 };
 
 export default AuthorTabs;

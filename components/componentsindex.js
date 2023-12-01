@@ -20,6 +20,9 @@ import ThemeSwitch from "./NavBar/ThemeSwitch/ThemeSwitch";
 import OverHead from "./OverHead/OverHead";
 import Loader from "./Loader/Loader";
 import Error from "./Error/Error";
+import NFTCardTwo from "./NFTCardTwo/NFTCardTwo";
+import Banner from "./Banner/Banner";
+
 
 
 export {
@@ -45,5 +48,7 @@ export {
   OverHead,
   Loader,
   Error,
+  NFTCardTwo,
+  Banner,
 };
 

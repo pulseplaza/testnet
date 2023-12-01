@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useContext } from "react";
+import Head from 'next/head';
 
 
 
@@ -23,7 +24,10 @@ import {
   Loader,
 } from "../components/componentsindex";
 
-import { getTopCreators } from "../TopCreators/TopCreators";
+import { CollectionCard } from "../collectionPage/collectionIndex";
+
+
+// import { getTopCreators } from "../TopCreators/TopCreators";
 
 
 
@@ -32,70 +36,150 @@ import { NFTMarketplaceContext } from "../Context/NFTMarketplaceContext";
 
 
 const Home = () => {
-  const { checkIfWalletConnected } = useContext(NFTMarketplaceContext);
+  const { checkIfWalletConnected, fetchNFTs, getAllCollections } = useContext(
+    NFTMarketplaceContext
+  );
+
   useEffect(() => {
     checkIfWalletConnected();
   }, []);
 
 
 
-  const { fetchNFTs } = useContext(NFTMarketplaceContext);
+  // const { fetchNFTs } = useContext(NFTMarketplaceContext);
+  // const [nfts, setNfts] = useState([]);
+  // const [nftsCopy, setNftsCopy] = useState([]);
+
   const [nfts, setNfts] = useState([]);
-  const [nftsCopy, setNftsCopy] = useState([]);
+  const [collections, setCollections] = useState([]);
 
 
-  //CREATOR LIST
-  const creators = getTopCreators(nfts);
+
+  // useEffect(() => {
+  //   fetchNFTs().then((item) => {
+  //     setNfts(item.reverse());
+  //     setNftsCopy(item);
+  //     console.log(nfts);
+  //   });
+  // }, []);
 
 
 
   useEffect(() => {
-    fetchNFTs().then((item) => {
-      setNfts(item.reverse());
-      setNftsCopy(item);
-    });
+    let isMounted = true;
+
+    // fetchNFTs()
+    //   .then((item) => {
+    //     if (isMounted) {
+    //       setNfts(item.reverse());
+    //       setNftsCopy(item);
+    //       console.log(nfts);
+    //     }
+    //   })
+    //   .catch(error => {
+    //     console.error("Error fetching NFTs:", error);
+    //   });
+
+
+    fetchNFTs()
+      .then((item) => {
+        if (isMounted) {
+          setNfts(item.reverse());
+        }
+      })
+      .catch(error => {
+        console.error("Error fetching NFTs:", error);
+      });
+
+    getAllCollections()
+      .then((items) => {
+        if (isMounted) {
+          setCollections(items);
+          // setOriginalCollections(items);
+        }
+      })
+      .catch(error => {
+        console.error("Error fetching collections:", error);
+      });
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
+
+
+
+
+
+
+  // //CREATOR LIST
+  // const creators = getTopCreators(nfts);
+
 
 
 
   return (
     <div className={Style.homePage}>
+
+      <Head>
+        <title>Welcome to the Pulse Plaza NFT Marketplace</title>
+      </Head>
+
+
       <HeroSection />
       <Service />
-      <BigNFTSlider />
+
+      {/* <BigNFTSlider />
       <Title
         heading="Audio collecions"
         paragraph="Discover the most outstanding NFTs in all topics of life"
       />
       <AudioLive />
-      
+
       {creators.length == 0 ? (
-      <Loader />
+        <Loader />
       ) : (
         <FollowerTab TopCreators={creators} />
       )}
 
-      <Slider />
-      <Collection />
-      <Title
-        heading="Featured NFTs"
-        paragraph="Discover the most outstanding NFTs in all topics of life"
-      />
-      <Filter />
-      {nfts.length == 0 ? <Loader /> : <NFTCard NFTData={nfts} />}
+      <Slider /> */}
 
       <Title
-        heading="Browse by category"
-        paragraph="Explore NFTs in the most featured categories"
+        heading="Latest Collections"
+        paragraph="Explore the most popular NFT collections on PulseChain"
       />
-      <Category />
-      <Subscribe />
+      {collections.length === 0
+        ? <Loader />
+        : <CollectionCard collections={[...collections].reverse().slice(0, 24)} />
+      }
+
+
+
+      <Title
+        heading="Latest NFTs"
+        paragraph="Discover the most outstanding NFTs in all topics of life"
+      />
+
+      {/* <Filter /> */}
+
+      {nfts.length == 0 ? <Loader /> : <NFTCard NFTData={nfts.slice(0, 60)} />}
+
+
+
+
+      {/* <Subscribe /> */}
+
       <Brand />
-      <Video />
+
+
+      <br></br>
+      <br></br>
+      <br></br>
     </div>
   );
 };
 
 
 export default Home;
+
 

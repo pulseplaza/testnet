@@ -1,0 +1,39 @@
+.CollectionDetailsPage {
+    width: 100%;
+    margin-block: 5rem;
+    max-width: 1920px;
+    margin: 5rem auto;
+    overflow-x: hidden;
+}
+
+
+.CollectionDetailsPage_box {
+    width: 85%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+}
+
+
+
+@media screen and (max-width: 800px) {
+    .CollectionDetailsPage {
+        margin-block: 2rem;
+    }
+
+    .CollectionDetailsPage_box {
+        width: 90%;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .CollectionDetailsPage_box > :nth-child(1) {
+        order: 2;
+    }
+
+    .CollectionDetailsPage_box > :nth-child(2) {
+        order: 1;
+    }
+
+}

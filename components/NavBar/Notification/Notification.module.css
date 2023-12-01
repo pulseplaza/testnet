@@ -9,8 +9,8 @@
     border-style: solid;
     border-width: 2px;
 
-    left: -20rem;
-    top: 3.5rem;
+    left: -10rem;
+    top: 3.7rem;
     z-index: 222222222;
     background-color: var(--bg-very-light);
 }
@@ -19,7 +19,7 @@
     background-color: var(--bg-very-dark);
 }
 
-.notification>p {
+.notification p {
     font-size: 1.3rem;
     font-weight: 600;
     margin-bottom: 2rem;
@@ -38,6 +38,11 @@
     background-color: var(--icons-color);
     color: var(--main-bg-color);
     border-radius: .3rem;
+}
+
+.notification:hover a {
+    color: var(--main-bg-color);
+    transition: all .3s ease-in;
 }
 
 :global(body.dark-mode) .notification_box:hover{

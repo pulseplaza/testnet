@@ -1,3 +1,5 @@
+
+
 .button {
     background-color: var(--icons-color);
     padding: 1rem 2rem;
@@ -7,12 +9,12 @@
     color: var(--main-bg-color);
     cursor: pointer;
     box-shadow: var(--box-shadow-2);
+    font-family: 'Exo 2', sans-serif;
 }
 
 :global(body.dark-mode) .button {
     background-color: var(--icons-color-2);
     border: 1px solid var(--icons-color-2);
-    
 }
 
 

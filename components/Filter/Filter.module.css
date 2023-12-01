@@ -26,10 +26,11 @@
     border-radius: 2rem;
     border: 2px solid var(--bg-very-light);
     transition: all .3s ease-in;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     cursor: pointer;
     background-color: var(--bg-very-light);
     color: var(--icons-color);
+    font-family: 'Exo 2', sans-serif;
 }
 
 

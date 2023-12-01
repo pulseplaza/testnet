@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
@@ -111,8 +112,7 @@ const AudioCard = () => {
 					<Image
 						src={images.creatorbackground10}
 						alt="Background"
-						width={600}
-						height={600}
+						layout="fill"
 						objectFit="cover"
 					/>
 				</div>

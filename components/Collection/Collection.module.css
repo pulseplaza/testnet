@@ -44,6 +44,7 @@
     cursor: pointer;
     border: 2px solid var(--icons-color);
     transition: all .3s ease-in;
+    font-family: 'Exo 2', sans-serif;
 }
 
 :global(body.dark-mode) .collection_collections_btn button {

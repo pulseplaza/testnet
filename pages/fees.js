@@ -1,9 +1,14 @@
+
+
 import React from "react";
+import Head from 'next/head';
 
 
 //INTERNAL IMPORT
 import Style from "../styles/fees.module.css";
 import Fees from "../Fees/Fees";
+import { Brand, Title } from "../components/componentsindex"
+
 
 
 
@@ -11,48 +16,48 @@ const fees = () => {
 
     const feesArray = [
         {
-            plan: "STARTER",
-            price: "$5/mo",
-            popular: "",
-            service: ["Automated Reporting", "Faster Processing", "Customizations"],
-            info: "Literally you probably haven't heard of them jean shorts.",
+            plan: "NFT Purchase",
+            price: "6%",
+            service: [
+                "2% PLS marketplace fee",
+                <span>2% PLS swapped for <a href="/coin/tokenomics">PACO</a> to pay royalties to the NFT creator</span>,
+                <span>2% PLS swapped for <a href="/coin/tokenomics">PACO</a> to burn</span>
+            ],
         },
         {
-            plan: "BASIC",
-            price: "$15/mo",
-            popular: "POPULAR",
+            plan: "NFT Listing",
+            price: "200 PLS",
             service: [
-                "Everything in Starter",
-                "100 Builds",
-                "Progress Reports",
-                "Premium Support",
+                <span style={{ color: 'red' }}>(1 tPLS on Testnet)</span>,
+                "Applies on every new NFT mint, which automatically lists your NFT.",
+                "Applies to every NFT relisting after previously purchasing an NFT",
             ],
-
-            info: "Literally you probably haven't heard of them jean shorts.",
         },
         {
-            plan: "PLUS",
-            price: "$25/mo",
-            popular: "",
+            plan: "New Collection",
+            price: "8000 PLS",
             service: [
-                "Everything in Basic",
-                "Unlimited Builds",
-                "Advanced Analytics",
-                "Company Evaluations",
+                <span style={{ color: 'red' }}>(5 tPLS on Testnet)</span>,
+                "Applies on every new creation of an NFT collection. (Once you created your collection, you can add as many NFTs as you wish into it.)",
             ],
-
-            info: "Literally you probably haven't heard of them jean shorts.",
         },
     ];
 
 
     return (
         <div className={Style.Fees}>
+
+
+            <Head>
+                <title>Pulse Plaza NFT Marketplace - Fees</title>
+            </Head>
+
+            <Title
+                heading="Fees"
+                paragraph="Pulse Plaza pricing and fees structure"
+            />
+
             <div className={Style.Fees_box}>
-                <div className={Style.Fees_box_info}>
-                    <h1>💎 Fees</h1>
-                    <p>Pricing to fit the needs of any company size.</p>
-                </div>
 
                 <div className={Style.Fees_box_box}>
                     {feesArray.map((el, i) => (
@@ -60,8 +65,11 @@ const fees = () => {
                     ))}
                 </div>
             </div>
+            <Brand />
         </div>
     );
 };
 
 export default fees;
+
+

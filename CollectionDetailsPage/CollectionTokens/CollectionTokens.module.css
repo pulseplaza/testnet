@@ -1,0 +1,146 @@
+.box_collectionTokens {
+    width: 80%;
+    margin: 0 auto 2rem auto;
+    align-items: center;
+}
+
+
+.box_collectionTokens .loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+    width: 100%;
+}
+
+
+.collectionTokens_link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.collectionTokens_link:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+
+.collectionTokens {
+    padding: 2rem 0;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1.5rem
+}
+
+.collectionTokens_box {
+    line-height: 0;
+    transition: all .3s ease-in;
+    border-radius: 1rem;
+    overflow: hidden;
+    cursor: pointer;
+    padding-bottom: 1rem;
+    background-color: var(--bg-very-light);
+}
+
+
+
+:global(body.dark-mode) .collectionTokens_box {
+    background-color: var(--bg-very-dark);
+}
+
+
+.collectionTokens_box:hover {
+    box-shadow: var(--box-shadow-2);
+}
+
+.collectionTokens_box_img {
+    border-radius: 1rem;
+    width: 100%;
+    overflow: hidden;
+}
+
+
+
+.collectionTokens_box_title {
+    display: flex;
+    align-items: center;
+    padding: 0 1rem 0 1rem;
+    gap: 1rem;
+}
+
+.collectionTokens_box_title span {
+    font-size: 3rem;
+    margin-top: 1rem;
+}
+
+.collectionTokens_box_title_info h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.collectionTokens_box_title_info p {
+    font-size: 0.8rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+}
+
+.collectionTokens_box_title_info small {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+
+
+
+/* Updated Media Queries */
+@media screen and (max-width: 425px) {
+    .box_collectionTokens {
+        width: 90%;
+    }
+
+    .collectionTokens {
+        grid-template-columns: 1fr;
+    }
+
+    .collectionTokens_box_title_info h3 {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (min-width: 426px) and (max-width: 770px) {
+    .collectionTokens {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .box_collectionTokens {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .collectionTokens_box_title_info h3 {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (min-width: 771px) and (max-width: 1024px) {
+    .collectionTokens {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .box_collectionTokens {
+        width: 90%;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1200px) {
+    .collectionTokens {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .box_collectionTokens {
+        width: 90%;
+        margin: 0 auto;
+    }
+}

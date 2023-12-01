@@ -1,13 +1,16 @@
 
 .footer{
     width: 100%;
-    padding-block: 1.5rem;
+    padding-top: 1.5rem;
+    padding-bottom: .1rem;
     position: relative;
     background-color: var(--bg-very-light-2);
+    border-top: 1px solid var(--bg-second-light);
 }
 
 :global(body.dark-mode) .footer{
     background-color: var(--bg-very-dark-2);
+    border-top: 1px solid var(--bg-second-dark);
 }
 
 
@@ -23,6 +26,20 @@
 }
 
 
+.footer_box_gallery a,
+.footer_box_coin a,
+.footer_box_more a {
+    color: var(--main-bg-color-dark);
+    text-decoration: none;
+}
+
+
+:global(body.dark-mode) .footer_box_gallery a,
+:global(body.dark-mode) .footer_box_coin a,
+:global(body.dark-mode) .footer_box_more a {
+    color: var(--main-bg-color);
+    text-decoration: none;
+}
 
 
 .footer_box_social_logo{

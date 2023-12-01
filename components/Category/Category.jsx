@@ -16,6 +16,9 @@ const Category = () => {
         images.creatorbackground3,
         images.creatorbackground4,
         images.creatorbackground5,
+        images.creatorbackground5,
+        images.creatorbackground5,
+        images.creatorbackground5,
         images.creatorbackground6,
     ];
 

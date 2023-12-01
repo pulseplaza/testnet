@@ -1,0 +1,171 @@
+
+.CollectionCard{
+    width: 80%;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+    margin-bottom: 6rem;
+}
+
+
+.CollectionCard_link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.CollectionCard_link:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+.CollectionCard_box{
+    display: grid;
+    cursor: pointer;
+    transition: all .3s ease-in;
+    border-radius: 1rem;
+    background-color: var(--bg-very-light);
+    height: auto;
+}
+
+:global(body.dark-mode) .CollectionCard_box{
+    background-color: var(--bg-very-dark);
+}
+
+.CollectionCard_box:hover{
+    box-shadow: var(--box-shadow-2);
+}
+
+
+.CollectionCard_box_img{
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+
+    width: 100%;
+    object-fit: cover;
+}
+
+.CollectionCard_box_img_img{
+    border-radius: 1rem;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.CollectionCard_box_info{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0 0 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: -.5rem;
+    margin-bottom: -.5rem;
+}
+
+.CollectionCard_box_info h3{
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-top: .5rem;
+    padding-right: .5rem;
+}
+
+
+.CollectionCard_box_info2{    
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-bottom: -.5rem;
+}
+
+
+
+.CollectionCard_box_info2 small{
+    font-size: .8rem;
+    
+}
+
+.CollectionCard_box_info2 h5{
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 0;
+}
+
+.CollectionCard_box_info_left{
+    line-height: 1;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.CollectionCard_box_info_left p{
+    font-size: 1.8rem;
+    font-weight: 700;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    white-space: normal;
+    text-overflow: ellipsis;
+}
+
+
+.CollectionCard_box_price{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    line-height: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.CollectionCard_box_price_box p{
+    border: 1px solid var(--icons-color);
+    padding: 1.5rem 1rem 1rem 1rem;
+    font-size: 1.4rem;
+    margin-top: .5rem;
+    border-radius: .3rem;
+}
+
+:global(body.dark-mode) .CollectionCard_box_price_box p{
+    border: 1px solid var(--icons-color-2);
+}
+
+.CollectionCard_box_price_box small{
+    background-color: var(--icons-color);
+    color: var(--main-bg-color);
+    padding: .3rem;
+    border-radius: .3rem;
+    margin-left: 1rem;
+}
+
+:global(body.dark-mode) .CollectionCard_box_price_box small{
+    background-color: var(--icons-color-2);
+}
+
+
+.CollectionCard_box_price_stock{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: 1.1rem;
+}
+
+
+@media screen and (max-width: 560px) {
+    .CollectionCard{
+        width: 90%;
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (min-width: 561px) and (max-width: 1024px) {
+    .CollectionCard{
+        width: 90%;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1200px) {
+    .CollectionCard{
+        width: 90%;
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

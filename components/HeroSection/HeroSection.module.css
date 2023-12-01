@@ -1,20 +1,22 @@
+
+
 .heroSection {
-    width: 80%;
-    margin: 3rem auto;
+    width: 85%;
+    margin: 6rem auto;
 }
 
 .heroSection_box {
     display: grid;
     grid-template-columns: 3fr 2fr;
-    gap: 2rem;
+    gap: 1rem;
 }
 
 .heroSection_box_left {
-    padding-right: 4rem;
+    padding-right: 3rem;
 }
 
 .heroSection_box_left h1 {
-    font-size: 7rem;
+    font-size: 6.5rem;
     line-height: 1;
     background: var(--pls-bg);
     background-clip: text;
@@ -24,7 +26,7 @@
 
 
 .heroSection_box_left h2 {
-    font-size: 3.5rem;
+    font-size: 2.8rem;
     line-height: 1;
 }
 
@@ -42,34 +44,33 @@
 
 
 
+
+
 @media screen and (max-width: 1024px) {
+
     .heroSection {
         width: 90%;
         margin-top: -1rem;
     }
 
     .heroSection_box {
-        width: 90%;
-    }
-}
-
-@media screen and (max-width: 960px) {
-    .heroSection_box {
         grid-template-columns: 1fr;
         gap: 4rem;
+        width: 90%;
     }
 
     .heroSection_box_left {
-        padding-right: 1rem;
+        padding-right: 0;
+        padding-top: 1rem;
     }
 
     .heroSection_box_left h1 {
         line-height: 1;
-        font-size: 2.8rem;
+        font-size: 4rem;
     }
 
     .heroSection_box_left h2 {
         line-height: 1;
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
 }

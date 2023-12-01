@@ -1,16 +1,34 @@
+
 import React, { useEffect, useState } from "react";
 import { BsSearch, BsArrowRight } from "react-icons/bs";
+
+
+import { useRouter } from "next/router";
 
 //INTERNAL IMPORT
 import Style from "./SearchBar.module.css";
 
 
 
-const SearchBar = ({ onHandleSearch, onClearSearch }) => {
+const SearchBar = ({ onHandleSearch, onClearSearch, placeholder = "Search" }) => {
 
 
   const [search, setSearch] = useState("");
   const [searchItem, setSearchItem] = useState(search);
+  const [isInitialQuerySet, setIsInitialQuerySet] = useState(false);
+
+  const router = useRouter();
+
+
+
+  useEffect(() => {
+    const queryParam = router.query.query;
+    if (queryParam && !isInitialQuerySet) {
+      setSearchItem(queryParam);
+      onHandleSearch(queryParam);
+      setIsInitialQuerySet(true);
+    }
+  }, [router.query, onHandleSearch]);
 
 
   useEffect(() => {
@@ -34,7 +52,7 @@ const SearchBar = ({ onHandleSearch, onClearSearch }) => {
         <BsSearch className={Style.SearchBar_box_icon} />
         <input
           type="text"
-          placeholder="Type your keyword"
+          placeholder={placeholder}
           onChange={(e) => setSearchItem(e.target.value)}
           value={searchItem}
         />
@@ -48,3 +66,4 @@ const SearchBar = ({ onHandleSearch, onClearSearch }) => {
 };
 
 export default SearchBar;
+

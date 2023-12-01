@@ -1,0 +1,61 @@
+
+
+.CollectionDetailsImg {
+    width: 100%;
+    overflow-x: hidden;
+    margin-bottom: 4rem;
+}
+
+.CollectionDetailsImg_box_NFT {
+    width: 100%;
+    display: grid;
+    overflow-x: hidden;
+}
+
+.CollectionDetailsImg_box_NFT_img {
+    width: 100%;
+    grid-column: 1 / -1;
+    grid-row: 1 / end;
+}
+
+.CollectionDetailsImg_box_NFT_img_img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 1rem;
+    cursor: pointer;
+    overflow-x: hidden;
+}
+
+
+.CollectionDetailsImg_box_details,
+.CollectionDetailsImg_box_description {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    line-height: 0;
+    background-color: var(--icons-color);
+    border-radius: .5rem;
+    padding-inline: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    color: var(--main-bg-color);
+    overflow-x: hidden;
+}
+
+:global(body.dark-mode) .CollectionDetailsImg_box_details,
+:global(body.dark-mode) .CollectionDetailsImg_box_description {
+    background-color: var(--icons-color-2);
+}
+
+.CollectionDetailsImg_box_details_box,
+.CollectionDetailsImg_box_description_box {
+    padding: .1rem 1rem;
+    font-size: 1rem;
+    overflow-x: hidden;
+}
+
+.CollectionDetailsImg_box_details_box p {
+    line-height: 1;
+    font-size: 1rem;
+}

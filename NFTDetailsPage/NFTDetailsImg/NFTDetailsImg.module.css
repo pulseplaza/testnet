@@ -1,35 +1,44 @@
 
-.NFTDetailsImg{
+
+.NFTDetailsImg {
     width: 100%;
+    overflow-x: hidden;
 }
 
-.NFTDetailsImg_box_NFT{
+.NFTDetailsImg_box_NFT {
+    width: 100%;
     display: grid;
+    overflow-x: hidden;
 }
 
-.NFTDetailsImg_box_NFT_img{
+.NFTDetailsImg_box_NFT_img {
+    width: 100%;
     grid-column: 1 / -1;
     grid-row: 1 / end;
 }
 
-.NFTDetailsImg_box_NFT_img_img{
+.NFTDetailsImg_box_NFT_img_img {
+    max-width: 100%;
+    height: auto;
+    display: block;
     border-radius: 1rem;
     cursor: pointer;
+    overflow-x: hidden;
 }
 
-.NFTDetailsImg_box_NFT_like{
+.NFTDetailsImg_box_NFT_like {
     display: flex;
     align-items: center;
     justify-content: space-between;
     grid-column: 1 / -1;
     grid-row: 1 / end;
-    z-index: 111111;
+    z-index: 10000;
     align-self: flex-start;
     padding-inline: 2rem;
 }
 
 
-.NFTDetailsImg_box_NFT_like p{
+.NFTDetailsImg_box_NFT_like p {
     background: var(--pls-bg);
     padding: .5rem 1rem;
     color: var(--main-bg-color);
@@ -40,22 +49,22 @@
     cursor: pointer;
 }
 
-.NFTDetailsImg_box_NFT_like_icon{
+.NFTDetailsImg_box_NFT_like_icon {
     font-size: 1.5rem;
     color: white;
 }
 
-.NFTDetailsImg_box_NFT_like_icon_1{
+.NFTDetailsImg_box_NFT_like_icon_1 {
     font-size: 2rem;
     color: var(--main-bg-color);
 }
 
-:global(body.dark-mode) .NFTDetailsImg_box_NFT_like_icon_1{
+:global(body.dark-mode) .NFTDetailsImg_box_NFT_like_icon_1 {
     color: var(--main-bg-color-dark);
 }
 
 .NFTDetailsImg_box_details,
-.NFTDetailsImg_box_description{
+.NFTDetailsImg_box_description {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -66,21 +75,21 @@
     cursor: pointer;
     margin-top: 1rem;
     color: var(--main-bg-color);
+    overflow-x: hidden;
 }
 
 :global(body.dark-mode) .NFTDetailsImg_box_details,
-:global(body.dark-mode) .NFTDetailsImg_box_description{
+:global(body.dark-mode) .NFTDetailsImg_box_description {
     background-color: var(--icons-color-2);
 }
 
 .NFTDetailsImg_box_details_box,
-.NFTDetailsImg_box_description_box{
+.NFTDetailsImg_box_description_box {
     padding: .1rem 1rem;
     font-size: 1rem;
+    overflow-x: hidden;
 }
 
-.NFTDetailsImg_box_details_box p{
-    line-height: 1;
+.NFTDetailsImg_box_details_box p {
     font-size: 1rem;
 }
-
