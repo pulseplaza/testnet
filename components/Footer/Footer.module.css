@@ -22,24 +22,47 @@
     align-items: flex-start;
     justify-content: space-between;
     gap: 3rem;
-    padding-bottom: 1rem;
 }
+
+
 
 
 .footer_box_gallery a,
 .footer_box_coin a,
 .footer_box_more a {
-    color: var(--main-bg-color-dark);
+    display: block;
+    color: var(--main-bg-color-2);
     text-decoration: none;
+    padding: .5rem;
+    border-radius: .5rem;
+    transition: all .3s ease-in-out;
 }
+
 
 
 :global(body.dark-mode) .footer_box_gallery a,
 :global(body.dark-mode) .footer_box_coin a,
 :global(body.dark-mode) .footer_box_more a {
     color: var(--main-bg-color);
-    text-decoration: none;
 }
+
+
+
+
+
+.footer_box_gallery a:hover,
+.footer_box_coin a:hover,
+.footer_box_more a:hover {
+    background-color: var(--icons-color);
+    color: var(--main-bg-color);
+    border-radius: .5rem;
+    color: var(--main-bg-color);
+    transition: all .3s ease-in;
+
+}
+
+
+
 
 
 .footer_box_social_logo{

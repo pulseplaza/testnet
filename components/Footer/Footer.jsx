@@ -9,6 +9,9 @@ import {
 import { RiMastodonFill, RiFacebookBoxFill, RiSendPlaneFill } from "react-icons/ri";
 import { BsDiscord, BsTwitterX } from "react-icons/bs";
 
+import Link from 'next/link';
+
+
 
 
 //INTERNAL IMPORT
@@ -19,6 +22,8 @@ import { Gallery, Coin, More } from "../NavBar/index";
 
 const Footer = () => {
   const year = new Date().getFullYear();
+
+
 
   return (
     <div className={Style.footer}>
@@ -50,17 +55,28 @@ const Footer = () => {
 
         <div className={Style.footer_box_gallery}>
           <h3>GALLERY</h3>
-          <Gallery />
+          <Link href="/search-nfts"><a>Search NFTs</a></Link>
+          <Link href="/search-collections"><a>Search Collections</a></Link>
+          <Link href="/create-nft"><a>Create NFT</a></Link>
+          <Link href="/create-collection"><a>Create Collection</a></Link>
         </div>
+
 
         <div className={Style.footer_box_coin}>
           <h3>COIN</h3>
-          <Coin />
+          <Link href="/coin/tokenomics"><a>Tokenomics</a></Link>
+          <Link href="/coin/trade"><a>Trade</a></Link>
         </div>
 
         <div className={Style.footer_box_more}>
           <h3>MORE</h3>
-          <More />
+          <Link href="/aboutus"><a>About Us</a></Link>
+          <Link href="/news"><a>News</a></Link>
+          <Link href="/fees"><a>Fees</a></Link>
+          <Link href="/contact"><a>Contact Us</a></Link>
+          <Link href="https://stats.uptimerobot.com/1kn5YInD1x" passHref>
+            <a target="_blank" rel="noopener noreferrer">System Status</a>
+          </Link>
         </div>
 
 

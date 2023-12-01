@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import Style from "./Gallery.module.css";
 
 
+
 const Gallery = ({ toggleMenu }) => {
   const router = useRouter();
   const gallery = [
