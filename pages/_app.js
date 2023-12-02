@@ -8,7 +8,6 @@ import { NFTMarketplaceProvider } from "../Context/NFTMarketplaceContext";
 
 
 
-
 const MyApp = ({ Component, pageProps }) => {
     const [theme, setTheme] = useState(null);
 
@@ -53,23 +52,7 @@ const MyApp = ({ Component, pageProps }) => {
                 <Head>
                     <title>{title}</title>
                     <meta name='viewport' content='width=device-width, initial-scale=1' />
-                    <script
-                        dangerouslySetInnerHTML={{
-                            __html: `
-                (function() {
-                    try {
-                        const savedTheme = localStorage.getItem('theme');
-                        if (savedTheme) {
-                            document.body.classList.add(savedTheme === 'dark' ? 'dark-mode' : '');
-                        } else {
-                            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-                            document.body.classList.add(prefersDark ? 'dark-mode' : '');
-                        }
-                    } catch (e) {}
-                })();
-                `
-                        }}
-                    />
+                    <link rel="icon" href="/favicon.ico" />
                 </Head>
                 <OverHead />
                 <NavBar theme={theme} setTheme={setTheme} />
