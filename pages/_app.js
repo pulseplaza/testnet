@@ -43,7 +43,7 @@ const MyApp = ({ Component, pageProps }) => {
     const defaultTitle = "Pulse Plaza NFT Marketplace";
     const title = pageProps.title || defaultTitle;
 
-    const defaultImage = "../img/PLSPLAZA_logo.png"
+    const defaultImage = "../public/PLSPLAZA_logo.png"
 
 
 
