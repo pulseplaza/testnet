@@ -57,10 +57,10 @@ const MyApp = ({ Component, pageProps }) => {
 
                     <meta property="og:title" content={title} />
                     <meta property="og:site_name" content="Pulse Plaza" />
-                    <meta property="og:description" content="The NFT Marketplace on Pulsechain" />
+                    <meta property="og:description" content="The NFT Marketplace on PulseChain" />
                     <meta property="og:image" content={`https://testnet.pulseplaza.io${defaultImage}`} />
                     <meta property="og:type" content="website" />
-                    
+
                 </Head>
                 <OverHead />
                 <NavBar theme={theme} setTheme={setTheme} />
