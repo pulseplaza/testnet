@@ -43,6 +43,8 @@ const MyApp = ({ Component, pageProps }) => {
     const defaultTitle = "Pulse Plaza NFT Marketplace";
     const title = pageProps.title || defaultTitle;
 
+    const defaultImage = "../img/PLSPLAZA_logo.png"
+
 
 
 
@@ -54,9 +56,11 @@ const MyApp = ({ Component, pageProps }) => {
                     <meta name='viewport' content='width=device-width, initial-scale=1' />
 
                     <meta property="og:title" content={title} />
+                    <meta property="og:site_name" content="Pulse Plaza" />
+                    <meta property="og:description" content="The NFT Marketplace on Pulsechain" />
+                    <meta property="og:image" content={`https://testnet.pulseplaza.io${defaultImage}`} />
                     <meta property="og:type" content="website" />
-                    <meta property="og:site_name" content="Pulse Plaza NFT Marketplace" />
-
+                    
                 </Head>
                 <OverHead />
                 <NavBar theme={theme} setTheme={setTheme} />
