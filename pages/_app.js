@@ -53,6 +53,10 @@ const MyApp = ({ Component, pageProps }) => {
                     <title>{title}</title>
                     <meta name='viewport' content='width=device-width, initial-scale=1' />
 
+                    <meta property="og:title" content={title} />
+                    <meta property="og:type" content="website" />
+                    <meta property="og:site_name" content="Pulse Plaza NFT Marketplace" />
+
                 </Head>
                 <OverHead />
                 <NavBar theme={theme} setTheme={setTheme} />
