@@ -174,13 +174,14 @@
     }
 }
 
+
 /* For devices with width <= 480px */
 @media screen and (max-width: 480px) {
     .NFTCard {
         width: 90%;
         margin: 0 auto;
         grid-template-columns: 1fr;
-        margin-bottom: 10rem;
+        margin-bottom: -2rem;
     }
 
     .NFTCard_box_update_right {
