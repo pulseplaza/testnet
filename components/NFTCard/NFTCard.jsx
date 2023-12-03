@@ -29,7 +29,7 @@ const NFTCard = ({ NFTData }) => {
 
     const getNameSliceLength = () => {
         if (screenWidth <= 480) {
-            return 30; // Adjust as needed for very small screens
+            return 28; // Adjust as needed for very small screens
         } else if (screenWidth <= 770) {
             return 18; // Adjust for small screens
         } else if (screenWidth <= 1200) {

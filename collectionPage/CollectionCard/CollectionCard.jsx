@@ -31,7 +31,7 @@ const CollectionCard = ({ collections }) => {
 
   const getNameSliceLength = () => {
     if (screenWidth <= 560) {
-      return 26; // Adjust as needed for very small screens
+      return 28; // Adjust as needed for very small screens
     } else if (screenWidth <= 1024) {
       return 20; // Adjust for small to medium screens
     } else if (screenWidth <= 1200) {
