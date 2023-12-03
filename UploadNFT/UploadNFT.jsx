@@ -117,7 +117,7 @@ const UploadNFT = ({ uploadToIPFS, createNFT, mycollections }) => {
 
       {isLoading && (
         <div className={Style.loaderOverlay}>
-          <Loader /> {/* Directly using the Loader component */}
+          <Loader />
         </div>
       )}
 

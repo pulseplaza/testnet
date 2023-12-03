@@ -1,4 +1,8 @@
 
+/* .upload_box {
+    margin-top: 14rem;
+} */
+
 
 .upload_box_input_para {
     padding: 0 1rem;
@@ -68,7 +72,8 @@
 
 .upload_box_btn {
     display: grid;
-    grid-template-columns: 1fr;;
+    grid-template-columns: 1fr;
+    ;
     margin-block: 4rem;
     gap: 2rem;
     place-items: center;
@@ -92,8 +97,8 @@
 
 
 .priceInputContainer {
-    width: 60%; 
-    margin: 2rem auto; 
+    width: 60%;
+    margin: 2rem auto;
 }
 
 .priceInputContainer .Form_box_input {
@@ -104,7 +109,7 @@
 .priceInputContainer .Form_box_input_box {
     width: 100%;
     display: flex;
-    align-items: center; 
+    align-items: center;
 }
 
 .priceInputContainer .Form_box_input input {
