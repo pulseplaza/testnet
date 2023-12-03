@@ -35,6 +35,23 @@ const MyApp = ({ Component, pageProps }) => {
 
     useEffect(() => {
         document.documentElement.lang = 'en';
+
+
+        // Add Google Analytics Script
+        if (typeof window !== "undefined") {
+            const script = document.createElement('script');
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=G-9QQP5QRSW0';
+            script.async = true;
+            document.head.appendChild(script);
+
+            // Initialize Google Analytics
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', 'G-9QQP5QRSW0');
+        }
+
+
     }, []);
 
 
@@ -45,6 +62,9 @@ const MyApp = ({ Component, pageProps }) => {
 
     const defaultImage = "/PLSPLAZA_logo_wide.png"
     const domain = process.env.NEXT_PUBLIC_DOMAIN;
+
+
+    
 
 
 
