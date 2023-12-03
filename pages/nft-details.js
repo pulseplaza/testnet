@@ -50,14 +50,6 @@ const NFTDetails = () => {
       <Head>
         <title>{nft.name ? `Pulse Plaza NFT Marketplace - NFT Details: ${nft.name}` : "Pulse Plaza NFT Marketplace - NFT Details"}</title>
 
-        <meta property="og:title" content={nft.name ? `NFT Details: ${nft.name}` : "Pulse Plaza NFT Marketplace - NFT Details"} />
-        <meta property="og:image" content={imageUrl ? imageUrl : `${domain}${defaultImage}`} />
-
-
-        {/* Twitter Card */}
-        <meta name="twitter:title" content={nft.name ? `NFT Details: ${nft.name}` : "Pulse Plaza NFT Marketplace - NFT Details"} />
-        <meta name="twitter:image" content={imageUrl ? imageUrl : `${domain}${defaultImage}`} />
-
       </Head>
 
       <NFTDetailsPage nft={nft} />

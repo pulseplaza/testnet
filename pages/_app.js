@@ -40,7 +40,7 @@ const MyApp = ({ Component, pageProps }) => {
 
 
 
-    const defaultTitle = "Pulse Plaza NFT Marketplace";
+    const defaultTitle = "Pulse Plaza - Decentralized NFT Marketplace on PulseChain";
     const title = pageProps.title || defaultTitle;
 
     const defaultImage = "/PLSPLAZA_logo_wide.png"
@@ -57,14 +57,14 @@ const MyApp = ({ Component, pageProps }) => {
 
                     <meta property="og:site_name" content="Pulse Plaza" />
                     <meta property="og:title" content={title} />
-                    <meta property="og:description" content="Decentralized NFT Marketplace on PulseChain" />
+                    {/* <meta property="og:description" content="Decentralized NFT Marketplace on PulseChain" /> */}
                     <meta property="og:image" content={`${domain}${defaultImage}`} />
                     <meta property="og:type" content="website" />
 
                     {/* Twitter Card */}
                     <meta name="twitter:card" content="summary_large_image" />
                     <meta name="twitter:title" content={title} />
-                    <meta name="twitter:description" content="Decentralized NFT Marketplace on PulseChain" />
+                    {/* <meta name="twitter:description" content="Decentralized NFT Marketplace on PulseChain" /> */}
                     <meta name="twitter:image" content={`${domain}${defaultImage}`} />
 
                 </Head>
