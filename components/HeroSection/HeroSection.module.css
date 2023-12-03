@@ -43,14 +43,19 @@
 }
 
 
-
+@media screen and (max-width: 800px) {
+    .heroSection_box_left h1 {
+        line-height: 1;
+        font-size: 3.4rem;
+    }
+}
 
 
 @media screen and (max-width: 1024px) {
 
     .heroSection {
         width: 90%;
-        margin-top: -1rem;
+        margin-top: 1rem;
     }
 
     .heroSection_box {
@@ -64,10 +69,10 @@
         padding-top: 1rem;
     }
 
-    .heroSection_box_left h1 {
+    /* .heroSection_box_left h1 {
         line-height: 1;
-        font-size: 4rem;
-    }
+        font-size: 3.4rem;
+    } */
 
     .heroSection_box_left h2 {
         line-height: 1;

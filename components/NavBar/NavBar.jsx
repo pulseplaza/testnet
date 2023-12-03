@@ -1,6 +1,5 @@
 
 
-
 import React, { useState, useEffect, useContext, useRef } from "react";
 import Image from "next/image";
 import { DiJqueryLogo } from "react-icons/di";
@@ -143,9 +142,14 @@ const NavBar = ({ theme, setTheme }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 1) {
-        setScrolling(true);
+      if (window.innerWidth > 770) {
+        if (window.scrollY > 1) {
+          setScrolling(true);
+        } else {
+          setScrolling(false);
+        }
       } else {
+        // Reset scrolling state when screen width is less than 770px
         setScrolling(false);
       }
     };
@@ -180,6 +184,7 @@ const NavBar = ({ theme, setTheme }) => {
 
 
 
+  
   return (
     <div className={`${Style.navbar} ${scrolling ? Style.navbar_scrolled : ''}`}>
       <div className={Style.navbar_container}>
