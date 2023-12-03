@@ -55,17 +55,16 @@ const MyApp = ({ Component, pageProps }) => {
                     <title>{title}</title>
                     <meta name='viewport' content='width=device-width, initial-scale=1' />
 
-                    <meta property="og:site_name" content="Pulse Plaza" />
+                    <meta property="og:site_name" content="PulsePlaza.io" />
                     <meta property="og:title" content={title} />
-                    {/* <meta property="og:description" content="Decentralized NFT Marketplace on PulseChain" /> */}
                     <meta property="og:image" content={`${domain}${defaultImage}`} />
                     <meta property="og:type" content="website" />
 
                     {/* Twitter Card */}
                     <meta name="twitter:card" content="summary_large_image" />
                     <meta name="twitter:title" content={title} />
-                    {/* <meta name="twitter:description" content="Decentralized NFT Marketplace on PulseChain" /> */}
                     <meta name="twitter:image" content={`${domain}${defaultImage}`} />
+
 
                 </Head>
                 <OverHead />
