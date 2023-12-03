@@ -3,6 +3,8 @@ import "../styles/globals.css";
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
 
+import { Analytics } from '@vercel/analytics/react';
+
 import { NavBar, Footer, OverHead } from "../components/componentsindex";
 import { NFTMarketplaceProvider } from "../Context/NFTMarketplaceContext";
 
@@ -66,8 +68,6 @@ const MyApp = ({ Component, pageProps }) => {
 
     
 
-
-
     return (
         <div>
             <NFTMarketplaceProvider>
@@ -91,6 +91,9 @@ const MyApp = ({ Component, pageProps }) => {
                 <NavBar theme={theme} setTheme={setTheme} />
                 <Component {...pageProps} />
                 <Footer />
+                
+                <Analytics />
+
             </NFTMarketplaceProvider>
         </div>
     );
