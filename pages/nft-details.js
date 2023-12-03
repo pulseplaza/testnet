@@ -39,9 +39,6 @@ const NFTDetails = () => {
 
 
 
-  const defaultImage = "/PLSPLAZA_logo_wide.png"
-  const domain = process.env.NEXT_PUBLIC_DOMAIN;
-  const imageUrl = decodeURIComponent(nft.image);
 
 
   return (
