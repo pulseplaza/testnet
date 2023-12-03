@@ -44,7 +44,7 @@ const MyApp = ({ Component, pageProps }) => {
     const title = pageProps.title || defaultTitle;
 
     const defaultImage = "/PLSPLAZA_logo_wide.png"
-
+    const domain = process.env.NEXT_PUBLIC_DOMAIN;
 
 
 
@@ -55,11 +55,17 @@ const MyApp = ({ Component, pageProps }) => {
                     <title>{title}</title>
                     <meta name='viewport' content='width=device-width, initial-scale=1' />
 
-                    <meta property="og:title" content={title} />
                     <meta property="og:site_name" content="Pulse Plaza" />
-                    <meta property="og:description" content="The NFT Marketplace on PulseChain" />
-                    <meta property="og:image" content={`https://testnet.pulseplaza.io${defaultImage}`} />
+                    <meta property="og:title" content={title} />
+                    <meta property="og:description" content="Decentralized NFT Marketplace on PulseChain" />
+                    <meta property="og:image" content={`${domain}${defaultImage}`} />
                     <meta property="og:type" content="website" />
+
+                    {/* Twitter Card */}
+                    <meta name="twitter:card" content="summary_large_image" />
+                    <meta name="twitter:title" content={title} />
+                    <meta name="twitter:description" content="Decentralized NFT Marketplace on PulseChain" />
+                    <meta name="twitter:image" content={`${domain}${defaultImage}`} />
 
                 </Head>
                 <OverHead />

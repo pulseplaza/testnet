@@ -37,17 +37,27 @@ const NFTDetails = () => {
     setNft(router.query);
   }, [router.isReady]);
 
+  const defaultImage = "/PLSPLAZA_logo_wide.png"
+  const domain = process.env.NEXT_PUBLIC_DOMAIN;
 
   return (
     <div>
 
       <Head>
         <title>{nft.name ? `Pulse Plaza NFT Marketplace - NFT Details: ${nft.name}` : "Pulse Plaza NFT Marketplace - NFT Details"}</title>
+
+        <meta property="og:title" content={nft.name ? `NFT Details: ${nft.name}` : "Pulse Plaza NFT Marketplace - NFT Details"} />
+        <meta property="og:image" content={nft.image ? `${domain}${nft.image}` : `${domain}${defaultImage}`} />
+
+
+        {/* Twitter Card */}
+        <meta name="twitter:title" content={nft.name ? `NFT Details: ${nft.name}` : "Pulse Plaza NFT Marketplace - NFT Details"} />
+        <meta name="twitter:image" content={nft.image ? `${domain}${nft.image}` : `${domain}${defaultImage}`} />
+
       </Head>
 
       <NFTDetailsPage nft={nft} />
 
-      {/* <Category /> */}
 
       <Brand />
 
@@ -58,3 +68,4 @@ const NFTDetails = () => {
 
 
 export default NFTDetails;
+
