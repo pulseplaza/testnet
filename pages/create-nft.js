@@ -50,7 +50,7 @@ const uploadNFT = () => {
                 </div>
 
                 <div className={Style.uploadNFT_box_title}>
-                    <h2>Mint a new NFT</h2>
+                    <h2>Mint a New NFT</h2>
                     <p>
                         Supported image file types: BMP, JPG, JPEG, GIF, HEIF, PNG, SVG, TIF, TIFF, WEBP
                     </p>

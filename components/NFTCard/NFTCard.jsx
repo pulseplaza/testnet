@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { BsImages } from "react-icons/bs";
 import Image from "next/image";
@@ -15,10 +15,39 @@ const NFTCard = ({ NFTData }) => {
 
 
 
+    const [screenWidth, setScreenWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setScreenWidth(window.innerWidth);
+        };
+
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const getNameSliceLength = () => {
+        if (screenWidth <= 480) {
+            return 30; // Adjust as needed for very small screens
+        } else if (screenWidth <= 770) {
+            return 18; // Adjust for small screens
+        } else if (screenWidth <= 1200) {
+            return 20; // Adjust for medium screens
+        } else if (screenWidth <= 1500) {
+            return 12; // Adjust for large screens
+        } else {
+            return 18; // Adjust for very large screens
+        }
+    };
+
+
+
+
     // Number formatting
     const formatNumber = (num) => {
         let formattedNum;
-    
+
         if (num < 1000) {
             // Format with one decimal place if there are decimals, otherwise no decimal
             formattedNum = num % 1 !== 0 ? num.toFixed(1) : num.toString();
@@ -43,12 +72,12 @@ const NFTCard = ({ NFTData }) => {
             // Optionally, you can add an emoji or symbol here
             formattedNum = '🐋 ' + formattedNum;
         }
-    
+
         return formattedNum;
     };
-    
-    
-    
+
+
+
 
 
 
@@ -74,8 +103,8 @@ const NFTCard = ({ NFTData }) => {
                             <div className={Style.NFTCard_box_update_right}>
                                 <div className={Style.NFTCard_box_update_right_info}>
                                     <h3>
-                                        {el.name.slice(0, 14)}
-                                        {el.name.length > 14 && '...'}
+                                    {el.name.slice(0, getNameSliceLength())}
+                                        {el.name.length > getNameSliceLength() && "..."}
                                     </h3>
                                 </div>
                             </div>

@@ -85,7 +85,7 @@ const DropZone = ({
 
             <Image
               src={fileUrl}
-              alt="NFT image"
+              alt="NFT image preview"
               width={200}
               height={200}
               className={Style.DropZone_box_aside_box_img}
@@ -95,6 +95,10 @@ const DropZone = ({
             <div className={Style.DropZone_box_aside_box_preview}>
 
               <div className={Style.DropZone_box_aside_box_preview_one}>
+              <small style={{ color: 'red' }}>⚠️ IF YOU CANNOT SEE THE IMAGE PREVIEW, TRY AGAIN IN A MOMENT.</small>
+              <small style={{ color: 'red' }}>DO NOT UPLOAD WITHOUT IMAGE PREVIEW!</small>
+              <br />
+
                 <h3>Name:</h3>
                 <p>{name || ""}</p>
                 <h3>Description:</h3>

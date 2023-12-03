@@ -26,7 +26,9 @@ const NFTCardTwo = ({ NFTData }) => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+    
 
+    
     const getNameSliceLength = () => {
         if (screenWidth <= 560) {
             return 30; // Adjust as needed for very small screens

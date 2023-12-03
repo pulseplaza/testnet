@@ -1,6 +1,6 @@
 
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { BsImage } from "react-icons/bs";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
@@ -13,7 +13,37 @@ import { LikeProfile } from "../../components/componentsindex";
 
 
 
+
 const CollectionCard = ({ collections }) => {
+
+
+  const [screenWidth, setScreenWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const getNameSliceLength = () => {
+    if (screenWidth <= 560) {
+      return 26; // Adjust as needed for very small screens
+    } else if (screenWidth <= 1024) {
+      return 20; // Adjust for small to medium screens
+    } else if (screenWidth <= 1200) {
+      return 22; // Adjust for large screens
+    } else if (screenWidth <= 1500) {
+      return 18; // Adjust for larger screens
+    } else {
+      return 24; // Adjust for very large screens
+    }
+  };
+
+
   return (
     <div className={Style.CollectionCard}>
       {collections?.map((collection, i) => (
@@ -33,8 +63,8 @@ const CollectionCard = ({ collections }) => {
               </div>
               <div className={Style.CollectionCard_box_info}>
                 <h3>
-                  {collection.name.slice(0, 18)}
-                  {collection.name.length > 18 && "..."}
+                  {collection.name.slice(0, getNameSliceLength())}
+                  {collection.name.length > getNameSliceLength() && "..."}
                 </h3>
               </div>
               <div className={Style.CollectionCard_box_info2}>
