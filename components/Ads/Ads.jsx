@@ -48,7 +48,7 @@ const Ads = () => {
         `;
 
         // Set the innerHTML of the container using dangerouslySetInnerHTML
-        adContainerRef.current.innerHTML = `<script type="text/javascript">${scriptContent}</script>`;
+        adContainerRef.current.innerHTML = `<script data-cfasync="false" type="text/javascript">${scriptContent}</script>`;
 
     }, []);
 
