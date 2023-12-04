@@ -52,6 +52,7 @@ const NFTDetails = () => {
       <NFTDetailsPage nft={nft} />
 
 
+
       <Brand />
 
     </div>

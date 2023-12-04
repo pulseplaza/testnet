@@ -22,6 +22,7 @@ import Loader from "./Loader/Loader";
 import Error from "./Error/Error";
 import NFTCardTwo from "./NFTCardTwo/NFTCardTwo";
 import Banner from "./Banner/Banner";
+import Ads from "./Ads/Ads";
 
 
 
@@ -50,5 +51,6 @@ export {
   Error,
   NFTCardTwo,
   Banner,
+  Ads,
 };
 

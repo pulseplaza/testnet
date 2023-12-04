@@ -4,7 +4,7 @@ import Head from 'next/head';
 
 //INTERNAL IMPORT
 import Style from "../styles/news.module.css";
-import { Title, Brand } from "../components/componentsindex";
+import { Title, Brand, Ads } from "../components/componentsindex";
 
 const News = () => {
     const [currentTheme, setCurrentTheme] = useState("light");
@@ -67,6 +67,8 @@ const News = () => {
                     Tweets by PulsePlazaio
                 </a>
             </div>
+
+            <Ads />
 
             <Brand />
 
