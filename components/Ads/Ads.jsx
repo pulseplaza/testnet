@@ -5,7 +5,7 @@ import Style from './Ads.module.css';
 const Ads = () => {
     const adScript = {
         __html: `
-            <script type="text/javascript">
+            <script data-cfasync="false" type="text/javascript">
                 if (typeof atAsyncOptions !== 'object') var atAsyncOptions = [];
                 atAsyncOptions.push({
                     'key': 'f431300ee3c352f99d04fd721b580db9',
