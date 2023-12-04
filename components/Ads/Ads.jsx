@@ -1,50 +1,57 @@
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import Style from "./Ads.module.css";
 
 const Ads = () => {
-  const adRef = useRef(null);
+  const [adConfig, setAdConfig] = useState({ src: "", width: "", height: "" });
 
   useEffect(() => {
-    const createScript = (src) => {
-      const script = document.createElement("script");
-      script.type = "text/javascript";
-      script.src = src;
-      return script;
-    };
-
-    const loadAdScript = () => {
+    const updateAdConfig = () => {
       if (window.innerWidth < 551) {
-        const script = createScript("//www.topcreativeformat.com/f43f5857097d74aeb88b88bb4533e37d/invoke.js");
-        adRef.current.appendChild(script);
+        setAdConfig({
+          src: "//www.topcreativeformat.com/f43f5857097d74aeb88b88bb4533e37d/invoke.js",
+          width: "300",
+          height: "250"
+        });
       } else if (window.innerWidth >= 551 && window.innerWidth <= 1024) {
-        const script = createScript("//www.topcreativeformat.com/a8bb164e951cde22acbf0c5047466f7a/invoke.js");
-        adRef.current.appendChild(script);
+        setAdConfig({
+          src: "//www.topcreativeformat.com/a8bb164e951cde22acbf0c5047466f7a/invoke.js",
+          width: "468",
+          height: "60"
+        });
       } else {
-        const script = createScript("//www.topcreativeformat.com/f431300ee3c352f99d04fd721b580db9/invoke.js");
-        adRef.current.appendChild(script);
+        setAdConfig({
+          src: "//www.topcreativeformat.com/f431300ee3c352f99d04fd721b580db9/invoke.js",
+          width: "728",
+          height: "90"
+        });
       }
     };
 
-    const handleResize = () => {
-      while (adRef.current && adRef.current.firstChild) {
-        adRef.current.removeChild(adRef.current.firstChild);
-      }
-      loadAdScript();
-    };
-
-    window.addEventListener('resize', handleResize);
-    loadAdScript();
+    updateAdConfig();
+    window.addEventListener('resize', updateAdConfig);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', updateAdConfig);
     };
   }, []);
 
-  return <div className={Style.adbanner_import} ref={adRef} />;
+  return (
+    <div className={Style.adbanner_import}>
+      <iframe 
+        src={adConfig.src} 
+        width={adConfig.width} 
+        height={adConfig.height} 
+        frameBorder="0" 
+        scrolling="no"
+        title="Ad"
+      ></iframe>
+    </div>
+  );
 };
 
 export default Ads;
+
 
 
 
