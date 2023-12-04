@@ -5,11 +5,11 @@ import Style from "./Ads.module.css";
 const Ads = () => {
     return (
         <div className={Style.adbanner_import}>
-            <iframe 
-                src="/ads.html" 
+            <iframe
+                src="/ads.html"
                 title="Advertisement"
-                style={{ width: '100%', height: 'auto', border: 'none' }} 
-                scrolling="no">
+                style={{ width: '100%', height: 'auto', border: 'none' }}
+            >
             </iframe>
         </div>
     );
