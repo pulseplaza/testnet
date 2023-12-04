@@ -1,47 +1,43 @@
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import Style from "./Ads.module.css";
 
 const Ads = () => {
-    const adRef = useRef(null);
+  const [adSrc, setAdSrc] = useState("");
 
-    useEffect(() => {
-        const loadAdScript = (key) => {
-            const script = document.createElement("script");
-            script.type = "text/javascript";
-            script.src = `//www.topcreativeformat.com/${key}/invoke.js`;
-            adRef.current.appendChild(script);
-        };
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 551) {
+        setAdSrc("//www.topcreativeformat.com/f43f5857097d74aeb88b88bb4533e37d/invoke.js");
+      } else if (window.innerWidth >= 551 && window.innerWidth <= 1024) {
+        setAdSrc("//www.topcreativeformat.com/a8bb164e951cde22acbf0c5047466f7a/invoke.js");
+      } else {
+        setAdSrc("//www.topcreativeformat.com/f431300ee3c352f99d04fd721b580db9/invoke.js");
+      }
+    };
 
-        const handleResize = () => {
-            while (adRef.current.firstChild) {
-                adRef.current.removeChild(adRef.current.firstChild);
-            }
+    handleResize();
+    window.addEventListener('resize', handleResize);
 
-            if (window.innerWidth < 551) {
-                loadAdScript("f43f5857097d74aeb88b88bb4533e37d");
-            } else if (window.innerWidth >= 551 && window.innerWidth <= 1024) {
-                loadAdScript("a8bb164e951cde22acbf0c5047466f7a");
-            } else {
-                loadAdScript("f431300ee3c352f99d04fd721b580db9");
-            }
-        };
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
-        handleResize();
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
-
-    return (
-        <div className={Style.adbanner_import} ref={adRef}>
-        </div>
-    );
+  return (
+    <div className={Style.adbanner_import}>
+      <iframe 
+        src={adSrc} 
+        title="Ad"
+        style={{ border: 'none', width: '100%', height: 'auto' }} 
+        scrolling="no" 
+      />
+    </div>
+  );
 };
 
 export default Ads;
+
 
 
 
