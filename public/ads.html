@@ -3,26 +3,40 @@
 
 <head>
     <script data-cfasync="false" type="text/javascript">
-        if (typeof atAsyncOptions !== 'object') var atAsyncOptions = [];
-        atAsyncOptions.push({
-            'key': 'f431300ee3c352f99d04fd721b580db9',
-            'format': 'js',
-            'async': true,
-            'container': 'atContainer-f431300ee3c352f99d04fd721b580db9',
-            'params': {}
-        });
-        var script = document.createElement('script');
-        script.type = "text/javascript";
-        script.async = true;
-        script.src = 'http' + (location.protocol === 'https:' ? 's' : '') + '://www.topcreativeformat.com/f431300ee3c352f99d04fd721b580db9/invoke.js';
-        document.getElementsByTagName('head')[0].appendChild(script);
+        // Function to dynamically load the script based on screen size
+        function loadAdScript(key, containerId) {
+            if (typeof atAsyncOptions !== 'object') var atAsyncOptions = [];
+            atAsyncOptions.push({
+                'key': key,
+                'format': 'js',
+                'async': true,
+                'container': containerId,
+                'params': {}
+            });
+            var script = document.createElement('script');
+            script.type = "text/javascript";
+            script.async = true;
+            script.src = 'http' + (location.protocol === 'https:' ? 's' : '') + '://www.topcreativeformat.com/' + key + '/invoke.js';
+            document.getElementsByTagName('head')[0].appendChild(script);
+        }
+
+        // Check screen size and load the appropriate script
+        if (window.innerWidth <= 550) {
+            loadAdScript('f43f5857097d74aeb88b88bb4533e37d', 'atContainer-f43f5857097d74aeb88b88bb4533e37d');
+        } else if (window.innerWidth <= 1024) {
+            loadAdScript('a8bb164e951cde22acbf0c5047466f7a', 'atContainer-a8bb164e951cde22acbf0c5047466f7a');
+        } else {
+            loadAdScript('f431300ee3c352f99d04fd721b580db9', 'atContainer-f431300ee3c352f99d04fd721b580db9');
+        }
     </script>
 </head>
 
 <body>
     <h1>Ad Test Page</h1>
+    <!-- Divs for different ad containers -->
+    <div id="atContainer-f43f5857097d74aeb88b88bb4533e37d"></div>
+    <div id="atContainer-a8bb164e951cde22acbf0c5047466f7a"></div>
     <div id="atContainer-f431300ee3c352f99d04fd721b580db9"></div>
-
 </body>
 
 </html>
