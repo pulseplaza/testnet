@@ -111,7 +111,6 @@ const Home = () => {
 
 
 
-
   // //CREATOR LIST
   // const creators = getTopCreators(nfts);
 
