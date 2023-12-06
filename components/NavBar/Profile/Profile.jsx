@@ -22,6 +22,7 @@ const Profile = ({ currentAccount, disconnectWallet, onDisconnect, toggleMenu })
     }
     toggleMenu();
   };
+  
 
   return (
     <div className={Style.profile}>

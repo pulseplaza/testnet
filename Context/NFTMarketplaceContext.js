@@ -44,9 +44,6 @@ const client = ipfsHttpClient({
 
 
 
-
-
-
 //---FETCHING MARKETPLACE SMART CONTRACT
 const fetchContract = (signerOrProvider) =>
     new ethers.Contract(
@@ -143,26 +140,28 @@ export const NFTMarketplaceProvider = ({ children }) => {
     };
 
 
+    
 
     //---CHECK IF WALLET IS CONNECTED
 
     const checkIfWalletConnected = async () => {
         try {
-            if (window.ethereum) {
+            const walletConnected = localStorage.getItem('walletConnected');
+            if (window.ethereum && walletConnected === 'true') {
                 const accounts = await window.ethereum.request({ method: 'eth_accounts' });
                 if (accounts.length > 0) {
-                    // An account is connected, update state
                     setCurrentAccount(accounts[0]);
-                    localStorage.setItem('walletConnected', 'true');
                 } else {
-                    // No accounts found, set wallet as not connected
-                    console.log("No connected accounts found.");
+                    // Even though localStorage says 'true', no accounts are found
+                    setCurrentAccount("");
                     localStorage.setItem('walletConnected', 'false');
                 }
             } else {
-                console.log("Install Metamask.");
+                // Metamask not installed or wallet not previously connected
+                setCurrentAccount("");
             }
         } catch (error) {
+            console.error("Error checking connected wallet:", error);
             setError("An error occurred when checking for connected accounts.", error);
             setOpenError(true);
         }
@@ -172,6 +171,9 @@ export const NFTMarketplaceProvider = ({ children }) => {
         checkIfWalletConnected();
     }, []);
     
+    
+    
+
 
 
 
@@ -196,24 +198,26 @@ export const NFTMarketplaceProvider = ({ children }) => {
             if (!window.ethereum) {
                 throw new Error("Please install Metamask or another compatible web3 wallet.");
             }
-
-            await window.ethereum.request({ method: 'eth_requestAccounts' });
-
-            // Local import inside the function
-            const Web3Module = await import('web3');
-            const web3 = new Web3Module.default(window.ethereum);
-
-            const accounts = await web3.eth.getAccounts();
+    
+            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    
             if (accounts.length === 0) {
                 throw new Error("No accounts found.");
             }
-
+    
+            // Set the current account
             setCurrentAccount(accounts[0]);
             console.log("Connected account:", accounts[0]);
+    
+            // Update localStorage to reflect that the wallet is connected
+            localStorage.setItem('walletConnected', 'true');
         } catch (error) {
             console.error("Connection error:", error);
             setError(`Could not connect. ${error.message}`);
             setOpenError(true);
+    
+            // Update localStorage to reflect that the wallet is not connected
+            localStorage.setItem('walletConnected', 'false');
         }
     };
 
