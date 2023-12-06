@@ -1,4 +1,3 @@
-
 .navbar {
     width: 100%;
     padding-block: 1rem;
@@ -48,7 +47,6 @@
     padding-left: 0rem;
     cursor: pointer;
 }
-
 
 
 
@@ -207,7 +205,7 @@
 :global(body.dark-mode) .navbar_container_right_gallery_box a,
 :global(body.dark-mode) .navbar_container_right_coin_box a,
 :global(body.dark-mode) .navbar_container_right_more_box a,
-:global(body.dark-mode) .navbar_container_right_profile a  {
+:global(body.dark-mode) .navbar_container_right_profile a {
     color: var(--main-bg-color);
     text-decoration: none;
 }
@@ -263,7 +261,6 @@
 
 
 
-
 /* /////------SIDEBAR */
 
 .sideBar {
@@ -290,9 +287,13 @@
 
 
 
-
-
 @media screen and (max-width: 769px) {
+
+    .logo {
+        width: 90px;
+        height: 90px;
+        margin-bottom: -.5rem;
+    }
 
     .navbar {
         padding-block: .2rem;

@@ -58,7 +58,7 @@ const NavBar = ({ theme, setTheme }) => {
   const { currentAccount, connectWallet, disconnectWallet, openError } = useContext(NFTMarketplaceContext);
 
 
-  const [hoveredItem, setHoveredItem] = useState(null);
+  // const [hoveredItem, setHoveredItem] = useState(null);
 
 
 
