@@ -97,11 +97,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
 
 
-    // Disconnect wallet function
-    const disconnectWallet = () => {
-        setCurrentAccount("");
-        localStorage.setItem('walletConnected', 'false');
-    };
+
 
 
     // Add a new function for character length validation
@@ -152,37 +148,38 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
     const checkIfWalletConnected = async () => {
         try {
-            if (!window.ethereum) {
-                console.log("Install Metamask.");
-                return;
-            }
-
-            const walletConnected = localStorage.getItem('walletConnected');
-            if (walletConnected === 'false') {
-                // User had previously disconnected
-                console.log("Wallet not connected.");
-                return;
-            }
-
-            const accounts = await window.ethereum.request({
-                method: "eth_accounts",
-            });
-
-            if (accounts.length) {
-                setCurrentAccount(accounts[0]);
-                localStorage.setItem('walletConnected', 'true');
+            if (window.ethereum) {
+                const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+                if (accounts.length > 0) {
+                    // An account is connected, update state
+                    setCurrentAccount(accounts[0]);
+                    localStorage.setItem('walletConnected', 'true');
+                } else {
+                    // No accounts found, set wallet as not connected
+                    console.log("No connected accounts found.");
+                    localStorage.setItem('walletConnected', 'false');
+                }
             } else {
-                console.log("No accounts found.");
+                console.log("Install Metamask.");
             }
         } catch (error) {
-            setError("Your wallet is not connected.", error);
+            setError("An error occurred when checking for connected accounts.", error);
             setOpenError(true);
         }
     };
-
+    
     useEffect(() => {
         checkIfWalletConnected();
     }, []);
+    
+
+
+
+    // Disconnect wallet function
+    const disconnectWallet = () => {
+        setCurrentAccount("");
+        localStorage.setItem('walletConnected', 'false');
+    };
 
 
 

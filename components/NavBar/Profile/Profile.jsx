@@ -20,7 +20,7 @@ const Profile = ({ currentAccount, disconnectWallet, onDisconnect, toggleMenu })
     if (onDisconnect) {
       onDisconnect();
     }
-    toggleMenu(); // Close the menu
+    toggleMenu();
   };
 
   return (
