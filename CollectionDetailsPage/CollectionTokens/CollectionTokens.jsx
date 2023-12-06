@@ -80,7 +80,7 @@ const CollectionTokens = ({ collection }) => {
     } else if (screenWidth <= 1500) {
       return 10; // Adjust for large screens
     } else {
-      return 12; // Adjust for very large screens
+      return 14; // Adjust for very large screens
     }
   };
 
