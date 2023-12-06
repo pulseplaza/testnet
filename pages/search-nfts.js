@@ -79,11 +79,11 @@ const SearchPage = () => {
       {/* <Banner bannerImage={images.creatorbackground2} /> */}
 
       <Head>
-        <title>Pulse Plaza NFT Marketplace - Search NFTs</title>
+        <title>Pulse Plaza NFT Marketplace - Search Listed NFTs</title>
       </Head>
       
       <Title
-        heading="Search NFTs"
+        heading="Search Listed NFTs"
         paragraph="You can search by NFT name, collection name/symbol or creator address"
       />
       <SearchBar
