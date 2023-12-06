@@ -287,7 +287,7 @@
 
 
 
-@media screen and (max-width: 769px) {
+@media screen and (max-width: 770px) {
 
     .logo {
         width: 90px;
@@ -355,7 +355,7 @@
 }
 
 
-@media screen and (min-width: 770px) and (max-width: 1024px) {
+@media screen and (min-width: 771px) and (max-width: 1024px) {
 
     .navbar {
         padding-block: .2rem;
