@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            background: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        #atContainer-f43f5857097d74aeb88b88bb4533e37d {
+            width: 300px;
+            height: 250px;
+            background: transparent;
+            display: flex;
+            justify-content: center;
+        }
+
+        #blockedAdMessage {
+            display: none;
+            font-size: 24px;
+            font-family: 'Exo 2', sans-serif;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+    </style>
+    <script data-cfasync="false" type="text/javascript">
+        if (typeof atAsyncOptions !== 'object') var atAsyncOptions = [];
+        atAsyncOptions.push({
+            'key': 'f43f5857097d74aeb88b88bb4533e37d',
+            'format': 'js',
+            'async': true,
+            'container': 'atContainer-f43f5857097d74aeb88b88bb4533e37d',
+            'params': {}
+        });
+        var script = document.createElement('script');
+        script.type = "text/javascript";
+        script.async = true;
+        script.src = 'http' + (location.protocol === 'https:' ? 's' : '') + '://www.topcreativeformat.com/f43f5857097d74aeb88b88bb4533e37d/invoke.js';
+        document.getElementsByTagName('head')[0].appendChild(script);
+    </script>
+    <script>
+        function sendSizeToParent() {
+            // Send fixed size of the ad to the parent
+            parent.postMessage({ frameHeight: 250, frameWidth: 300 }, "*");
+        }
+
+        window.addEventListener("DOMContentLoaded", sendSizeToParent);
+
+        // Check if the ad container is empty and display the message if it is
+        window.addEventListener("load", function () {
+            var adContainer = document.getElementById("atContainer-f43f5857097d74aeb88b88bb4533e37d");
+            var blockedAdMessage = document.getElementById("blockedAdMessage");
+            
+            // Check if the ad container is empty
+            if (adContainer.innerHTML.trim() === "") {
+                blockedAdMessage.style.display = "block";
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div id="atContainer-f43f5857097d74aeb88b88bb4533e37d"></div>
+    <div id="blockedAdMessage">Ads by Adsterra</div>
+</body>
+
+</html>

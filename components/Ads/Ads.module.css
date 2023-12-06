@@ -1,8 +1,13 @@
 
 .adbanner_import {
-    width: 100%;
-    text-align: center;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.adbanner_import iframe {
+  border: none;
+}
+
+
   

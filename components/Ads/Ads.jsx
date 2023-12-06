@@ -1,42 +1,49 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Style from './Ads.module.css';
 
 const Ads = () => {
-    const adHtml = `
-        <script data-cfasync="false" type="text/javascript">
-            if (typeof atAsyncOptions !== 'object') var atAsyncOptions = [];
-            atAsyncOptions.push({
-                'key': 'f431300ee3c352f99d04fd721b580db9',
-                'format': 'js',
-                'async': true,
-                'container': 'atContainer-f431300ee3c352f99d04fd721b580db9',
-                'params': {}
-            });
-            var script = document.createElement('script');
-            script.type = "text/javascript";
-            script.async = true;
-            script.setAttribute('data-cfasync', 'false');
-            script.src = 'http' + (location.protocol === 'https:' ? 's' : '') + '://www.topcreativeformat.com/f431300ee3c352f99d04fd721b580db9/invoke.js';
-            document.getElementsByTagName('head')[0].appendChild(script);
-        </script>
-        <div id="atContainer-f431300ee3c352f99d04fd721b580db9"></div>
-    `;
+    const [adUrl, setAdUrl] = useState('');
+    const [iframeSize, setIframeSize] = useState({ width: '100%', height: 'auto' });
+
+    useEffect(() => {
+        const determineAdUrl = () => {
+            if (window.innerWidth <= 600) {
+                setAdUrl('/ads-small.html');
+            } else if (window.innerWidth <= 1024) {
+                setAdUrl('/ads-medium.html');
+            } else {
+                setAdUrl('/ads-big.html');
+            }
+        };
+
+        const handleMessage = (event) => {
+            if (event.data.frameHeight && event.data.frameWidth) {
+                setIframeSize({ height: event.data.frameHeight + 'px', width: event.data.frameWidth + 'px' });
+            }
+        };
+
+        window.addEventListener('resize', determineAdUrl);
+        window.addEventListener('message', handleMessage);
+
+        determineAdUrl();
+
+        return () => {
+            window.removeEventListener('resize', determineAdUrl);
+            window.removeEventListener('message', handleMessage);
+        };
+    }, []);
 
     return (
         <div className={Style.adbanner_import}>
             <iframe 
                 title="Ad"
-                style={{ width: '100%', height: 'auto', border: 'none' }}
-                srcDoc={adHtml}
-                sandbox="allow-scripts"
+                style={{ ...iframeSize, border: 'none' }}
+                src={adUrl}
             />
         </div>
     );
 };
 
 export default Ads;
-
-
-
 

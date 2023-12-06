@@ -7,7 +7,7 @@ import Head from 'next/head';
 
 
 //INTERNAL IMPORT
-import { Button, Category, Brand } from "../components/componentsindex";
+import { Button, Category, Brand, Ads } from "../components/componentsindex";
 import NFTDetailsPage from "../NFTDetailsPage/NFTDetailsPage";
 
 
@@ -51,7 +51,7 @@ const NFTDetails = () => {
 
       <NFTDetailsPage nft={nft} />
 
-
+      <Ads />
 
       <Brand />
 

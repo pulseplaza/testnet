@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 
 
 //INTERNAL IMPORT
-import { Button, Category, Brand } from "../components/componentsindex";
+import { Button, Category, Brand, Ads } from "../components/componentsindex";
 import NFTDetailsPage from "../NFTDetailsPage/NFTDetailsPage";
 import CollectionDetailsPage from "../CollectionDetailsPage/CollectionDetailsPage";
 
@@ -51,6 +51,9 @@ const NFTDetails = () => {
 
 
       <CollectionDetailsPage nft={nft} />
+
+      <Ads />
+      
       <Brand />
     </div>
   );

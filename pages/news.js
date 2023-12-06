@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Head from 'next/head';
 
+
 //INTERNAL IMPORT
 import Style from "../styles/news.module.css";
 import { Title, Brand, Ads } from "../components/componentsindex";
@@ -77,3 +78,4 @@ const News = () => {
 };
 
 export default News;
+
