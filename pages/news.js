@@ -69,7 +69,7 @@ const News = () => {
                 </a>
             </div>
 
-            <Ads />
+            {/* <Ads /> */}
 
             <Brand />
 

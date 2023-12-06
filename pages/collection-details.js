@@ -52,7 +52,7 @@ const NFTDetails = () => {
 
       <CollectionDetailsPage nft={nft} />
 
-      <Ads />
+      {/* <Ads /> */}
       
       <Brand />
     </div>

@@ -51,7 +51,7 @@ const NFTDetails = () => {
 
       <NFTDetailsPage nft={nft} />
 
-      <Ads />
+      {/* <Ads /> */}
 
       <Brand />
 
