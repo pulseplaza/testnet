@@ -10,10 +10,13 @@ const Ads = () => {
         const determineAdUrl = () => {
             if (window.innerWidth <= 600) {
                 setAdUrl('/ads-small.html');
+                setIframeSize({ width: '300px', height: '250px' });
             } else if (window.innerWidth <= 1024) {
                 setAdUrl('/ads-medium.html');
+                setIframeSize({ width: '468px', height: '60px' });
             } else {
                 setAdUrl('/ads-big.html');
+                setIframeSize({ width: '728px', height: '90px' });
             }
         };
 
@@ -46,4 +49,5 @@ const Ads = () => {
 };
 
 export default Ads;
+
 
