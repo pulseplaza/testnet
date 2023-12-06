@@ -57,6 +57,7 @@ const MyApp = ({ Component, pageProps }) => {
     }, []);
 
 
+    
 
 
     const defaultTitle = "Pulse Plaza - Decentralized NFT Marketplace on PulseChain";
@@ -71,22 +72,26 @@ const MyApp = ({ Component, pageProps }) => {
     return (
         <div>
             <NFTMarketplaceProvider>
+
                 <Head>
                     <title>{title}</title>
                     <meta name='viewport' content='width=device-width, initial-scale=1' />
 
                     <meta property="og:site_name" content="PULSE PLAZA" />
                     <meta property="og:title" content={title} />
+                    <meta property="og:description" content="Pulse Plaza, a decentralized NFT marketplace on PulseChain, which guarantees low fees and supports freedom with no middleman. Experience efficient, fair trading and creator-focused royalties." />
                     <meta property="og:image" content={`${domain}${defaultImage}`} />
                     <meta property="og:type" content="website" />
 
                     {/* Twitter Card */}
                     <meta name="twitter:card" content="summary_large_image" />
                     <meta name="twitter:title" content={title} />
+                    <meta name="twitter:description" content="Pulse Plaza, a decentralized NFT marketplace on PulseChain, which guarantees low fees and supports freedom with no middleman. Experience efficient, fair trading and creator-focused royalties." />
                     <meta name="twitter:image" content={`${domain}${defaultImage}`} />
 
-
                 </Head>
+
+
                 <OverHead />
                 <NavBar theme={theme} setTheme={setTheme} />
                 <Component {...pageProps} />
