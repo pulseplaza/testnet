@@ -1,9 +1,10 @@
 
 import "../styles/globals.css";
-import Head from 'next/head';
-import { useState, useEffect } from 'react';
+import Head from "next/head";
+import { useState, useEffect } from "react";
 
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 import { NavBar, Footer, OverHead } from "../components/componentsindex";
 import { NFTMarketplaceProvider } from "../Context/NFTMarketplaceContext";
@@ -98,6 +99,7 @@ const MyApp = ({ Component, pageProps }) => {
                 <Footer />
                 
                 <Analytics />
+                <SpeedInsights />
 
             </NFTMarketplaceProvider>
         </div>
