@@ -66,7 +66,7 @@ const tokenomics = () => {
 
 
             <Head>
-                <title>Pulse Plaza NFT Marketplace - Coin - Tokenomics</title>
+                <title>Tokenomics - Coin - Pulse Plaza NFT Marketplace</title>
             </Head>
 
 

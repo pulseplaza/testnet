@@ -19,7 +19,7 @@ const Trade = () => {
     <div className={Style.trade}>
 
       <Head>
-        <title>Pulse Plaza NFT Marketplace - Coin - Trade</title>
+        <title>Trade - Coin - Pulse Plaza NFT Marketplace</title>
       </Head>
 
 
