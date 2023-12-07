@@ -503,7 +503,6 @@ export const NFTMarketplaceProvider = ({ children }) => {
                 );
 
 
-
                 return items;
             }
 
