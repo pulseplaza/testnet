@@ -49,7 +49,7 @@ const fees = () => {
 
 
             <Head>
-                <title>Pulse Plaza NFT Marketplace - Fees</title>
+                <title>Fees - Pulse Plaza NFT Marketplace</title>
             </Head>
 
             <Title

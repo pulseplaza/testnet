@@ -92,7 +92,7 @@ const author = () => {
     <div className={Style.author}>
 
       <Head>
-        <title>Pulse Plaza NFT Marketplace - Profile</title>
+        <title>Profile - Pulse Plaza NFT Marketplace</title>
       </Head>
 
       {/* <Banner bannerImage={images.creatorbackground1} /> */}

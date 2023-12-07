@@ -69,7 +69,7 @@ const resellToken = () => {
         <div className={Style.resellToken}>
 
             <Head>
-                <title>Pulse Plaza NFT Marketplace - Resell NFT</title>
+                <title>Resell NFT - Pulse Plaza NFT Marketplace</title>
             </Head>
 
             {isLoading && (

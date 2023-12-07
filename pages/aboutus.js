@@ -16,7 +16,7 @@ const aboutus = () => {
         <div className={Style.aboutus}>
 
             <Head>
-                <title>Pulse Plaza NFT Marketplace - About Us</title>
+                <title>About Us - Pulse Plaza NFT Marketplace</title>
             </Head>
 
             <div className={Style.aboutus_box}>

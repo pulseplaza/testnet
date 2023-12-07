@@ -45,7 +45,7 @@ const NFTDetails = () => {
 
       <Head>
         {/* <title>Pulse Plaza NFT Marketplace - Collection Details</title> */}
-        <title>{nft.name ? `Pulse Plaza NFT Marketplace - Collection Details: ${nft.name} (${nft.symbol})` : "Pulse Plaza NFT Marketplace - Collection Details"}</title>
+        <title>{nft.name ? `Collection Details: ${nft.name} (${nft.symbol}) - Pulse Plaza NFT Marketplace` : "Collection Details - Pulse Plaza NFT Marketplace"}</title>
 
       </Head>
 

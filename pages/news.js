@@ -47,7 +47,7 @@ const News = () => {
         <div className={Style.news}>
 
             <Head>
-                <title>Pulse Plaza NFT Marketplace - News</title>
+                <title>News - Pulse Plaza NFT Marketplace</title>
             </Head>
 
 

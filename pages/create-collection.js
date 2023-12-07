@@ -20,7 +20,7 @@ const uploadNFT = () => {
         <div className={Style.uploadNFT}>
 
             <Head>
-                <title>Pulse Plaza NFT Marketplace - Create New Collection</title>
+                <title>Create New Collection - Pulse Plaza NFT Marketplace</title>
             </Head>
 
             <div className={Style.uploadNFT_box}>

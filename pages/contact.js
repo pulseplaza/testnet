@@ -37,7 +37,7 @@ const contactus = () => {
         <div className={Style.contactus}>
 
             <Head>
-                <title>Pulse Plaza NFT Marketplace - Contact Us</title>
+                <title>Contact Us - Pulse Plaza NFT Marketplace</title>
             </Head>
 
             <Title
