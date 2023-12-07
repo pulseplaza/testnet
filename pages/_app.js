@@ -90,7 +90,6 @@ const MyApp = ({ Component, pageProps }) => {
                     <meta name="twitter:description" content="The NFT marketplace, which guarantees low fees and supports freedom with no middleman. Experience efficient, fair trading and creator-focused royalties." />
                     <meta name="twitter:image" content={`${domain}${defaultImage}`} />
 
-                    <meta name="google-adsense-account" content="ca-pub-2390595287097056" />
                 </Head>
 
 
