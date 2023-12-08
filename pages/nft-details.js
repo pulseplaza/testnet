@@ -38,7 +38,8 @@ const NFTDetails = () => {
 
 
 
-  const { name, description, image, collectionSymbol } = nft;
+  // const { name, description, image, collectionSymbol } = nft;
+
 
   // Default fallbacks
   const defaultTitle = "NFT Details - Pulse Plaza NFT Marketplace";
@@ -48,8 +49,8 @@ const NFTDetails = () => {
 
 
   return (
-    <div>
 
+    <div>
       <Head>
 
         <title>
@@ -61,22 +62,22 @@ const NFTDetails = () => {
 
 
         {/* Open Graph Meta Tags */}
-        <meta property="og:title" content={name && collectionSymbol ?
-          `NFT Details: ${name} (${collectionSymbol}) - Pulse Plaza NFT Marketplace` :
+        <meta property="og:title" content={nft.name && nft.collectionSymbol ?
+          `NFT Details: ${nft.name} (${nft.collectionSymbol}) - Pulse Plaza NFT Marketplace` :
           defaultTitle} />
-        <meta property="og:description" content={description || defaultDescription} />
-        <meta property="og:image" content={image || defaultImage} />
+        <meta property="og:description" content={nft.description || defaultDescription} />
+        <meta property="og:image" content={nft.image || defaultImage} />
         <meta property="og:type" content="website" />
 
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={name && collectionSymbol ?
-          `NFT Details: ${name} (${collectionSymbol}) - Pulse Plaza NFT Marketplace` :
+        <meta name="twitter:title" content={nft.name && nft.collectionSymbol ?
+          `NFT Details: ${nft.name} (${nft.collectionSymbol}) - Pulse Plaza NFT Marketplace` :
           defaultTitle} />
-        <meta name="twitter:description" content={description || defaultDescription} />
-        <meta name="twitter:image" content={image || defaultImage} />
-
+        <meta name="twitter:description" content={nft.description || defaultDescription} />
+        <meta name="twitter:image" content={nft.image || defaultImage} />
       </Head>
+
 
 
       <NFTDetailsPage nft={nft} />
