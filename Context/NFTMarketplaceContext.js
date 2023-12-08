@@ -6,12 +6,9 @@ import { ethers } from "ethers";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { create as ipfsHttpClient } from "ipfs-http-client";
-import dynamic from 'next/dynamic';
+
 
 import { NFTMarketplaceAddress, NFTMarketplaceABI } from "./constants";
-
-// Import Web3 dynamically to ensure it only loads on the client-side
-const Web3 = dynamic(() => import('web3'), { ssr: false });
 
 
 
@@ -30,6 +27,9 @@ const projectSecretKey = process.env.NEXT_PUBLIC_IPFS_TEST_PROJECT_SECRET_KEY;
 const auth = `Basic ${Buffer.from(`${projectId}:${projectSecretKey}`).toString("base64")}`;
 
 const subdomain = "https://pulseplazatest.infura-ipfs.io";
+
+const rpcurl = "https://pulsechain-testnet.publicnode.com";
+
 
 const client = ipfsHttpClient({
     host: "infura-ipfs.io",
@@ -364,8 +364,9 @@ export const NFTMarketplaceProvider = ({ children }) => {
         try {
             // Using a public provider
             const provider = new ethers.providers.JsonRpcProvider(
-                "https://pulsechain-testnet.publicnode.com"
+                rpcurl
             );
+
             const contract = new ethers.Contract(
                 NFTMarketplaceAddress,
                 NFTMarketplaceABI,
@@ -389,7 +390,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
     const fetchNFTs = async () => {
         try {
             const provider = new ethers.providers.JsonRpcProvider(
-                "https://pulsechain-testnet.publicnode.com"
+                rpcurl
             );
 
             const contract = fetchContract(provider);
