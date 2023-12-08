@@ -5,7 +5,6 @@ import Head from 'next/head';
 
 
 
-
 //INTERNAL IMPORT
 import { Button, Category, Brand, Ads } from "../components/componentsindex";
 import NFTDetailsPage from "../NFTDetailsPage/NFTDetailsPage";
@@ -39,6 +38,14 @@ const NFTDetails = () => {
 
 
 
+  const { name, description, image, collectionSymbol } = nft;
+
+  // Default fallbacks
+  const defaultTitle = "NFT Details - Pulse Plaza NFT Marketplace";
+  const defaultDescription = "Explore unique NFTs at Pulse Plaza, the leading NFT marketplace.";
+  const defaultImage = "/PLSPLAZA_logo_wide.png";
+
+
 
   return (
     <div>
@@ -52,7 +59,25 @@ const NFTDetails = () => {
           }
         </title>
 
+
+        {/* Open Graph Meta Tags */}
+        <meta property="og:title" content={name && collectionSymbol ?
+          `NFT Details: ${name} (${collectionSymbol}) - Pulse Plaza NFT Marketplace` :
+          defaultTitle} />
+        <meta property="og:description" content={description || defaultDescription} />
+        <meta property="og:image" content={image || defaultImage} />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={name && collectionSymbol ?
+          `NFT Details: ${name} (${collectionSymbol}) - Pulse Plaza NFT Marketplace` :
+          defaultTitle} />
+        <meta name="twitter:description" content={description || defaultDescription} />
+        <meta name="twitter:image" content={image || defaultImage} />
+
       </Head>
+
 
       <NFTDetailsPage nft={nft} />
 

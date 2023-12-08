@@ -76,6 +76,7 @@ const MyApp = ({ Component, pageProps }) => {
 
                 <Head>
                     <title>{title}</title>
+                    
                     <meta name='viewport' content='width=device-width, initial-scale=1' />
 
                     <meta property="og:site_name" content="PULSE PLAZA" />
