@@ -71,8 +71,6 @@ const MyApp = ({ Component, pageProps }) => {
     const dynamicDescription = pageProps.description || defaultDescription;
     const dynamicImage = pageProps.image || `${domain}${defaultImage}`;
 
-
-
     
 
     return (
@@ -113,6 +111,7 @@ const MyApp = ({ Component, pageProps }) => {
 };
 
 export default MyApp;
+
 
 
 
