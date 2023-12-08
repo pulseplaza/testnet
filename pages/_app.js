@@ -43,7 +43,7 @@ const MyApp = ({ Component, pageProps }) => {
         // Add Google Analytics Script
         if (typeof window !== "undefined") {
             const script = document.createElement('script');
-            script.src = 'https://www.googletagmanager.com/gtag/js?id=G-9QQP5QRSW0';
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=G-Y9SSVS1LG4';
             script.async = true;
             document.head.appendChild(script);
 
@@ -51,7 +51,7 @@ const MyApp = ({ Component, pageProps }) => {
             window.dataLayer = window.dataLayer || [];
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
-            gtag('config', 'G-9QQP5QRSW0');
+            gtag('config', 'G-Y9SSVS1LG4');
         }
 
 
