@@ -15,11 +15,23 @@ const Trade = () => {
     window.location.reload();
   };
 
+
+  // Title and meta tags to be used in Head
+  const metaTitle = "Trade - Coin - Pulse Plaza NFT Marketplace";
+
+  const metaDescription = "Buy and sell Plaza Coin (PACO) directly on Pulse Plaza";
+
   return (
     <div className={Style.trade}>
 
       <Head>
-        <title>Trade - Coin - Pulse Plaza NFT Marketplace</title>
+        <title>{metaTitle}</title>
+
+        <meta property="og:title" content={metaTitle} />
+        <meta property="og:description" content={metaDescription} />
+
+        <meta name="twitter:title" content={metaTitle} />
+        <meta name="twitter:description" content={metaDescription} />
       </Head>
 
 

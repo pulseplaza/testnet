@@ -44,13 +44,25 @@ const fees = () => {
     ];
 
 
+    // Title and meta tags to be used in Head
+    const metaTitle = "Fees - Pulse Plaza NFT Marketplace";
+
+    const metaDescription = "Pulse Plaza pricing and fees structure";
+
     return (
         <div className={Style.Fees}>
 
 
             <Head>
-                <title>Fees - Pulse Plaza NFT Marketplace</title>
+                <title>{metaTitle}</title>
+
+                <meta property="og:title" content={metaTitle} />
+                <meta property="og:description" content={metaDescription} />
+
+                <meta name="twitter:title" content={metaTitle} />
+                <meta name="twitter:description" content={metaDescription} />
             </Head>
+
 
             <Title
                 heading="Fees"

@@ -72,16 +72,26 @@ const SearchPage = () => {
 
 
 
+  // Title and meta tags to be used in Head
+  const metaTitle = "Search Listed NFTs - Pulse Plaza NFT Marketplace";
+
+  const metaDescription = "You can search by NFT name, collection name/symbol or creator address";
+
 
   return (
     <div className={Style.searchPage}>
 
-      {/* <Banner bannerImage={images.creatorbackground2} /> */}
 
       <Head>
-        <title>Search Listed NFTs - Pulse Plaza NFT Marketplace</title>
+        <title>{metaTitle}</title>
+
+        <meta property="og:title" content={metaTitle} />
+        <meta property="og:description" content={metaDescription} />
+
+        <meta name="twitter:title" content={metaTitle} />
+        <meta name="twitter:description" content={metaDescription} />
       </Head>
-      
+
       <Title
         heading="Search Listed NFTs"
         paragraph="You can search by NFT name, collection name/symbol or creator address"

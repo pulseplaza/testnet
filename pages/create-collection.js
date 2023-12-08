@@ -16,11 +16,25 @@ import { NFTMarketplaceContext } from "../Context/NFTMarketplaceContext";
 const uploadNFT = () => {
     const { uploadToIPFS, createCollection } = useContext(NFTMarketplaceContext);
 
+
+
+    // Title and meta tags to be used in Head
+    const metaTitle = "Create New Collection - Pulse Plaza NFT Marketplace";
+
+    const metaDescription = "You can set the preferred collection name, collection symbol and description";
+
+
     return (
         <div className={Style.uploadNFT}>
 
             <Head>
-                <title>Create New Collection - Pulse Plaza NFT Marketplace</title>
+                <title>{metaTitle}</title>
+
+                <meta property="og:title" content={metaTitle} />
+                <meta property="og:description" content={metaDescription} />
+
+                <meta name="twitter:title" content={metaTitle} />
+                <meta name="twitter:description" content={metaDescription} />
             </Head>
 
             <div className={Style.uploadNFT_box}>

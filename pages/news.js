@@ -43,11 +43,23 @@ const News = () => {
     }, []);
 
 
+    // Title and meta tags to be used in Head
+    const metaTitle = "News - Pulse Plaza NFT Marketplace";
+
+    const metaDescription = "Don't miss out the latest and most important Pulse Plaza posts on X";
+
+
     return (
         <div className={Style.news}>
 
             <Head>
-                <title>News - Pulse Plaza NFT Marketplace</title>
+                <title>{metaTitle}</title>
+
+                <meta property="og:title" content={metaTitle} />
+                <meta property="og:description" content={metaDescription} />
+
+                <meta name="twitter:title" content={metaTitle} />
+                <meta name="twitter:description" content={metaDescription} />
             </Head>
 
 

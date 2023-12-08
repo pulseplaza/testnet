@@ -86,13 +86,23 @@ const author = () => {
   }, [currentAccount]);
 
 
+  // Title and meta tags to be used in Head
+  const metaTitle = "My Profile - Pulse Plaza NFT Marketplace";
+
+  const metaDescription = "My Listed NFTs, Owned NFTs and My Collections";
 
 
   return (
     <div className={Style.author}>
 
       <Head>
-        <title>Profile - Pulse Plaza NFT Marketplace</title>
+        <title>{metaTitle}</title>
+
+        <meta property="og:title" content={metaTitle} />
+        <meta property="og:description" content={metaDescription} />
+
+        <meta name="twitter:title" content={metaTitle} />
+        <meta name="twitter:description" content={metaDescription} />
       </Head>
 
       {/* <Banner bannerImage={images.creatorbackground1} /> */}

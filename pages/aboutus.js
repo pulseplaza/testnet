@@ -29,8 +29,8 @@ const aboutus = () => {
 
                 <meta name="twitter:title" content={metaTitle} />
                 <meta name="twitter:description" content={metaDescription} />
-
             </Head>
+
 
             <div className={Style.aboutus_box}>
                 <div className={Style.aboutus_box_hero}>

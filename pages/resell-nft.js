@@ -55,13 +55,12 @@ const resellToken = () => {
     };
 
 
-    //     try {
-    //         await createSale(tokenURI, price, true, id);
-    //         router.push("/profile");
-    //     } catch (error) {
-    //         console.log("Error while creating resale.", error);
-    //     }
-    // };
+
+
+    // Title and meta tags to be used in Head
+    const metaTitle = "Resell NFT - Pulse Plaza NFT Marketplace";
+
+    const metaDescription = "Please set your new price in order to relist the NFT to the marketplace";
 
 
     return (
@@ -69,7 +68,13 @@ const resellToken = () => {
         <div className={Style.resellToken}>
 
             <Head>
-                <title>Resell NFT - Pulse Plaza NFT Marketplace</title>
+                <title>{metaTitle}</title>
+
+                <meta property="og:title" content={metaTitle} />
+                <meta property="og:description" content={metaDescription} />
+
+                <meta name="twitter:title" content={metaTitle} />
+                <meta name="twitter:description" content={metaDescription} />
             </Head>
 
             {isLoading && (

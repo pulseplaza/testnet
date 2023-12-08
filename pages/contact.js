@@ -28,21 +28,29 @@ const contactus = () => {
 
 
 
+    // Title and meta tags to be used in Head
+    const metaTitle = "Contact Us - Pulse Plaza NFT Marketplace";
 
-
-
+    const metaDescription = "Any doubts or questions? Feel free to contact us and we will get back to you as soon as possible.";
 
 
     return (
         <div className={Style.contactus}>
 
             <Head>
-                <title>Contact Us - Pulse Plaza NFT Marketplace</title>
+                <title>{metaTitle}</title>
+
+                <meta property="og:title" content={metaTitle} />
+                <meta property="og:description" content={metaDescription} />
+
+                <meta name="twitter:title" content={metaTitle} />
+                <meta name="twitter:description" content={metaDescription} />
             </Head>
+
 
             <Title
                 heading="Contact Us"
-                paragraph="Ay doubts or questions? Feel free to contact us and we will get back to you as soon as possible."
+                paragraph="Any doubts or questions? Feel free to contact us and we will get back to you as soon as possible."
             />
 
 
