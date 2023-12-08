@@ -32,6 +32,7 @@ const NFTDetails = () => {
     description: "",
   });
 
+
   const router = useRouter();
   useEffect(() => {
     if (!router.isReady) return;
@@ -40,23 +41,24 @@ const NFTDetails = () => {
 
 
 
-  const defaultDescription = "The NFT marketplace, which guarantees low fees and supports freedom with no middleman. Experience efficient, fair trading and creator-focused royalties."; // Default description
-  const defaultImage = "/PLSPLAZA_logo_wide.png"; // Default image
+  const defaultDescription = "The NFT marketplace, which guarantees low fees and supports freedom with no middleman. Experience efficient, fair trading and creator-focused royalties.";
+  const defaultImage = "/PLSPLAZA_logo_wide.png";
 
-  
+  // Title and meta tags to be used in Head
   const metaTitle = nft.name && nft.collectionSymbol ?
-                      `NFT Details: ${nft.name} (${nft.collectionSymbol}) - Pulse Plaza NFT Marketplace` :
-                      "NFT Details - Pulse Plaza NFT Marketplace";
+    `NFT Details: ${nft.name} (${nft.collectionSymbol}) - Pulse Plaza NFT Marketplace` :
+    "NFT Details - Pulse Plaza NFT Marketplace";
 
   const metaDescription = nft.description || defaultDescription;
+
 
 
   return (
     <div>
 
-<Head>
+      <Head>
         <title>{metaTitle}</title>
-
+        
         <meta property="og:title" content={metaTitle} />
         <meta property="og:description" content={metaDescription} />
         <meta property="og:image" content={defaultImage} />
