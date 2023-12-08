@@ -23,6 +23,7 @@ const NFTDetails = () => {
   const router = useRouter();
 
 
+
   const [nft, setNft] = useState({
     image: "",
     tokenId: "",
@@ -30,11 +31,19 @@ const NFTDetails = () => {
     owner: "",
     price: "",
     seller: "",
-    collectionSymbol: "",
-    description: "",
+    collection: {}
   });
 
 
+
+  useEffect(() => {
+    if (!router.isReady) return;
+    setNft(router.query);
+  }, [router.isReady]);
+
+
+
+  // const { name, description, image, collectionSymbol } = nft;
 
 
   // Default fallbacks
@@ -44,54 +53,37 @@ const NFTDetails = () => {
 
 
 
-  useEffect(() => {
-    if (!router.isReady) return;
-    // Update the NFT state with router query
-    setNft({
-      ...router.query,
-      name: decodeURIComponent(router.query.name || ''),
-      description: decodeURIComponent(router.query.description || ''),
-      image: decodeURIComponent(router.query.image || ''),
-      collectionSymbol: decodeURIComponent(router.query.collectionSymbol || '')
-    });
-  }, [router.isReady, router.query]);
-
-
-
-  useEffect(() => {
-    // Function to update document's meta tags
-    const updateMetaTags = () => {
-      document.title = nft.name && nft.collectionSymbol ?
-        `NFT Details: ${nft.name} (${nft.collectionSymbol}) - Pulse Plaza NFT Marketplace` :
-        defaultTitle;
-
-      const updateMetaTag = (name, content) => {
-        let meta = document.querySelector(`meta[name="${name}"]`) || document.querySelector(`meta[property="${name}"]`);
-        if (meta) {
-          meta.setAttribute('content', content);
-        }
-      };
-
-      updateMetaTag('og:title', document.title);
-      updateMetaTag('twitter:title', document.title);
-      updateMetaTag('og:description', nft.description || defaultDescription);
-      updateMetaTag('twitter:description', nft.description || defaultDescription);
-      updateMetaTag('og:image', nft.image || defaultImage);
-      updateMetaTag('twitter:image', nft.image || defaultImage);
-    };
-
-    updateMetaTags();
-  }, [nft]);
-
-
-
   return (
-
+    
     <div>
+
       <Head>
+
+        <title>
+          {nft.name && nft.collectionSymbol ?
+            `NFT Details: ${nft.name} (${nft.collectionSymbol}) - Pulse Plaza NFT Marketplace` :
+            "NFT Details - Pulse Plaza NFT Marketplace"
+          }
+        </title>
+
         <meta name='viewport' content='width=device-width, initial-scale=1' />
+
+        {/* Open Graph Meta Tags */}
         <meta property="og:type" content="website" />
+        <meta property="og:title" content={nft.name && nft.collectionSymbol ? 
+          `NFT Details: ${nft.name} (${nft.collectionSymbol}) - Pulse Plaza NFT Marketplace` : 
+          "NFT Details - Pulse Plaza NFT Marketplace"} />
+        <meta property="og:description" content={nft.description || defaultDescription} />
+        <meta property="og:image" content={nft.image || defaultImage} />
+
+
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={nft.name && nft.collectionSymbol ? 
+          `NFT Details: ${nft.name} (${nft.collectionSymbol}) - Pulse Plaza NFT Marketplace` : 
+          "NFT Details - Pulse Plaza NFT Marketplace"} />
+        <meta name="twitter:description" content={nft.description || defaultDescription} />
+        <meta name="twitter:image" content={nft.image || defaultImage} />
+
 
       </Head>
 
@@ -110,4 +102,5 @@ const NFTDetails = () => {
 
 
 export default NFTDetails;
+
 
