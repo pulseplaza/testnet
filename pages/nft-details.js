@@ -34,6 +34,8 @@ const NFTDetails = () => {
 
 
   const router = useRouter();
+
+  
   useEffect(() => {
     if (!router.isReady) return;
     setNft(router.query);
@@ -41,7 +43,7 @@ const NFTDetails = () => {
 
 
 
-  const defaultDescription = "NFT details description";
+  const defaultDescription = "NFT collection minted on Pulse Plaza";
   const defaultImage = "/PLSPLAZA_logo_wide.png";
 
   // Title and meta tags to be used in Head
@@ -52,10 +54,8 @@ const NFTDetails = () => {
   const metaDescription = nft.description || defaultDescription;
 
 
-
   return (
     <div>
-
       <Head>
         <title>{metaTitle}</title>
 
@@ -79,8 +79,6 @@ const NFTDetails = () => {
     </div>
   );
 };
-
-
 
 
 

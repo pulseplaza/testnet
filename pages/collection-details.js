@@ -40,20 +40,38 @@ const NFTDetails = () => {
   }, [router.isReady]);
 
 
+  const defaultDescription = "NFT minted on Pulse Plaza";
+  const defaultImage = "/PLSPLAZA_logo_wide.png";
+
+  // Title and meta tags to be used in Head
+  const metaTitle = nft.name && nft.symbol ?
+    `Collection Details: ${nft.name} (${nft.symbol}) - Pulse Plaza NFT Marketplace` :
+    "Colelction Details - Pulse Plaza NFT Marketplace";
+
+  const metaDescription = nft.description || defaultDescription;
+
+
   return (
     <div>
-
       <Head>
-        {/* <title>Pulse Plaza NFT Marketplace - Collection Details</title> */}
-        <title>{nft.name ? `Collection Details: ${nft.name} (${nft.symbol}) - Pulse Plaza NFT Marketplace` : "Collection Details - Pulse Plaza NFT Marketplace"}</title>
+        <title>{metaTitle}</title>
 
+        <meta property="og:title" content={metaTitle} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:image" content={defaultImage} />
+        <meta property="og:type" content="website" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={metaTitle} />
+        <meta name="twitter:description" content={metaDescription} />
+        <meta name="twitter:image" content={defaultImage} />
       </Head>
 
 
       <CollectionDetailsPage nft={nft} />
 
       {/* <Ads /> */}
-      
+
       <Brand />
     </div>
   );

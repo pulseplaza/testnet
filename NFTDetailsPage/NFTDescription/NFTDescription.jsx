@@ -152,39 +152,6 @@ const NFTDescription = ({ nft }) => {
         <div className={Style.NFTDescription_box_share}>
           <p>NFT Details</p>
 
-
-
-
-          {/* <div className={Style.NFTDescription_box_share_box}>
-            <FaShareAlt
-              className={Style.NFTDescription_box_share_box_icon}
-              onClick={() => openSocial()}
-            />
-
-
-            {social && (
-              <div className={Style.NFTDescription_box_share_box_social}>
-                <a href="#">
-                  <TiSocialFacebook /> Facebook
-                </a>
-                <a href="#">
-                  <TiSocialInstagram /> Instagram
-                </a>
-                <a href="#">
-                  <TiSocialLinkedin /> LinkedIn
-                </a>
-                <a href="#">
-                  <TiSocialTwitter /> Twitter
-                </a>
-                <a href="#">
-                  <TiSocialYoutube /> YouTube
-                </a>
-              </div>
-            )}
-          </div> */}
-
-
-
         </div>
 
 
