@@ -40,37 +40,32 @@ const NFTDetails = () => {
 
 
 
-  const defaultImage = "/PLSPLAZA_logo_wide.png";
+  const defaultDescription = "The NFT marketplace, which guarantees low fees and supports freedom with no middleman. Experience efficient, fair trading and creator-focused royalties."; // Default description
+  const defaultImage = "/PLSPLAZA_logo_wide.png"; // Default image
+
+  
+  const metaTitle = nft.name && nft.collectionSymbol ?
+                      `NFT Details: ${nft.name} (${nft.collectionSymbol}) - Pulse Plaza NFT Marketplace` :
+                      "NFT Details - Pulse Plaza NFT Marketplace";
+
+  const metaDescription = nft.description || defaultDescription;
 
 
   return (
     <div>
 
-      <Head>
+<Head>
+        <title>{metaTitle}</title>
 
-        <title>
-          {nft.name && nft.collectionSymbol ?
-            `NFT Details: ${nft.name} (${nft.collectionSymbol}) - Pulse Plaza NFT Marketplace` :
-            "NFT Details - Pulse Plaza NFT Marketplace"
-          }
-        </title>
-
-        <meta property="og:title" content={nft.name && nft.collectionSymbol ? 
-          `NFT Details: ${nft.name} (${nft.collectionSymbol}) - Pulse Plaza NFT Marketplace` : 
-          "NFT Details - Pulse Plaza NFT Marketplace"} />
-        <meta property="og:description" content={nft.description || "Explore this unique NFT at Pulse Plaza"} />
-        <meta property="og:image" content={nft.image || defaultImage} />
+        <meta property="og:title" content={metaTitle} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:image" content={defaultImage} />
         <meta property="og:type" content="website" />
 
-
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={nft.name && nft.collectionSymbol ? 
-          `NFT Details: ${nft.name} (${nft.collectionSymbol}) - Pulse Plaza NFT Marketplace` : 
-          "NFT Details - Pulse Plaza NFT Marketplace"} />
-        <meta name="twitter:description" content={nft.description || "Explore this unique NFT at Pulse Plaza"} />
-        <meta name="twitter:image" content={nft.image || defaultImage} />
-
-
+        <meta name="twitter:title" content={metaTitle} />
+        <meta name="twitter:description" content={metaDescription} />
+        <meta name="twitter:image" content={defaultImage} />
       </Head>
 
       <NFTDetailsPage nft={nft} />
@@ -82,6 +77,9 @@ const NFTDetails = () => {
     </div>
   );
 };
+
+
+
 
 
 
