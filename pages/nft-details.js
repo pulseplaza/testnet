@@ -5,6 +5,7 @@ import Head from 'next/head';
 
 
 
+
 //INTERNAL IMPORT
 import { Button, Category, Brand, Ads } from "../components/componentsindex";
 import NFTDetailsPage from "../NFTDetailsPage/NFTDetailsPage";
@@ -20,10 +21,6 @@ const NFTDetails = () => {
 
   const { currentAccount } = useContext(NFTMarketplaceContext);
 
-  const router = useRouter();
-
-
-
   const [nft, setNft] = useState({
     image: "",
     tokenId: "",
@@ -31,11 +28,11 @@ const NFTDetails = () => {
     owner: "",
     price: "",
     seller: "",
-    collection: {}
+    collectionSymbol: "", // Ensure this field is included
+    description: "" // Ensure this field is included
   });
 
-
-
+  const router = useRouter();
   useEffect(() => {
     if (!router.isReady) return;
     setNft(router.query);
@@ -43,18 +40,10 @@ const NFTDetails = () => {
 
 
 
-  // const { name, description, image, collectionSymbol } = nft;
-
-
-  // Default fallbacks
-  const defaultTitle = "NFT Details - Pulse Plaza NFT Marketplace";
-  const defaultDescription = "Explore unique NFTs at Pulse Plaza, the leading NFT marketplace.";
   const defaultImage = "/PLSPLAZA_logo_wide.png";
 
 
-
   return (
-    
     <div>
 
       <Head>
@@ -66,28 +55,23 @@ const NFTDetails = () => {
           }
         </title>
 
-        <meta name='viewport' content='width=device-width, initial-scale=1' />
-
-        {/* Open Graph Meta Tags */}
-        <meta property="og:type" content="website" />
         <meta property="og:title" content={nft.name && nft.collectionSymbol ? 
           `NFT Details: ${nft.name} (${nft.collectionSymbol}) - Pulse Plaza NFT Marketplace` : 
           "NFT Details - Pulse Plaza NFT Marketplace"} />
-        <meta property="og:description" content={nft.description || defaultDescription} />
+        <meta property="og:description" content={nft.description || "Explore this unique NFT at Pulse Plaza"} />
         <meta property="og:image" content={nft.image || defaultImage} />
+        <meta property="og:type" content="website" />
 
-
+        
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={nft.name && nft.collectionSymbol ? 
           `NFT Details: ${nft.name} (${nft.collectionSymbol}) - Pulse Plaza NFT Marketplace` : 
           "NFT Details - Pulse Plaza NFT Marketplace"} />
-        <meta name="twitter:description" content={nft.description || defaultDescription} />
+        <meta name="twitter:description" content={nft.description || "Explore this unique NFT at Pulse Plaza"} />
         <meta name="twitter:image" content={nft.image || defaultImage} />
 
 
       </Head>
-
-
 
       <NFTDetailsPage nft={nft} />
 
@@ -102,5 +86,4 @@ const NFTDetails = () => {
 
 
 export default NFTDetails;
-
 

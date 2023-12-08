@@ -62,10 +62,17 @@ const MyApp = ({ Component, pageProps }) => {
 
 
     const defaultTitle = "Pulse Plaza NFT Marketplace";
-    const title = pageProps.title || defaultTitle;
+    const defaultDescription = "The NFT marketplace, which guarantees low fees and supports freedom with no middleman. Experience efficient, fair trading and creator-focused royalties.";
+    // const title = pageProps.title || defaultTitle;
 
     const defaultImage = "/PLSPLAZA_logo_wide.png"
     const domain = process.env.NEXT_PUBLIC_DOMAIN;
+
+
+    const dynamicTitle = pageProps.title || defaultTitle;
+    const dynamicDescription = pageProps.description || defaultDescription;
+    const dynamicImage = pageProps.image || `${domain}${defaultImage}`;
+
 
 
     
@@ -75,21 +82,21 @@ const MyApp = ({ Component, pageProps }) => {
             <NFTMarketplaceProvider>
 
                 <Head>
-                    <title>{title}</title>
-                    
+                    <title>{dynamicTitle}</title>
+
                     <meta name='viewport' content='width=device-width, initial-scale=1' />
 
                     <meta property="og:site_name" content="PULSE PLAZA" />
-                    <meta property="og:title" content={title} />
-                    <meta property="og:description" content="The NFT marketplace, which guarantees low fees and supports freedom with no middleman. Experience efficient, fair trading and creator-focused royalties." />
-                    <meta property="og:image" content={`${domain}${defaultImage}`} />
+                    <meta property="og:title" content={dynamicTitle} />
+                    <meta property="og:description" content={dynamicDescription} />
+                    <meta property="og:image" content={dynamicImage} />
                     <meta property="og:type" content="website" />
 
                     {/* Twitter Card */}
                     <meta name="twitter:card" content="summary_large_image" />
-                    <meta name="twitter:title" content={title} />
-                    <meta name="twitter:description" content="The NFT marketplace, which guarantees low fees and supports freedom with no middleman. Experience efficient, fair trading and creator-focused royalties." />
-                    <meta name="twitter:image" content={`${domain}${defaultImage}`} />
+                    <meta name="twitter:title" content={dynamicTitle} />
+                    <meta name="twitter:description" content={dynamicDescription} />
+                    <meta name="twitter:image" content={dynamicImage} />
 
                 </Head>
 
