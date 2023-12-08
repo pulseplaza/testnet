@@ -10,13 +10,26 @@ import images from "../img";
 
 
 const aboutus = () => {
-    
+
+
+    // Title and meta tags to be used in Head
+    const metaTitle = "About Us - Pulse Plaza NFT Marketplace";
+
+    const metaDescription = "At Pulse Plaza, we're not just an NFT marketplace but a revolution in digital art and creativity. Built on the innovative PulseChain blockchain, we offer a seamless and efficient experience for artists and collectors alike.";
+
 
     return (
         <div className={Style.aboutus}>
 
             <Head>
-                <title>About Us - Pulse Plaza NFT Marketplace</title>
+                <title>{metaTitle}</title>
+
+                <meta property="og:title" content={metaTitle} />
+                <meta property="og:description" content={metaDescription} />
+
+                <meta name="twitter:title" content={metaTitle} />
+                <meta name="twitter:description" content={metaDescription} />
+
             </Head>
 
             <div className={Style.aboutus_box}>

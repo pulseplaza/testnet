@@ -42,9 +42,11 @@ const NFTDetails = () => {
   }, [router.isReady]);
 
 
+  
+
+  const defaultImage = "/PLSPLAZA_logo_wide.png";
 
   const defaultDescription = "NFT collection minted on Pulse Plaza";
-  const defaultImage = "/PLSPLAZA_logo_wide.png";
 
   // Title and meta tags to be used in Head
   const metaTitle = nft.name && nft.collectionSymbol ?
