@@ -28,8 +28,8 @@ const NFTDetails = () => {
     owner: "",
     price: "",
     seller: "",
-    collectionSymbol: "", // Ensure this field is included
-    description: "" // Ensure this field is included
+    collectionSymbol: "",
+    description: "",
   });
 
   const router = useRouter();
@@ -62,7 +62,7 @@ const NFTDetails = () => {
         <meta property="og:image" content={nft.image || defaultImage} />
         <meta property="og:type" content="website" />
 
-        
+
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={nft.name && nft.collectionSymbol ? 
           `NFT Details: ${nft.name} (${nft.collectionSymbol}) - Pulse Plaza NFT Marketplace` : 
