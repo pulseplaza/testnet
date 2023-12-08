@@ -41,7 +41,7 @@ const NFTDetails = () => {
 
 
 
-  const defaultDescription = "The NFT marketplace, which guarantees low fees and supports freedom with no middleman. Experience efficient, fair trading and creator-focused royalties.";
+  const defaultDescription = "NFT details description";
   const defaultImage = "/PLSPLAZA_logo_wide.png";
 
   // Title and meta tags to be used in Head
@@ -58,7 +58,7 @@ const NFTDetails = () => {
 
       <Head>
         <title>{metaTitle}</title>
-        
+
         <meta property="og:title" content={metaTitle} />
         <meta property="og:description" content={metaDescription} />
         <meta property="og:image" content={defaultImage} />
