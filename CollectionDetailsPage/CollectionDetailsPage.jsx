@@ -10,17 +10,18 @@ import {
   CollectionTokens,
 } from "./CollectionDetailsIndex";
 
-const CollectionDetailsPage = ({ nft }) => {
+const CollectionDetailsPage = ({ collection }) => {
   // nft = {name, symbol, description, collectionAddress, creatorAddress}
   return (
     <div className={Style.CollectionDetailsPage}>
       <div className={Style.CollectionDetailsPage_box}>
-        <CollectionDetailsImg nft={nft} />
-        <CollectionDescription nft={nft} />
+        <CollectionDetailsImg nft={collection} />
+        <CollectionDescription nft={collection} />
       </div>
-      <CollectionTokens collection={nft}/>
+      <CollectionTokens collection={collection}/>
     </div>
   );
 };
 
 export default CollectionDetailsPage;
+

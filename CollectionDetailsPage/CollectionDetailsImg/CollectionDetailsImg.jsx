@@ -76,6 +76,7 @@ const CollectionDetailsImg = ({ nft }) => {
   };
 
 
+  
 
 
   return (

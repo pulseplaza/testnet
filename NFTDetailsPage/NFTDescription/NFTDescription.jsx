@@ -4,32 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-// import {
-//   MdVerified,
-//   MdCloudUpload,
-//   MdTimer,
-//   MdReportProblem,
-//   MdOutlineDeleteSweep,
-// } from "react-icons/md";
 
-// import { BsThreeDots, BsDiscord, BsTwitter } from "react-icons/bs";
 
 import { FaWallet, FaShareAlt, FaPercentage } from "react-icons/fa";
 
-import {
-  TiSocialTwitter,
-  TiSocialFacebook,
-  TiSocialInstagram,
-  TiArrowSortedDown,
-  TiArrowSortedUp,
-  TiSocialLinkedin,
-  TiSocialYoutube,
-} from "react-icons/ti";
 
 import { HiOutlineUserCircle } from "react-icons/hi2";
 
-import { RiMastodonFill, RiFacebookBoxFill } from "react-icons/ri";
-import { BiTransferAlt, BiDollar } from "react-icons/bi";
 
 //INTERNAL IMPORT
 import Style from "./NFTDescription.module.css";
@@ -70,7 +51,7 @@ const NFTDescription = ({ nft }) => {
 
 
   const formatCollectionName = (name) => {
-    if (!name) return "No Name"; // Or any default/fallback string you prefer
+    if (!name) return "No Name";
 
     if (screenWidth > 1400) {
       return name.length > 50 ? `${name.slice(0, 50)}...` : name;
@@ -81,7 +62,7 @@ const NFTDescription = ({ nft }) => {
     } else if (screenWidth >= 500 && screenWidth < 800) {
       return name.length > 50 ? `${name.slice(0, 50)}...` : name;
     } else {
-      return name.length > 25 ? `${name.slice(0, 25)}...` : name; // For screens under 500px
+      return name.length > 25 ? `${name.slice(0, 25)}...` : name; 
     }
   };
 
@@ -116,11 +97,6 @@ const NFTDescription = ({ nft }) => {
 
 
 
-  // const openSocial = () => {
-  //   setSocial(!social);
-  // };
-
-
 
   // Prepare the collection query object for the Link component
   const collectionQuery = {
@@ -131,7 +107,6 @@ const NFTDescription = ({ nft }) => {
     description: nft.collectionDescription,
     image: nft.collectionImage
   };
-
 
 
 
@@ -171,6 +146,7 @@ const NFTDescription = ({ nft }) => {
 
               </div>
             </div>
+
 
 
             <div className={Style.NFTDescription_box_profile_box_right}>

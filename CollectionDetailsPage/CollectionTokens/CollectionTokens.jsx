@@ -89,10 +89,15 @@ const CollectionTokens = ({ collection }) => {
 
 
 
-  const formatAddress = (inputString) =>
-    inputString.length > 9
-      ? inputString.slice(0, 6) + "..." + inputString.slice(-6)
-      : inputString;
+  const formatAddress = (inputString) => {
+    // Convert the input string to lowercase
+    const lowerCaseInputString = inputString.toLowerCase();
+  
+    return lowerCaseInputString.length > 9
+      ? `${lowerCaseInputString.slice(0, 6)}...${lowerCaseInputString.slice(-6)}`
+      : lowerCaseInputString;
+  };
+  
 
 
 

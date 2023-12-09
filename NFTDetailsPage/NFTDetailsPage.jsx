@@ -10,7 +10,6 @@ import { NFTDescription, NFTDetailsImg, NFTTabs } from "./NFTDetailsIndex";
 const NFTDetailsPage = ({ nft }) => {
 
 
-
   return (
     <div className={Style.NFTDetailsPage}>
       <div className={Style.NFTDetailsPage_box}>

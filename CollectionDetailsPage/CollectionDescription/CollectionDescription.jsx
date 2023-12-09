@@ -1,37 +1,12 @@
 
 import React, { useState, useEffect, useContext, useRef } from "react";
 
-// import Image from "next/image";
-// import Link from "next/link";
-
 import { useRouter } from "next/router";
-
-// import {
-//   MdVerified,
-//   MdCloudUpload,
-//   MdTimer,
-//   MdReportProblem,
-//   MdOutlineDeleteSweep,
-// } from "react-icons/md";
-
-// import { BsThreeDots, BsDiscord, BsTwitter } from "react-icons/bs";
 
 import { FaShareAlt } from "react-icons/fa";
 
-// import {
-//   TiSocialTwitter,
-//   TiSocialFacebook,
-//   TiSocialInstagram,
-//   TiArrowSortedDown,
-//   TiArrowSortedUp,
-//   TiSocialLinkedin,
-//   TiSocialYoutube,
-// } from "react-icons/ti";
-
 import { FiCopy } from "react-icons/fi";
 
-// import { RiMastodonFill, RiFacebookBoxFill } from "react-icons/ri";
-// import { BiTransferAlt, BiDollar } from "react-icons/bi";
 
 
 
@@ -97,11 +72,16 @@ const CollectionDescription = ({ nft }) => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+
   const formatAddress = (address) => {
-    return ((screenWidth < 450 || (screenWidth >= 750 && screenWidth <= 1100))
-      ? `${address.slice(0, 10)}...${address.slice(-10)}`
-      : address);
-  };
+  // Convert the address to lowercase
+  const lowerCaseAddress = address.toLowerCase();
+
+  return ((screenWidth < 450 || (screenWidth >= 750 && screenWidth <= 1100))
+    ? `${lowerCaseAddress.slice(0, 10)}...${lowerCaseAddress.slice(-10)}`
+    : lowerCaseAddress);
+};
+
 
 
 
