@@ -36,7 +36,8 @@
     }
 
     .filter select {
-        width: 90%;
+        width: 100%;
+        box-shadow: var(--box-shadow-2);
     }
 }
 
