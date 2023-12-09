@@ -82,7 +82,7 @@ const MyApp = ({ Component, pageProps }) => {
 
                     <meta name='viewport' content='width=device-width, initial-scale=1' />
 
-                    <meta property="og:site_name" content="PULSE PLAZA" />
+                    <meta property="og:site_name" content="Pulse Plaza NFT Marketplace" />
                     <meta property="og:title" content={dynamicTitle} />
                     <meta property="og:description" content={dynamicDescription} />
                     <meta property="og:image" content={dynamicImage} />

@@ -94,12 +94,13 @@ import { Button, Category, Brand, Ads } from "../components/componentsindex";
 
 const CollectionDetails = ({ collection }) => {
   const metaTitle = collection.name && collection.symbol ?
-    `Collection Details: ${collection.name} (${collection.symbol}) - Pulse Plaza NFT Marketplace` :
-    "Collection Details - Pulse Plaza NFT Marketplace";
+    `Collection Details: ${collection.name} (${collection.symbol}) - Pulse Plaza` :
+    "Collection Details - Pulse Plaza";
 
   const metaDescription = collection.description || "Collection minted on Pulse Plaza";
   const defaultImage = "/PLSPLAZA_logo_wide.png";
   const imageUrl = collection.image || defaultImage;
+
 
 
   return (

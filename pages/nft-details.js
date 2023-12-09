@@ -103,8 +103,8 @@ import { Button, Category, Brand, Ads } from "../components/componentsindex";
 const NFTDetails = ({ nft }) => {
   // Title and meta tags to be used in Head
   const metaTitle = nft.name && nft.collectionSymbol ?
-    `NFT Details: ${nft.name} (${nft.collectionSymbol}) - Pulse Plaza NFT Marketplace` :
-    "NFT Details - Pulse Plaza NFT Marketplace";
+    `NFT Details: ${nft.name} (${nft.collectionSymbol}) - Pulse Plaza` :
+    "NFT Details - Pulse Plaza";
 
   const metaDescription = nft.description || "NFT collection minted on Pulse Plaza";
 
