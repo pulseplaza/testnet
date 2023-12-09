@@ -55,19 +55,19 @@
 
 //   return (
 //     <div>
-//       <Head>
-//         <title>{metaTitle}</title>
+      // <Head>
+      //   <title>{metaTitle}</title>
 
-//         <meta property="og:title" content={metaTitle} />
-//         <meta property="og:description" content={metaDescription} />
-//         <meta property="og:image" content={defaultImage} />
-//         <meta property="og:type" content="website" />
+      //   <meta property="og:title" content={metaTitle} />
+      //   <meta property="og:description" content={metaDescription} />
+      //   <meta property="og:image" content={defaultImage} />
+      //   <meta property="og:type" content="website" />
 
-//         <meta name="twitter:card" content="summary_large_image" />
-//         <meta name="twitter:title" content={metaTitle} />
-//         <meta name="twitter:description" content={metaDescription} />
-//         <meta name="twitter:image" content={defaultImage} />
-//       </Head>
+      //   <meta name="twitter:card" content="summary_large_image" />
+      //   <meta name="twitter:title" content={metaTitle} />
+      //   <meta name="twitter:description" content={metaDescription} />
+      //   <meta name="twitter:image" content={defaultImage} />
+      // </Head>
 
 
 //       <CollectionDetailsPage nft={nft} />
@@ -99,11 +99,23 @@ const CollectionDetails = ({ collection }) => {
 
   const metaDescription = collection.description || "Collection minted on Pulse Plaza";
   const defaultImage = "/PLSPLAZA_logo_wide.png";
+  const imageUrl = collection.image || defaultImage;
+
 
   return (
     <div>
       <Head>
-        {/* ... Head content ... */}
+        <title>{metaTitle}</title>
+
+        <meta property="og:title" content={metaTitle} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:image" content={defaultImage} />
+        <meta property="og:type" content="website" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={metaTitle} />
+        <meta name="twitter:description" content={metaDescription} />
+        <meta name="twitter:image" content={imageUrl} />
       </Head>
 
       <CollectionDetailsPage collection={collection} />

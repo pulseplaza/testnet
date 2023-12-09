@@ -107,7 +107,9 @@ const NFTDetails = ({ nft }) => {
     "NFT Details - Pulse Plaza NFT Marketplace";
 
   const metaDescription = nft.description || "NFT collection minted on Pulse Plaza";
-  const defaultImage = "/PLSPLAZA_logo_wide.png"; // Assuming you have a default image
+
+  const defaultImage = "/PLSPLAZA_logo_wide.png";
+  const imageUrl = nft.image || defaultImage;
 
   return (
     <div>
@@ -120,7 +122,7 @@ const NFTDetails = ({ nft }) => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={metaTitle} />
         <meta name="twitter:description" content={metaDescription} />
-        <meta name="twitter:image" content={defaultImage} />
+        <meta name="twitter:image" content={imageUrl} />
       </Head>
 
       <NFTDetailsPage nft={nft} />
