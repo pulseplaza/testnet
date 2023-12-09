@@ -1,0 +1,35 @@
+.searchWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.searchBarContainer {
+    flex: 5;
+    margin-top: -3rem;
+}
+
+.filterContainer {
+    flex: 2;
+    margin-top: -3rem;
+}
+
+@media screen and (max-width: 1024px) {
+    .searchWrapper {
+        flex-direction: column;
+    }
+
+    .searchBarContainer {
+        margin-right: 0;
+        width: 100%;
+    }
+
+
+    .filterContainer {
+        margin-top: -4rem;
+        margin-bottom: 0;
+    }
+}

@@ -1,3 +1,5 @@
+
+
 .NFTCardTwo {
     width: 80%;
     margin: 0 auto;
@@ -29,7 +31,6 @@
     width: 200px;
 
     height: auto;
-
 }
 
 :global(body.dark-mode) .NFTCardTwo_box {
@@ -164,12 +165,22 @@
     .NFTCardTwo {
         width: 90%;
         grid-template-columns: 1fr;
+        margin: 0 auto;
+        display: grid;
+        gap: 3rem;
     }
 
     .NFTCardTwo_box {
-        width: 350px;
+        width: auto;
+        display: grid;
+        cursor: pointer;
+        transition: all .3s ease-in;
+        border-radius: 1rem;
+        background-color: var(--bg-very-light);
+        height: auto;
     }
 }
+
 
 
 @media screen and (min-width: 561px) and (max-width: 770px) {

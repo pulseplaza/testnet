@@ -26,9 +26,9 @@ const searchPage = () => {
     getAllCollections()
       .then((items) => {
         console.log('My Collections:', items);
-        const reversedItems = [...items].reverse(); // Reverse the order of collections
+        const reversedItems = [...items].reverse();
         setCollections(reversedItems || []);
-        setOriginalCollections(reversedItems || []); // Store a copy of the original dataset in reversed order
+        setOriginalCollections(reversedItems || []);
       })
       .catch(error => {
         console.error("Error fetching collections:", error);
@@ -40,9 +40,10 @@ const searchPage = () => {
 
   const onHandleSearch = (value) => {
     const searchTerm = value.toLowerCase();
-    const filteredCollections = originalCollections.filter(({ name, symbol, creatorAddress }) =>
+    const filteredCollections = originalCollections.filter(({ name, description, symbol, creatorAddress }) =>
       name.toLowerCase().includes(searchTerm) ||
       symbol.toLowerCase().includes(searchTerm) ||
+      description.toLowerCase().includes(searchTerm) ||
       creatorAddress.toLowerCase().includes(searchTerm)
     );
     setCollections(filteredCollections);
@@ -56,7 +57,7 @@ const searchPage = () => {
   // Title and meta tags to be used in Head
   const metaTitle = "Search Collections - Pulse Plaza NFT Marketplace";
 
-  const metaDescription = "You can search by collection name/symbol or creator address";
+  const metaDescription = "You can search by collection name/symbol, description or creator address";
 
 
   return (
@@ -75,8 +76,9 @@ const searchPage = () => {
 
       <Title
         heading="Search Collections"
-        paragraph="You can search by collection name/symbol or creator address"
+        paragraph="You can search by collection name/symbol, description or creator address"
       />
+
 
       <SearchBar
         onHandleSearch={onHandleSearch}

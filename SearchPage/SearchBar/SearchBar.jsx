@@ -10,7 +10,7 @@ import Style from "./SearchBar.module.css";
 
 
 
-const SearchBar = ({ onHandleSearch, onClearSearch, placeholder = "Search" }) => {
+const SearchBar = ({ onHandleSearch, onClearSearch, placeholder = "Search", className, style }) => {
 
 
   const [search, setSearch] = useState("");
@@ -47,8 +47,8 @@ const SearchBar = ({ onHandleSearch, onClearSearch, placeholder = "Search" }) =>
 
 
   return (
-    <div className={Style.SearchBar}>
-      <div className={Style.SearchBar_box}>
+    <div className={`${Style.SearchBar} ${className}`}>
+      <div className={Style.SearchBar_box} style={style}>
         <BsSearch className={Style.SearchBar_box_icon} />
         <input
           type="text"

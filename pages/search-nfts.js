@@ -6,9 +6,8 @@ import Head from 'next/head';
 
 //INTERNAL IMPORT
 import Style from "../styles/searchPage.module.css";
-import { Slider, Brand, Loader } from "../components/componentsindex";
-import { SearchBar } from "../SearchPage/searchBarIndex";
-import { Filter, Title, Banner, NFTCardTwo } from "../components/componentsindex";
+import { SearchWithFilter } from "../SearchPage/searchBarIndex";
+import { Filter, Title, Banner, NFTCardTwo, Slider, Brand, Loader } from "../components/componentsindex";
 import images from "../img";
 
 //SMART CONTRACT IMPORT
@@ -21,6 +20,7 @@ const SearchPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const router = useRouter();
 
+  const [sortOption, setSortOption] = useState('newest');
 
 
 
@@ -38,32 +38,43 @@ const SearchPage = () => {
       });
   }, []);
 
+
+  
   useEffect(() => {
-    if (router.query.query) {
-      setSearchTerm(router.query.query);
-      filterNFTs(router.query.query);
+    if (router.isReady) {
+      const queryParam = router.query.query;
+      if (queryParam) {
+        setSearchTerm(queryParam);
+        const filteredResults = filterNFTs(queryParam);
+        setNfts(filteredResults);
+      }
     }
-  }, [router.query.query]);
+  }, [router.isReady, router.query]);
+  
 
 
 
 
-
-  const filterNFTs = (query) => {
+  const filterNFTs = (query, nftsToFilter = originalNfts) => {
     const lowerCaseQuery = query.toLowerCase();
-    const filteredNfts = originalNfts.filter(({ name, creator, collection }) =>
+    return nftsToFilter.filter(({ name, description, creator, collection }) =>
       name.toLowerCase().includes(lowerCaseQuery) ||
+      description.toLowerCase().includes(lowerCaseQuery) ||
       creator.toLowerCase().includes(lowerCaseQuery) ||
       collection.name.toLowerCase().includes(lowerCaseQuery) ||
       collection.symbol.toLowerCase().includes(lowerCaseQuery)
     );
-    setNfts(filteredNfts);
   };
+
+
 
   const onHandleSearch = (value) => {
     setSearchTerm(value);
-    filterNFTs(value);
+    const filteredResults = filterNFTs(value);
+    setNfts(filteredResults);
   };
+  
+
 
   const onClearSearch = () => {
     setSearchTerm('');
@@ -72,10 +83,50 @@ const SearchPage = () => {
 
 
 
+  // Sorting function
+  const handleSort = (selectedOption) => {
+    let sortedNfts;
+  
+    switch (selectedOption) {
+      case 'newest':
+        sortedNfts = searchTerm ? filterNFTs(searchTerm, [...originalNfts]) : [...originalNfts];
+        break;
+      case 'oldest':
+        const reversedNfts = [...originalNfts].reverse();
+        sortedNfts = searchTerm ? filterNFTs(searchTerm, reversedNfts) : reversedNfts;
+        break;
+      case 'expensive':
+        sortedNfts = [...nfts].sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+        break;
+      case 'cheapest':
+        sortedNfts = [...nfts].sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+        break;
+      default:
+        sortedNfts = [...originalNfts];
+    }
+  
+    setNfts(sortedNfts);
+  };
+  
+
+
+
+
+
+
+  const handleSortChange = (selectedOption) => {
+    setSortOption(selectedOption);
+    handleSort(selectedOption);
+  };
+
+
+
+
+
   // Title and meta tags to be used in Head
   const metaTitle = "Search Listed NFTs - Pulse Plaza NFT Marketplace";
 
-  const metaDescription = "You can search by NFT name, collection name/symbol or creator address";
+  const metaDescription = "You can search by NFT name, description, collection name/symbol or creator address";
 
 
   return (
@@ -94,14 +145,23 @@ const SearchPage = () => {
 
       <Title
         heading="Search Listed NFTs"
-        paragraph="You can search by NFT name, collection name/symbol or creator address"
+        paragraph="You can search by NFT name, description, collection name/symbol or creator address"
       />
-      <SearchBar
+
+      <SearchWithFilter
         onHandleSearch={onHandleSearch}
         onClearSearch={onClearSearch}
+        onSortChange={handleSortChange}
+        sortOption={sortOption}
         placeholder="Search NFTs"
-        value={searchTerm}
       />
+
+
+
+      {/* Filter Component */}
+      {/* <Filter onSort={handleSortChange} value={sortOption} /> */}
+
+
       {nfts.length === 0 ? <Loader /> : <NFTCardTwo NFTData={nfts} />}
       <Brand />
     </div>
