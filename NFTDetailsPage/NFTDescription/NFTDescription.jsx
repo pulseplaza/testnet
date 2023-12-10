@@ -100,14 +100,13 @@ const NFTDescription = ({ nft }) => {
 
   // Prepare the collection query object for the Link component
   const collectionQuery = {
-    creatorAddress: nft.creator,
     collectionAddress: nft.collectionAddress,
     name: nft.collectionName,
     symbol: nft.collectionSymbol,
+    creatorAddress: nft.creator,
+    image: nft.collectionImage,
     description: nft.collectionDescription,
-    image: nft.collectionImage
   };
-
 
 
 

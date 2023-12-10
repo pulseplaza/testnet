@@ -140,7 +140,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
     };
 
 
-    
+
 
     //---CHECK IF WALLET IS CONNECTED
 
@@ -166,13 +166,13 @@ export const NFTMarketplaceProvider = ({ children }) => {
             setOpenError(true);
         }
     };
-    
+
     useEffect(() => {
         checkIfWalletConnected();
     }, []);
-    
-    
-    
+
+
+
 
 
 
@@ -198,24 +198,24 @@ export const NFTMarketplaceProvider = ({ children }) => {
             if (!window.ethereum) {
                 throw new Error("Please install Metamask or another compatible web3 wallet.");
             }
-    
+
             const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-    
+
             if (accounts.length === 0) {
                 throw new Error("No accounts found.");
             }
-    
+
             // Set the current account
             setCurrentAccount(accounts[0]);
             console.log("Connected account:", accounts[0]);
-    
+
             // Update localStorage to reflect that the wallet is connected
             localStorage.setItem('walletConnected', 'true');
         } catch (error) {
             console.error("Connection error:", error);
             setError(`Could not connect. ${error.message}`);
             setOpenError(true);
-    
+
             // Update localStorage to reflect that the wallet is not connected
             localStorage.setItem('walletConnected', 'false');
         }
@@ -335,7 +335,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
         }
     };
 
-    //--- Fetch Collections by user
+    //--- FETCH USER COLLECTIONS
     const getCollectionsByUser = async () => {
         try {
             if (typeof window.ethereum === 'undefined') {
@@ -351,7 +351,25 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
             const result = await contract.getCollectionsByUser(currentAccount);
 
-            return result;
+            // Format the collection data
+            const collections = result.map((collection) => {
+                
+                return {
+                    collectionAddress: collection.collectionAddress,
+                    name: collection.name,
+                    symbol: collection.symbol,
+                    creatorAddress: collection.creatorAddress,
+                    image: collection.image,
+                    description: collection.description,
+                };
+            });
+
+            console.log('getCollectionsByUser:', collections);
+            return collections;
+
+
+
+
         } catch (error) {
             console.log(error)
             setError("There was a problem while fetching your collections.", error);
@@ -360,6 +378,8 @@ export const NFTMarketplaceProvider = ({ children }) => {
     };
 
 
+
+    //--- FETCH ALL COLLECTIONS
     const getAllCollections = async () => {
         try {
             // Using a public provider
@@ -374,7 +394,25 @@ export const NFTMarketplaceProvider = ({ children }) => {
             );
 
             const result = await contract.getCollections();
-            return result;
+
+
+            // Format the collection data
+            const collections = result.map((collection) => {
+
+                return {
+                    collectionAddress: collection.collectionAddress,
+                    name: collection.name,
+                    symbol: collection.symbol,
+                    creatorAddress: collection.creatorAddress,
+                    image: collection.image,
+                    description: collection.description,
+                };
+            });
+
+            console.log('getAllCollections:', collections);
+            return collections;
+
+
         } catch (error) {
             console.log(error)
             setError("There was a problem while fetching collections.", error);
@@ -416,21 +454,21 @@ export const NFTMarketplaceProvider = ({ children }) => {
                     );
 
                     return {
-                        price,
                         tokenId: tokenId.toNumber(),
+                        name,
+                        creator,
+                        image,
+                        tokenURI,
+                        price,
                         seller,
                         owner,
-                        image,
-                        name,
                         description,
-                        tokenURI,
-                        creator,
+                        collection,
                         collectionName: collection.name,
                         collectionSymbol: collection.symbol,
                         collectionAddress: collection.collectionAddress,
                         collectionImage: collection.image,
                         collectionDescription: collection.description,
-                        collection
                     };
                 })
             );
@@ -483,21 +521,21 @@ export const NFTMarketplaceProvider = ({ children }) => {
                             const collectionData = collection || { name: 'Unknown', symbol: 'Unknown' };
 
                             return {
-                                price,
                                 tokenId: tokenId.toNumber(),
+                                name,
+                                creator,
+                                image,
+                                tokenURI,
+                                price,
                                 seller,
                                 owner,
-                                image,
-                                name,
                                 description,
-                                tokenURI,
-                                creator,
+                                collection,
                                 collectionName: collection.name,
                                 collectionSymbol: collection.symbol,
                                 collectionAddress: collection.collectionAddress,
                                 collectionImage: collection.image,
                                 collectionDescription: collection.description,
-                                collection
                             };
                         }
                     )
@@ -573,4 +611,5 @@ export const NFTMarketplaceProvider = ({ children }) => {
         </NFTMarketplaceContext.Provider>
     );
 };
+
 
