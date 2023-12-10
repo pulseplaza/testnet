@@ -353,7 +353,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
             // Format the collection data
             const collections = result.map((collection) => {
-                
+
                 return {
                     collectionAddress: collection.collectionAddress,
                     name: collection.name,
@@ -366,7 +366,6 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
             console.log('getCollectionsByUser:', collections);
             return collections;
-
 
 
 
