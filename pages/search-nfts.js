@@ -40,16 +40,33 @@ const SearchPage = () => {
 
 
   
+  
   useEffect(() => {
-    if (router.isReady) {
-      const queryParam = router.query.query;
-      if (queryParam) {
-        setSearchTerm(queryParam);
-        const filteredResults = filterNFTs(queryParam);
-        setNfts(filteredResults);
+    const fetchData = async () => {
+      try {
+        const items = await fetchNFTs();
+        const reversedItems = [...items].reverse();
+        setOriginalNfts(reversedItems);
+  
+        if (router.isReady) {
+          const queryParam = router.query.query;
+          if (queryParam) {
+            setSearchTerm(queryParam);
+            const filteredResults = filterNFTs(queryParam, reversedItems);
+            setNfts(filteredResults);
+          } else {
+            setNfts(reversedItems);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching NFTs:", error);
+        setError("Please refresh the browser.", error);
       }
-    }
+    };
+  
+    fetchData();
   }, [router.isReady, router.query]);
+  
   
 
 
@@ -108,8 +125,6 @@ const SearchPage = () => {
     setNfts(sortedNfts);
   };
   
-
-
 
 
 

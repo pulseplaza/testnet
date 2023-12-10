@@ -10,7 +10,6 @@ const SearchWithFilter = ({ onHandleSearch, onClearSearch, onSortChange, sortOpt
     const [isNarrowScreen, setIsNarrowScreen] = useState(false);
 
     useEffect(() => {
-        // Update the state based on the actual screen width
         setIsNarrowScreen(window.innerWidth <= 1024);
 
         const handleResize = () => {
