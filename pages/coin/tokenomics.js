@@ -106,7 +106,7 @@ const tokenomics = () => {
                 <p>
                     (Test Token) Name:&nbsp;
                     <a
-                        href="https://beacon.v4.testnet.pulsechain.com/token/13ca32a56d9a52810df2fe0bbad71462b0d209ad"
+                        href="https://scan.v4.testnet.pulsechain.com/token/0x13ca32a56D9A52810dF2FE0bBaD71462b0D209AD/token-transfers"
                         target="_blank"
                         rel="noopener noreferrer"
                         className={Style.tokenomics_link}

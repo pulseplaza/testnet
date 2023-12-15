@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { BsImages } from "react-icons/bs";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+// import { BsImages } from "react-icons/bs";
+// import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 
 import { useRouter } from 'next/router';
@@ -13,10 +13,10 @@ const NFTDetailsImg = ({ nft }) => {
   const [blockWidth, setBlockWidth] = useState(0);
   const blockRef = useRef(null);
 
-  const [isImageLoaded, setImageLoaded] = useState(false);
+  // const [isImageLoaded, setImageLoaded] = useState(false);
   const [description, setDescription] = useState(true);
   const [details, setDetails] = useState(true);
-  const [like, setLike] = useState(false);
+  // const [like, setLike] = useState(false);
 
   const router = useRouter();
 
@@ -142,7 +142,13 @@ const NFTDetailsImg = ({ nft }) => {
             <p>
               <small>NFT ID</small>
               <br />
-              {nft.tokenId}
+              <a
+                href={`https://scan.v4.testnet.pulsechain.com/token/0xb4c364d1dc193d7402db4bde0052722f114ed02a/instance/${nft.tokenId}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {nft.tokenId}
+              </a>
             </p>
           </div>
         )}
