@@ -53,7 +53,7 @@ const NFTPriceHistory = ({ tokenId }) => {
                     </tbody>
                 </table>
             ) : (
-                <p>No price history available.</p>
+                <p>Please refresh the page to show the price history.</p>
             )}
         </div>
     );
