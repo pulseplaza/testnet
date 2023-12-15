@@ -84,10 +84,7 @@ const CollectionDescription = ({ nft }) => {
 
 
 
-
-
-  const { buyNFT, currentAccount, fetchMyNFTsOrListedNFTs } = useContext(NFTMarketplaceContext);
-
+  // const { buyNFT, currentAccount, fetchMyNFTsOrListedNFTs } = useContext(NFTMarketplaceContext);
 
 
 
