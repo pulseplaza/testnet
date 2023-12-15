@@ -13,6 +13,7 @@
 
 
 
+
 .CollectionDescription_box_share{
     display: flex;
     align-items: center;
@@ -266,6 +267,8 @@
     .CollectionDescription_box_share_box_social{
         left: 35%;
     }
+
+
     .CollectionDescription_box_profile_box{
         display: grid;
     }
