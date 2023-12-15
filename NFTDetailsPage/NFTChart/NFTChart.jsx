@@ -32,10 +32,10 @@ const NFTChart = ({ priceHistory }) => {
             {
                 label: "NFT Price in PLS",
                 data: reversedPriceHistory.map(item => item.price),
-                fill: false,
-                backgroundColor: '#0080ff',
+                fill: true,
+                backgroundColor: '#0080ff30',
                 borderColor: '#0077d8',
-                lineTension: 0.3,
+                lineTension: 0.4,
             },
         ],
     };
