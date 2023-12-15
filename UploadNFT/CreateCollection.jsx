@@ -68,7 +68,7 @@ const CreateCollection = ({ uploadToIPFS, createCollection }) => {
 
 
       <DropZone
-        title="BMP, JPG, JPEG, GIF, HEIF, PNG, SVG, TIF, TIFF, WEBP, MAX 20MB"
+        title="Static and animated image files, max 20 MB"
         heading="Drag & drop file"
         subHeading="or browse media on your device"
         name={name}

@@ -1,17 +1,19 @@
 
 import React, { useState, useEffect } from "react";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { BsImages } from "react-icons/bs";
+// import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+// import { BsImages } from "react-icons/bs";
 import Image from "next/image";
 import Link from "next/link";
 
 
 //INTERNAL IMPORT
 import Style from "./NFTCard.module.css";
-import images from "../../img";
+// import images from "../../img";
 
 
 const NFTCard = ({ NFTData }) => {
+
+
 
 
 
@@ -77,16 +79,14 @@ const NFTCard = ({ NFTData }) => {
     };
 
 
-
-
-
-
     return (
         <div className={Style.NFTCard}>
             {NFTData.map((el, i) => (
-                <Link href={{ pathname: "/nft-details", query: el }}>
 
-                    <div className={Style.NFTCard_box} key={i + 1}>
+                <Link href={`/nft?tokenId=${el.tokenId}`} passHref key={i}>
+
+                    <a className={Style.NFTCard_box}>
+
                         <div className={Style.NFTCard_box_img}>
                             <Image
                                 src={el.image}
@@ -103,7 +103,7 @@ const NFTCard = ({ NFTData }) => {
                             <div className={Style.NFTCard_box_update_right}>
                                 <div className={Style.NFTCard_box_update_right_info}>
                                     <h3>
-                                    {el.name.slice(0, getNameSliceLength())}
+                                        {el.name.slice(0, getNameSliceLength())}
                                         {el.name.length > getNameSliceLength() && "..."}
                                     </h3>
                                 </div>
@@ -125,7 +125,7 @@ const NFTCard = ({ NFTData }) => {
                             </div>
 
                         </div>
-                    </div>
+                    </a>
                 </Link>
             ))}
         </div>
@@ -133,3 +133,4 @@ const NFTCard = ({ NFTData }) => {
 };
 
 export default NFTCard;
+

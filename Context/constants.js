@@ -1,14 +1,12 @@
 
 
-
 import nftMarketplace from "./NFTMarketplace.json";
 import nftCollection from "./BaseNFT.json";
 
 
 
 //MARKETPLACE
-// export const NFTMarketplaceAddress = "0x75994cB52163AB1F92C283E4eDd7E2871a96D9e1"; //pulsechain origin
-export const NFTMarketplaceAddress = "0x118594655792c308a705A437ccD1059A2f2BEAF4";
+export const NFTMarketplaceAddress = "0xB4c364D1dc193D7402DB4BdE0052722F114ed02a";
 export const NFTMarketplaceABI = nftMarketplace.abi;
 
 //Collection

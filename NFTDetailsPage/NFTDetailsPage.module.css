@@ -1,9 +1,10 @@
 
+
 .NFTDetailsPage {
     width: 100%;
-    margin-block: 5rem;
     max-width: 1920px;
-    margin: 5rem auto 4rem auto;
+    /* margin-block: 5rem; */
+    margin: 5rem auto 6rem auto;
     overflow-x: hidden;
 }
 
@@ -14,7 +15,7 @@
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1.2fr 1fr;
-    gap: 4rem;
+    gap: 3rem;
 }
 
 
@@ -38,6 +39,17 @@
     .NFTDetailsPage_box > :nth-child(2) {
         order: 1;
     }
-    
 
+    .NFTDetailsPage_box > :nth-child(1) {
+        order: 2;
+    }
+
+    .NFTDetailsPage_box > :nth-child(3) {
+        order: 4;
+    }
+
+    .NFTDetailsPage_box > :nth-child(4) {
+        order: 3;
+    }
 }
+

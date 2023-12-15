@@ -1,0 +1,37 @@
+
+
+
+.title {
+    display: none;
+}
+
+
+.chartContainer {
+    margin-top: 6rem;
+    width: 100%;
+    max-width: 100%;
+    min-height: 300px;
+    overflow: hidden;
+}
+
+
+
+
+@media screen and (max-width: 800px) {
+
+    .title {
+        display: block;
+        margin-bottom: 2rem;
+    }
+
+    .chartContainer {
+        margin-top: 1rem;
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+    .chartContainer {
+        margin-top: 1rem;
+    }
+}

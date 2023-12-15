@@ -1,6 +1,5 @@
 
 
-
 import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import { useRouter } from "next/router";
@@ -9,7 +8,6 @@ import { create as ipfsHttpClient } from "ipfs-http-client";
 
 
 import { NFTMarketplaceAddress, NFTMarketplaceABI } from "./constants";
-
 
 
 
@@ -175,8 +173,6 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
 
 
-
-
     // Disconnect wallet function
     const disconnectWallet = () => {
         setCurrentAccount("");
@@ -187,7 +183,6 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
 
     //---CONNECT WALLET FUNCTION
-
     const connectWallet = async () => {
         if (typeof window === 'undefined') {
             // Server-side rendering, do nothing
@@ -220,6 +215,78 @@ export const NFTMarketplaceProvider = ({ children }) => {
             localStorage.setItem('walletConnected', 'false');
         }
     };
+
+
+
+
+    ////////////////
+
+
+
+    // Function to fetch all history (initial listing and re-listings) of an NFT
+    const priceHistory = async (tokenId) => {
+        try {
+            const contractAddress = NFTMarketplaceAddress;
+            const topic0 = ethers.utils.id("MarketItemCreated(uint256,address,address,address,uint256,bool)");
+            const tokenIdHex = ethers.utils.hexZeroPad(ethers.utils.hexlify(Number(tokenId)), 32);
+
+            const url = `https://scan.v4.testnet.pulsechain.com/api?module=logs&action=getLogs&fromBlock=0&toBlock=latest&address=${contractAddress}&topic0=${topic0}&topic1=${tokenIdHex}&topic0_1_opr=and`;
+
+            // console.log(`Fetching logs from URL: ${url}`);
+
+            const response = await fetch(url);
+            const data = await response.json();
+
+            // console.log(`API Response:`, data);
+
+            if (!data.result || data.result.length === 0) {
+                console.log("No relevant logs found for tokenId:", tokenId);
+                return [];
+            }
+
+            const history = data.result.map(log => {
+                // console.log(`Processing log:`, log);
+
+                // Decode non-indexed parameters from 'data'
+                const decodedData = ethers.utils.defaultAbiCoder.decode(
+                    ["address", "address", "address", "uint256", "bool"],
+                    log.data
+                );
+
+                // console.log(`Decoded data:`, decodedData);
+
+                // Extracting price from BigNumber
+                const priceBigNumber = decodedData[3];
+                const price = ethers.utils.formatUnits(priceBigNumber, 'ether');
+                console.log(`Price (ETH): ${price}`);
+
+                return {
+                    price: price,
+                    timestamp: new Date(parseInt(log.timeStamp, 16) * 1000).toLocaleString(),
+                };
+            });
+
+            return history.reverse(); // Reverses the order of the array
+
+        } catch (error) {
+            console.error("Error fetching NFT transaction history:", error);
+            return [];
+        }
+    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ///////////////
 
 
 
@@ -335,6 +402,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
         }
     };
 
+
     //--- FETCH USER COLLECTIONS
     const getCollectionsByUser = async () => {
         try {
@@ -421,17 +489,60 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
 
 
+    //--------- FETCH SPECIFIC COLLECTION DETAILS
+    const fetchCollectionDetails = async (collectionAddress) => {
+        console.log("Attempting to fetch collection details for:", collectionAddress);
+        
+        // Check if the collection address is valid
+        if (!collectionAddress) {
+            console.error("No collection address provided for fetching details.");
+            setError("No collection address provided.");
+            setOpenError(true);
+            return null; // Returning null to indicate no data could be fetched
+        }
+    
+        try {
+            const provider = new ethers.providers.JsonRpcProvider(rpcurl);
+            const contract = new ethers.Contract(NFTMarketplaceAddress, NFTMarketplaceABI, provider);
+            const collectionDetails = await contract.getCollectionDetails(collectionAddress);
+    
+            // Log the fetched details for debugging
+            console.log("Fetched collection details:", collectionDetails);
+    
+            return collectionDetails;
+        } catch (error) {
+            console.error("Error in fetchCollectionDetails:", error);
+            setError("There was a problem while fetching the collection details.", error);
+            setOpenError(true);
+            return null; // Returning null in case of an error
+        }
+    };
+    
+
+
+
+
+
+    //---FETCH NFT DETAILS FUNCTION
+    const fetchNFTDetails = async (tokenId) => {
+        try {
+            const provider = new ethers.providers.JsonRpcProvider(rpcurl);
+            const contract = new ethers.Contract(NFTMarketplaceAddress, NFTMarketplaceABI, provider);
+            const tokenURI = await contract.tokenURI(tokenId);
+            const response = await axios.get(tokenURI);
+            return response.data; // Assuming this contains the NFT details like name, image, etc.
+        } catch (error) {
+            console.error("Error fetching NFT details:", error);
+            // Handle the error appropriately
+        }
+    };
+
 
     //---FETCH NFTS FUNCTION
-
     const fetchNFTs = async () => {
         try {
-            const provider = new ethers.providers.JsonRpcProvider(
-                rpcurl
-            );
-
+            const provider = new ethers.providers.JsonRpcProvider(rpcurl);
             const contract = fetchContract(provider);
-
             const data = await contract.fetchMarketItems();
 
             if (!data || data.length === 0) {
@@ -440,47 +551,43 @@ export const NFTMarketplaceProvider = ({ children }) => {
             }
 
             const items = await Promise.all(
-                data.map(async ({ tokenId, seller, owner, price: unformattedPrice }) => {
+                data.map(async (item) => {
+                    const tokenId = item.tokenId.toNumber();
                     const tokenURI = await contract.tokenURI(tokenId);
+                    const response = await axios.get(tokenURI);
+                    const nftData = response.data;
 
-                    const {
-                        data: { image, name, description, creator, collection },
-                    } = await axios.get(tokenURI);
-
-                    const price = ethers.utils.formatUnits(
-                        unformattedPrice.toString(),
-                        "ether"
-                    );
 
                     return {
-                        tokenId: tokenId.toNumber(),
-                        name,
-                        creator,
-                        image,
+                        tokenId,
+                        name: nftData.name,
+                        image: nftData.image,
+                        description: nftData.description,
+                        creator: nftData.creator,
+                        price: ethers.utils.formatUnits(item.price.toString(), 'ether'),
+                        seller: item.seller,
+                        owner: item.owner,
                         tokenURI,
-                        price,
-                        seller,
-                        owner,
-                        description,
-                        collection,
-                        collectionName: collection.name,
-                        collectionSymbol: collection.symbol,
-                        collectionAddress: collection.collectionAddress,
-                        collectionImage: collection.image,
-                        collectionDescription: collection.description,
+                        collection: nftData.collection ? nftData.collection : '',
+                        collectionName: nftData.collection ? nftData.collection.name : '',
+                        collectionSymbol: nftData.collection ? nftData.collection.symbol : '',
+                        collectionAddress: nftData.collection ? nftData.collection.collectionAddress : '',
+                        collectionImage: nftData.collection ? nftData.collection.image : '',
+                        collectionDescription: nftData.collection ? nftData.collection.description : ''
                     };
                 })
             );
 
-            console.log('fetchNFT here: ', items)
+            console.log('fetchNFTs:', items);
             return items;
-
-            // }
         } catch (error) {
             setError("There was a problem while fetching NFTs.");
             setOpenError(true);
         }
     };
+
+
+
 
 
 
@@ -490,63 +597,52 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
 
 
-    //--FETCHING MY NFT OR LISTED NFTS
 
+
+
+    //--FETCHING MY NFT OR LISTED NFTS
     const fetchMyNFTsOrListedNFTs = async (type) => {
         try {
             if (currentAccount) {
                 const contract = await connectingWithSmartContract();
+                const data = type === "fetchItemsListed"
+                    ? await contract.fetchItemsListed()
+                    : await contract.fetchMyNFTs();
 
-                const data =
-                    type == "fetchItemsListed"
-                        ? await contract.fetchItemsListed()
-                        : await contract.fetchMyNFTs();
+                const items = await Promise.all(data.map(async (item) => {
+                    const tokenId = item.tokenId.toNumber();
+                    const tokenURI = await contract.tokenURI(tokenId);
+                    const response = await axios.get(tokenURI);
+                    const nftData = response.data;
+
+                    // Ensure all fields are present and provide fallback values where necessary
+                    return {
+                        tokenId,
+                        name: nftData.name,
+                        image: nftData.image,
+                        description: nftData.description,
+                        creator: nftData.creator,
+                        price: ethers.utils.formatUnits(item.price.toString(), 'ether'),
+                        seller: item.seller,
+                        owner: item.owner,
+                        tokenURI,
+                        collection: nftData.collection ? nftData.collection : '',
+                        collectionName: nftData.collection ? nftData.collection.name : '',
+                        collectionSymbol: nftData.collection ? nftData.collection.symbol : '',
+                        collectionAddress: nftData.collection ? nftData.collection.collectionAddress : '',
+                        collectionImage: nftData.collection ? nftData.collection.image : '',
+                        collectionDescription: nftData.collection ? nftData.collection.description : ''
+                    };
 
 
-                const items = await Promise.all(
-                    data.map(
-                        async ({ tokenId, seller, owner, price: unformattedPrice }) => {
-                            const tokenURI = await contract.tokenURI(tokenId);
-                            const {
-                                data: { image, name, description, creator, collection },
-                            } = await axios.get(tokenURI);
-
-                            const price = ethers.utils.formatUnits(
-                                unformattedPrice.toString(),
-                                "ether"
-                            );
-
-                            // Ensuring that the collection details are included
-                            const collectionData = collection || { name: 'Unknown', symbol: 'Unknown' };
-
-                            return {
-                                tokenId: tokenId.toNumber(),
-                                name,
-                                creator,
-                                image,
-                                tokenURI,
-                                price,
-                                seller,
-                                owner,
-                                description,
-                                collection,
-                                collectionName: collection.name,
-                                collectionSymbol: collection.symbol,
-                                collectionAddress: collection.collectionAddress,
-                                collectionImage: collection.image,
-                                collectionDescription: collection.description,
-                            };
-                        }
-                    )
-                );
-
+                }));
 
                 return items;
             }
-
         } catch (error) {
-            setError("There was a problem while fetching listed NFTs.", error);
+            setError("There was a problem while fetching NFTs.", error);
             setOpenError(true);
+            return []; // Return an empty array in case of error
         }
     };
 
@@ -591,6 +687,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
                 createSale,
                 getCollectionsByUser,
                 getAllCollections,
+                fetchNFTDetails,
                 fetchNFTs,
                 fetchMyNFTsOrListedNFTs,
                 buyNFT,
@@ -600,15 +697,13 @@ export const NFTMarketplaceProvider = ({ children }) => {
                 openError,
                 error,
                 disconnectWallet,
-                // transferEther,
-                // loading,
-                // accountBalance,
                 validateTextLength,
+                priceHistory,
+                fetchCollectionDetails,
             }}>
 
             {children}
         </NFTMarketplaceContext.Provider>
     );
 };
-
 

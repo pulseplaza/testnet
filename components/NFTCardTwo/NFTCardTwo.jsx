@@ -1,18 +1,17 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { BsImage } from "react-icons/bs";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { MdVerified, MdTimer } from "react-icons/md";
 import Link from "next/link";
 
 
 //INTERNAL IMPORT
 import Style from "./NFTCardTwo.module.css";
-import { LikeProfile } from "../componentsindex";
+
+
 
 
 const NFTCardTwo = ({ NFTData }) => {
+
 
     const [screenWidth, setScreenWidth] = useState(0);
 
@@ -26,9 +25,9 @@ const NFTCardTwo = ({ NFTData }) => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    
 
-    
+
+
     const getNameSliceLength = () => {
         if (screenWidth <= 560) {
             return 30; // Adjust as needed for very small screens
@@ -45,19 +44,6 @@ const NFTCardTwo = ({ NFTData }) => {
 
 
 
-    // const [like, setLike] = useState(false);
-    // const [likeInc, setLikeInc] = useState(21);
-
-    // const likeNFT = () => {
-    //     if (!like) {
-    //         setLike(true);
-    //         setLikeInc(23);
-    //     } else {
-    //         setLike(false);
-    //         setLikeInc(23 + 1);
-    //     }
-    // };
-
     // Address format
     const formatAddress = (inputString) =>
         inputString.length > 9
@@ -65,10 +51,11 @@ const NFTCardTwo = ({ NFTData }) => {
             : inputString;
 
 
+
     // Number formatting
     const formatNumber = (num) => {
         let formattedNum;
-    
+
         if (num < 1000) {
             // Format with one decimal place if there are decimals, otherwise no decimal
             formattedNum = num % 1 !== 0 ? num.toFixed(1) : num.toString();
@@ -93,16 +80,17 @@ const NFTCardTwo = ({ NFTData }) => {
             // Optionally, you can add an emoji or symbol here
             formattedNum = '🐋 ' + formattedNum;
         }
-    
+
         return formattedNum;
     };
+
 
 
     return (
         <div className={Style.NFTCardTwo}>
             {NFTData?.map((el, i) => (
 
-                <Link href={{ pathname: "/nft-details", query: el }} key={i + 1}>
+                <Link href={`/nft?tokenId=${el.tokenId}`} key={i + 1}>
                     <a className={Style.NFTCardTwo_link}>
 
                         <div className={Style.NFTCardTwo_box} key={i + 1}>
@@ -124,21 +112,22 @@ const NFTCardTwo = ({ NFTData }) => {
                                     <div className={Style.NFTCardTwo_box_img_bar_txt}>
 
                                         <small>
-                                            {el.collection && el.collection.symbol
-                                                ? el.collection.symbol.slice(0, getNameSliceLength()) + (el.collection.symbol.length > getNameSliceLength() ? "..." : "")
-                                                : "No collection"}
+                                            {
+                                                el.collectionSymbol
+                                                    ? el.collectionSymbol.slice(0, getNameSliceLength()) + (el.collectionSymbol.length > getNameSliceLength() ? "..." : "")
+                                                    : "No collection"
+                                            }
                                         </small>
 
                                     </div>
                                 </div>
-
                             </div>
 
 
 
                             <div className={Style.NFTCardTwo_box_info}>
                                 <div className={Style.NFTCardTwo_box_info_left}>
-                                    {/* <LikeProfile /> */}
+
                                     <p>
                                         {el.name.slice(0, getNameSliceLength())}
                                         {el.name.length > getNameSliceLength() && "..."}
@@ -146,11 +135,6 @@ const NFTCardTwo = ({ NFTData }) => {
 
                                     <small>{formatAddress(el.creator)}</small>
                                     <br />
-
-                                    {/* <small>
-                                        ID: {el.tokenId}
-                                    </small> */}
-
 
 
                                 </div>
@@ -160,10 +144,7 @@ const NFTCardTwo = ({ NFTData }) => {
                                     <small>Price</small>
                                     <p>{formatNumber(parseFloat(el.price))} PLS</p>
                                 </div>
-                                {/* <p className={Style.NFTCardTwo_box_price_stock}>
-                                <MdTimer />
-                                <span>{i + 1} hours left</span>
-                            </p> */}
+
                             </div>
                         </div>
 
@@ -177,3 +158,4 @@ const NFTCardTwo = ({ NFTData }) => {
 };
 
 export default NFTCardTwo;
+

@@ -128,8 +128,8 @@ const NFTDetailsImg = ({ nft }) => {
             <p>
               <small>Owner Address</small>
               <br />
-              {truncatedOwner === '0x118594655792c308a705a437ccd1059a2f2beaf4'.toLowerCase()
-                ? "0x118594655792c308a705a437ccd1059a2f2beaf4 (Pulse Plaza)"
+              {truncatedOwner === '0xb4c364d1dc193d7402db4bde0052722f114ed02a'.toLowerCase()
+                ? "0xb4c364d1dc193d7402db4bde0052722f114ed02a (Pulse Plaza)"
                 : truncatedOwner}
             </p>
 

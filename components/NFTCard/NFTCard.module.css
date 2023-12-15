@@ -8,22 +8,26 @@
     margin-bottom: 10rem;
 }
 
+
 .NFTCard_box {
     background-color: var(--main-bg-color);
     padding: .3rem;
     border-radius: 1rem;
     overflow: hidden;
-
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(6, 1fr);
     cursor: pointer;
     transition: all .3s ease-in;
+    text-decoration: none;
+    color: inherit;
 }
 
 
 .NFTCard_box:hover {
     box-shadow: var(--box-shadow-2);
+    text-decoration: none;
+    color: inherit;
 }
 
 
@@ -32,11 +36,13 @@
     border-radius: 1rem;
 }
 
+
+
+
 .NFTCard_box_update {
     grid-column: 1 /-1;
     grid-row: 1 /-2;
     z-index: 1111;
-
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -91,9 +97,7 @@
     line-height: 0;
     z-index: 111;
     align-items: flex-end;
-
     display: flex;
-
     grid-template-columns: 1fr 1fr;
     overflow: hidden;
     width: 100%;

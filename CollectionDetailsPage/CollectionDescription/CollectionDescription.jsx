@@ -13,7 +13,7 @@ import { FiCopy } from "react-icons/fi";
 //INTERNAL IMPORT
 import Style from "./CollectionDescription.module.css";
 // import images from "../../img";
-import { Button } from "../../components/componentsindex";
+// import { Button } from "../../components/componentsindex";
 // import { NFTTabs } from "../CollectionDetailsIndex";
 
 //IMPORT SMART CONTRACT

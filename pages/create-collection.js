@@ -51,7 +51,7 @@ const uploadNFT = () => {
                 <div className={Style.uploadNFT_box_title}>
                     <h2>Mint a New Collection</h2>
                     <p>
-                        Supported image file types: BMP, JPG, JPEG, GIF, HEIF, PNG, SVG, TIF, TIFF, WEBP
+                        Supported image file types: Static and animated image files
                     </p>
                     <p>
                         Maximal size: 20 MB

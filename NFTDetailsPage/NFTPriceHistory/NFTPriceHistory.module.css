@@ -1,0 +1,48 @@
+
+.title {
+    display: block;
+    margin-bottom: 4rem;
+}
+
+.nft_price_history {
+    width: 100%;
+    margin-left: 0;
+    border-collapse: collapse;
+}
+
+.nft_price_history th, 
+.nft_price_history td {
+    padding: 8px;
+    border: 1px solid;
+}
+
+.nft_price_history th {
+    font-size: larger;
+}
+
+.nft_price_history th.dateColumn {
+    width: 40%;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+}
+
+.nft_price_history th.priceColumn {
+    width: 60%;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+}
+
+
+
+@media screen and (max-width: 800px) {
+    .title {
+        display: none;
+    }
+
+    .nft_price_history {
+        margin-top: 4rem;
+    }
+}
+

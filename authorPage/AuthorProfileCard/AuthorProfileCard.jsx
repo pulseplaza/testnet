@@ -1,30 +1,17 @@
 
 import React, { useState } from "react";
-// import Image from "next/image";
-// import {
-//   MdVerified,
-//   MdCloudUpload,
-//   MdOutlineReportProblem,
-// } from "react-icons/md";
+
 import { FiCopy } from "react-icons/fi";
-// import {
-//   TiSocialFacebook,
-//   TiSocialLinkedin,
-//   TiSocialYoutube,
-//   TiSocialInstagram,
-// } from "react-icons/ti";
-// import { BsThreeDots } from "react-icons/bs";
+
 
 import { HiOutlineUserCircle } from "react-icons/hi2";
 
 //INTERNAL IMPORT
 import Style from "./AuthorProfileCard.module.css";
-// import images from "../../img";
-// import { Button } from "../../components/componentsindex.js";
+
 
 const AuthorProfileCard = ({ currentAccount }) => {
-  // const [share, setShare] = useState(false);
-  // const [report, setReport] = useState(false);
+
 
   //copyAddress function
   const copyAddress = () => {
@@ -34,23 +21,6 @@ const AuthorProfileCard = ({ currentAccount }) => {
     navigator.clipboard.writeText(copyText.value);
   };
 
-  // const openShare = () => {
-  //   if (!share) {
-  //     setShare(true);
-  //     setReport(false);
-  //   } else {
-  //     setShare(false);
-  //   }
-  // };
-
-  // const openReport = () => {
-  //   if (!report) {
-  //     setReport(true);
-  //     setShare(false);
-  //   } else {
-  //     setReport(false);
-  //   }
-  // };
 
 
   return (

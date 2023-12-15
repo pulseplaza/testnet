@@ -37,7 +37,6 @@ const DropZone = ({
     }
 
     setIsLoading(true);
-    // Assuming processing the first image file for simplicity
     const url = await uploadToIPFS(imageFiles[0]);
     setFileUrl(url);
     setImage(url);
@@ -85,7 +84,7 @@ const DropZone = ({
 
             <Image
               src={fileUrl}
-              alt="NFT image preview"
+              alt="Image preview"
               width={200}
               height={200}
               className={Style.DropZone_box_aside_box_img}

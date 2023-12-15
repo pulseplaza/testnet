@@ -39,7 +39,9 @@ const resellToken = () => {
 
     useEffect(() => {
         fetchNFT();
-    }, [id]);
+    }, [id, tokenURI]);
+
+
 
     const resell = async () => {
 
@@ -91,17 +93,7 @@ const resellToken = () => {
 
                 <h3>The initially assigned collection cannot be changed anymore</h3>
 
-                <div className={formStyle.Form_box_input}>
-                    <label htmlFor="name">Price</label>
-                    <input
-                        type="number"
-                        min={1}
-                        placeholder="Resell Price in PLS"
-                        className={formStyle.Form_box_input_userName}
-                        onChange={(e) => setPrice(e.target.value)}
-                    />
-                </div>
-
+                
 
 
                 <div className={Style.resellToken_box_image}>
@@ -115,6 +107,23 @@ const resellToken = () => {
                             />
                         )}
                 </div>
+
+
+                <div className={formStyle.Form_box_input}>
+                    <label htmlFor="name">New Price</label>
+                    <input
+                        type="number"
+                        min={1}
+                        placeholder="Resell Price in PLS"
+                        className={formStyle.Form_box_input_userName}
+                        onChange={(e) => setPrice(e.target.value)}
+                        style={{width: "400px"}}
+                    />
+                </div>
+
+                <br />
+                <br />
+                <br />
 
                 <div className={Style.resellToken_box_btn}>
                     <Button
@@ -130,3 +139,4 @@ const resellToken = () => {
 };
 
 export default resellToken;
+

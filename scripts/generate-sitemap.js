@@ -32,3 +32,4 @@ const paths = [
 
   fs.writeFileSync('public/sitemap.xml', xmlString);
 })();
+

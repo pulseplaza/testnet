@@ -5,10 +5,12 @@ import Head from 'next/head';
 
 //INTERNAL IMPORT
 import Style from "../styles/author.module.css";
-import { Banner, NFTCardTwo } from "../collectionPage/collectionIndex";
+// import { Banner, NFTCardTwo } from "../collectionPage/collectionIndex";
+
 import { Brand, Title, Loader } from "../components/componentsindex";
-import FollowerTabCard from "../components/FollowerTab/FollowerTabCard/FollowerTabCard";
-import images from "../img";
+
+// import FollowerTabCard from "../components/FollowerTab/FollowerTabCard/FollowerTabCard";
+// import images from "../img";
 import {
   AuthorProfileCard,
   AuthorTabs,

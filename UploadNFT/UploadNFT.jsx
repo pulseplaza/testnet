@@ -1,10 +1,10 @@
 
 import React, { useContext, useState, useEffect } from 'react';
-import { MdOutlineHttp, MdOutlineAttachFile } from "react-icons/md";
-import { FaPercent } from "react-icons/fa";
-import { AiTwotonePropertySafety } from "react-icons/ai";
+// import { MdOutlineHttp, MdOutlineAttachFile } from "react-icons/md";
+// import { FaPercent } from "react-icons/fa";
+// import { AiTwotonePropertySafety } from "react-icons/ai";
 import { FaHeartPulse } from "react-icons/fa6";
-import { TiTick } from "react-icons/ti";
+// import { TiTick } from "react-icons/ti";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Link from 'next/link';
@@ -15,14 +15,14 @@ import Link from 'next/link';
 //INTERNAL IMPORT
 import Style from "./UploadNFT.module.css";
 import formStyle from "../components/Form/Form.module.css";
-import images from "../img";
+// import images from "../img";
 import { Button, Loader } from "../components/componentsindex.js";
 import { DropZone } from "../UploadNFT/uploadNFTIndex.js";
 
 
 import { NFTMarketplaceContext } from '../Context/NFTMarketplaceContext';
 
-import Profile from "../components/componentsindex";
+// import Profile from "../components/componentsindex";
 
 
 const UploadNFT = ({ uploadToIPFS, createNFT, mycollections }) => {
@@ -124,7 +124,7 @@ const UploadNFT = ({ uploadToIPFS, createNFT, mycollections }) => {
 
 
       <DropZone
-        title="BMP, JPG, JPEG, GIF, HEIF, PNG, SVG, TIF, TIFF, WEBP, MAX 20MB"
+        title="Static and animated image files, max 20MB"
         heading="Drag & drop file"
         subHeading="or browse media on your device"
         name={name}
@@ -203,8 +203,8 @@ const UploadNFT = ({ uploadToIPFS, createNFT, mycollections }) => {
                       />
                     </div>
                   </div>
-                  <p>{collection.name}</p>
-                  <small>({collection.symbol})</small>
+                  <p>{collection.symbol}</p>
+                  {/* <small>({collection.symbol})</small> */}
                 </div>
               ))
             ) : (

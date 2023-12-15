@@ -2,14 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { BsImage } from "react-icons/bs";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { MdVerified, MdTimer } from "react-icons/md";
 import Link from "next/link";
 
 //INTERNAL IMPORT
 import Style from "./CollectionCard.module.css";
-import { LikeProfile } from "../../components/componentsindex";
 
 
 
@@ -44,10 +40,14 @@ const CollectionCard = ({ collections }) => {
   };
 
 
+
   return (
     <div className={Style.CollectionCard}>
       {collections?.map((collection, i) => (
-        <Link href={{ pathname: "/collection-details", query: collection }} key={i + 1}>
+
+        <Link href={`/collection?collectionAddress=${collection.collectionAddress}`} key={i}>
+
+
           <a className={Style.CollectionCard_link}>
             <div className={Style.CollectionCard_box} key={i + 1}>
 

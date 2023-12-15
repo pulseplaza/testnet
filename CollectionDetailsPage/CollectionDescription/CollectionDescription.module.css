@@ -10,6 +10,10 @@
     margin:  0 auto;
 }
 
+
+
+
+
 .CollectionDescription_box_share{
     display: flex;
     align-items: center;
@@ -83,6 +87,9 @@
     gap: 2rem;
     font-size: 1.3rem;
 }
+
+
+
 
 .CollectionDescription_box_profile h1{
     font-size: 3.2rem;

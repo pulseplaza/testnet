@@ -9,18 +9,9 @@ import Style from "../styles/index.module.css";
 import {
   HeroSection,
   Service,
-  BigNFTSlider,
-  Subscribe,
   Title,
-  Category,
-  Filter,
   NFTCard,
-  Collection,
-  AudioLive,
-  FollowerTab,
-  Slider,
   Brand,
-  Video,
   Loader,
 } from "../components/componentsindex";
 
@@ -46,39 +37,18 @@ const Home = () => {
 
 
 
-  // const { fetchNFTs } = useContext(NFTMarketplaceContext);
-  // const [nfts, setNfts] = useState([]);
-  // const [nftsCopy, setNftsCopy] = useState([]);
 
   const [nfts, setNfts] = useState([]);
   const [collections, setCollections] = useState([]);
 
 
 
-  // useEffect(() => {
-  //   fetchNFTs().then((item) => {
-  //     setNfts(item.reverse());
-  //     setNftsCopy(item);
-  //     console.log(nfts);
-  //   });
-  // }, []);
-
 
 
   useEffect(() => {
     let isMounted = true;
 
-    // fetchNFTs()
-    //   .then((item) => {
-    //     if (isMounted) {
-    //       setNfts(item.reverse());
-    //       setNftsCopy(item);
-    //       console.log(nfts);
-    //     }
-    //   })
-    //   .catch(error => {
-    //     console.error("Error fetching NFTs:", error);
-    //   });
+
 
 
     fetchNFTs()
@@ -95,7 +65,6 @@ const Home = () => {
       .then((items) => {
         if (isMounted) {
           setCollections(items);
-          // setOriginalCollections(items);
         }
       })
       .catch(error => {
@@ -121,27 +90,14 @@ const Home = () => {
     <div className={Style.homePage}>
 
       <Head>
-        <title>Welcome to the Pulse Plaza NFT Marketplace</title>
+        <title>Welcome to Pulse Plaza - The Creator-focused Decentralized NFT Marketplace on PulseChain</title>
       </Head>
 
 
       <HeroSection />
       <Service />
 
-      {/* <BigNFTSlider />
-      <Title
-        heading="Audio collecions"
-        paragraph="Discover the most outstanding NFTs in all topics of life"
-      />
-      <AudioLive />
 
-      {creators.length == 0 ? (
-        <Loader />
-      ) : (
-        <FollowerTab TopCreators={creators} />
-      )}
-
-      <Slider /> */}
 
       <Title
         heading="Latest Collections"
@@ -159,14 +115,11 @@ const Home = () => {
         paragraph="Discover the most outstanding NFTs in all topics of life"
       />
 
-      {/* <Filter /> */}
 
       {nfts.length == 0 ? <Loader /> : <NFTCard NFTData={nfts.slice(0, 60)} />}
 
 
 
-
-      {/* <Subscribe /> */}
 
       <Brand />
 

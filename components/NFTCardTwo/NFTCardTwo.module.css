@@ -3,11 +3,11 @@
 .NFTCardTwo {
     width: 80%;
     margin: 0 auto;
-
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 3rem;
     margin-bottom: 10rem;
+    border-radius: 1rem;
 }
 
 
@@ -16,10 +16,12 @@
     color: inherit;
 }
 
+
 .NFTCardTwo_link:hover {
     text-decoration: none;
     color: inherit;
 }
+
 
 .NFTCardTwo_box {
     display: grid;
@@ -27,30 +29,33 @@
     transition: all .3s ease-in;
     border-radius: 1rem;
     background-color: var(--bg-very-light);
-
     width: 200px;
-
     height: auto;
+    overflow: hidden;
 }
+
 
 :global(body.dark-mode) .NFTCardTwo_box {
     background-color: var(--bg-very-dark);
 }
 
+
 .NFTCardTwo_box:hover {
     box-shadow: var(--box-shadow-2);
+    border-radius: 1rem;
 }
 
 
 .NFTCardTwo_box_img {
     grid-column: 1 / -1;
     grid-row: 1 / -1;
-
     width: 100%;
     height: 100%;
     object-fit: cover;
-
     position: relative;
+    border-radius: 1rem;
+    transition: all .3s ease-in;
+
 }
 
 .NFTCardTwo_box_img_img {
@@ -58,7 +63,22 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
+    transition: all .3s ease-in;
 }
+
+
+
+/* .NFTCardTwo_box:hover .NFTCardTwo_box_img {
+    border-radius: 1rem;
+} */
+
+
+.NFTCardTwo_box:hover .NFTCardTwo_box_img_img {
+    transform: scale(1.05);
+    transition: all .3s ease-in;
+    /* border-radius: 1rem; */
+}
+
 
 .NFTCardTwo_box_img_bar {
     position: absolute;

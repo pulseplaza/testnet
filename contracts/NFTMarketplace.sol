@@ -1,3 +1,4 @@
+
 // SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.4;
@@ -162,7 +163,6 @@ contract NFTMarketplace is ERC721URIStorage {
 
 
     // Create NFT collection
-
     function createCollection(string memory name, string memory symbol, string memory description,string memory image) external payable returns (address collectionAddress) {
          require(
             msg.value == creatingCollectionFee,
@@ -197,8 +197,7 @@ contract NFTMarketplace is ERC721URIStorage {
 
 
 
-    // Get User's collections
-
+    // GET USER'S COLLECTION
     function getCollectionsByUser(
         address user
     ) external view returns (Collection[] memory) {
@@ -227,8 +226,24 @@ contract NFTMarketplace is ERC721URIStorage {
 
 
 
-    // TOKEN MINT
 
+// Fetch a specific collection by its address
+function getCollectionDetails(address collectionAddress) public view returns (Collection memory) {
+    for (uint i = 0; i < collections.length; i++) {
+        if (collections[i].collectionAddress == collectionAddress) {
+            return collections[i];
+        }
+    }
+    revert("Collection not found");
+}
+
+
+
+
+
+
+
+    // TOKEN MINT
     function createToken(
         string memory tokenURI,
         uint256 price
@@ -301,6 +316,19 @@ contract NFTMarketplace is ERC721URIStorage {
         _itemsSold.decrement();
 
         _transfer(msg.sender, address(this), tokenId);
+
+
+        emit MarketItemCreated(
+        tokenId,
+        idToMarketItem[tokenId].creator,
+        msg.sender,
+        address(this),
+        price,
+        false
+    );
+
+
+        
     }
 
 
@@ -367,6 +395,7 @@ contract NFTMarketplace is ERC721URIStorage {
         }
         return items;
     }
+
 
     /* Returns only items that a user has purchased */
     function fetchMyNFTs() public view returns (MarketItem[] memory) {
