@@ -1,4 +1,3 @@
-
 // SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.4;
@@ -55,7 +54,8 @@ contract NFTMarketplace is ERC721URIStorage {
     Collection[] public collections;
 
     address public ROUTER_ADDRESS = 0x636f6407B90661b73b1C0F7e24F4C79f624d0738;
-    address public PACO_TOKEN_ADDRESS = 0x13ca32a56D9A52810dF2FE0bBaD71462b0D209AD;
+    address public PACO_TOKEN_ADDRESS =
+        0x13ca32a56D9A52810dF2FE0bBaD71462b0D209AD;
     address public WPLS = 0x70499adEBB11Efd915E3b69E700c331778628707;
     address public BURN_ADDRESS = 0x0000000000000000000000000000000000000369;
     uint256 public burnPercentage = 50;
@@ -160,11 +160,14 @@ contract NFTMarketplace is ERC721URIStorage {
         creatingCollectionFee = _creatingCollectionFee;
     }
 
-
-
     // Create NFT collection
-    function createCollection(string memory name, string memory symbol, string memory description,string memory image) external payable returns (address collectionAddress) {
-         require(
+    function createCollection(
+        string memory name,
+        string memory symbol,
+        string memory description,
+        string memory image
+    ) external payable returns (address collectionAddress) {
+        require(
             msg.value == creatingCollectionFee,
             "Must send collection creating fee."
         );
@@ -172,7 +175,10 @@ contract NFTMarketplace is ERC721URIStorage {
         payable(owner).transfer(creatingCollectionFee);
 
         // bytes memory initCode = type(BaseNFT).creationCode; //with no arguments
-        bytes memory initCode = abi.encodePacked(type(BaseNFT).creationCode, abi.encode(name, symbol)); //with arguments
+        bytes memory initCode = abi.encodePacked(
+            type(BaseNFT).creationCode,
+            abi.encode(name, symbol)
+        ); //with arguments
 
         uint256 nonce = collections.length;
 
@@ -180,10 +186,24 @@ contract NFTMarketplace is ERC721URIStorage {
             abi.encodePacked(msg.sender, address(this), nonce)
         );
         assembly {
-            collectionAddress := create2(0, add(initCode, 32), mload(initCode), salt)
+            collectionAddress := create2(
+                0,
+                add(initCode, 32),
+                mload(initCode),
+                salt
+            )
         }
 
-        collections.push(Collection(msg.sender, collectionAddress, name, symbol, description, image));
+        collections.push(
+            Collection(
+                msg.sender,
+                collectionAddress,
+                name,
+                symbol,
+                description,
+                image
+            )
+        );
 
         emit CollectionCreated(nonce, initCode, collectionAddress);
 
@@ -194,8 +214,6 @@ contract NFTMarketplace is ERC721URIStorage {
     function getCollections() public view returns (Collection[] memory) {
         return collections;
     }
-
-
 
     // GET USER'S COLLECTION
     function getCollectionsByUser(
@@ -224,24 +242,19 @@ contract NFTMarketplace is ERC721URIStorage {
         return userCollections;
     }
 
-
-
-
-// Fetch a specific collection by its address
-function getCollectionDetails(address collectionAddress) public view returns (Collection memory) {
-    for (uint i = 0; i < collections.length; i++) {
-        if (collections[i].collectionAddress == collectionAddress) {
-            return collections[i];
+    // Fetch a specific collection by its address
+    function getCollectionDetails(
+        address collectionAddress
+    ) public view returns (Collection memory) {
+        for (uint i = 0; i < collections.length; i++) {
+            if (collections[i].collectionAddress == collectionAddress) {
+                return collections[i];
+            }
         }
+        revert("Collection not found.");
     }
-    revert("Collection not found");
-}
 
-
-
-
-
-
+    
 
     // TOKEN MINT
     function createToken(
@@ -293,10 +306,7 @@ function getCollectionDetails(address collectionAddress) public view returns (Co
         );
     }
 
-
-
     // TOKEN RE-SALE
-
     function resellToken(uint256 tokenId, uint256 price) public payable {
         require(
             idToMarketItem[tokenId].owner == msg.sender,
@@ -317,21 +327,15 @@ function getCollectionDetails(address collectionAddress) public view returns (Co
 
         _transfer(msg.sender, address(this), tokenId);
 
-
         emit MarketItemCreated(
-        tokenId,
-        idToMarketItem[tokenId].creator,
-        msg.sender,
-        address(this),
-        price,
-        false
-    );
-
-
-        
+            tokenId,
+            idToMarketItem[tokenId].creator,
+            msg.sender,
+            address(this),
+            price,
+            false
+        );
     }
-
-
 
     // TOKEN SALE
     /* Transfers ownership of the item, as well as funds between parties */
@@ -395,7 +399,6 @@ function getCollectionDetails(address collectionAddress) public view returns (Co
         }
         return items;
     }
-
 
     /* Returns only items that a user has purchased */
     function fetchMyNFTs() public view returns (MarketItem[] memory) {

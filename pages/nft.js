@@ -133,4 +133,3 @@ export async function getServerSideProps(context) {
 
 export default NFTDetails;
 
-

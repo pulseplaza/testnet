@@ -11,12 +11,8 @@ import {
 
 
 
+
 const CollectionDetailsPage = ({ collection }) => {
-
-  if (!collection || !collection.collectionAddress) {
-    return <div><br/><br/><br/>Loading collection details...<br/><br/><br/></div>;
-  }
-
 
 
   return (

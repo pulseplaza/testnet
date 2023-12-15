@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useContext, useRef } from "react";
 
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 
 import { FaShareAlt } from "react-icons/fa";
 
@@ -12,9 +12,7 @@ import { FiCopy } from "react-icons/fi";
 
 //INTERNAL IMPORT
 import Style from "./CollectionDescription.module.css";
-// import images from "../../img";
-// import { Button } from "../../components/componentsindex";
-// import { NFTTabs } from "../CollectionDetailsIndex";
+
 
 //IMPORT SMART CONTRACT
 import { NFTMarketplaceContext } from "../../Context/NFTMarketplaceContext";
@@ -27,8 +25,8 @@ const CollectionDescription = ({ nft }) => {
 
 
 
-   // Function to toggle social menu
-   const openSocial = (event) => {
+  // Function to toggle social menu
+  const openSocial = (event) => {
     event.stopPropagation(); // Prevent triggering the global click when opening
     setSocial(prevSocial => !prevSocial);
   };
@@ -44,7 +42,7 @@ const CollectionDescription = ({ nft }) => {
   useEffect(() => {
     if (social) {
       document.addEventListener('mousedown', handleGlobalClick);
-    } 
+    }
 
     return () => {
       document.removeEventListener('mousedown', handleGlobalClick);
@@ -74,13 +72,15 @@ const CollectionDescription = ({ nft }) => {
 
 
   const formatAddress = (address) => {
-  // Convert the address to lowercase
-  const lowerCaseAddress = address.toLowerCase();
 
-  return ((screenWidth < 450 || (screenWidth >= 750 && screenWidth <= 1100))
-    ? `${lowerCaseAddress.slice(0, 10)}...${lowerCaseAddress.slice(-10)}`
-    : lowerCaseAddress);
-};
+    if (!address) return 'N/A';
+
+    const lowerCaseAddress = address.toLowerCase();
+
+    return ((screenWidth < 450 || (screenWidth >= 750 && screenWidth <= 1100))
+      ? `${lowerCaseAddress.slice(0, 10)}...${lowerCaseAddress.slice(-10)}`
+      : lowerCaseAddress);
+  };
 
 
 
@@ -115,7 +115,7 @@ const CollectionDescription = ({ nft }) => {
           </div>
 
 
-          
+
         </div>
 
         <div className={Style.CollectionDescription_box_profile}>

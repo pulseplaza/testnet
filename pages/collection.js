@@ -9,32 +9,38 @@ import { NFTMarketplaceAddress, NFTMarketplaceABI } from "../Context/constants";
 
 const rpcurl = "https://pulsechain-testnet.publicnode.com";
 
-const CollectionDetails = ({ collectionAddress, errorMsg }) => {
-  const [collection, setCollection] = useState({});
-  const [error, setError] = useState(errorMsg);
 
-  const fetchCollectionDetails = async (address) => {
-    try {
-      const provider = new ethers.providers.JsonRpcProvider(rpcurl);
-      const contract = new ethers.Contract(NFTMarketplaceAddress, NFTMarketplaceABI, provider);
-      const collectionData = await contract.getCollectionDetails(address);
-      setCollection(collectionData);
-      address = address.toLowerCase();
-    } catch (error) {
-      console.error("Error fetching collection details:", error);
-      setError("No collection found with requested collection address.");
-    }
-  };
+
+
+
+const CollectionDetails = ({ collectionData, errorMsg }) => {
+  const [collection, setCollection] = useState(collectionData);
 
   useEffect(() => {
-    if (collectionAddress) {
-      fetchCollectionDetails(collectionAddress);
+    if (!collectionData) {
+      // Fetch collection data client-side if it wasn't provided server-side
+      const fetchCollection = async () => {
+        try {
+          const provider = new ethers.providers.JsonRpcProvider(rpcurl);
+          const contract = new ethers.Contract(NFTMarketplaceAddress, NFTMarketplaceABI, provider);
+          const fetchedCollection = await contract.getCollectionDetails(collectionData.address);
+          setCollection(fetchedCollection);
+        } catch (error) {
+          console.error("Error fetching collection details:", error);
+        }
+      };
+      fetchCollection();
     }
-  }, [collectionAddress]);
+  }, [collectionData]);
 
-  if (error) {
-    return <Error message={error} />;
+  if (errorMsg) {
+    return <Error message={errorMsg} />;
   }
+
+  if (!collection) {
+    return <div>Loading collection details...</div>;
+  }
+
 
 
 
@@ -74,27 +80,43 @@ const CollectionDetails = ({ collectionAddress, errorMsg }) => {
 
 
 export async function getServerSideProps(context) {
-  let collectionAddress = context.query.collectionAddress || "";
-
-  // console.log("Received collection address in getServerSideProps:", collectionAddress);
-
+  const collectionAddress = context.query.collectionAddress || "";
+  let collectionData = null;
   let errorMsg = "";
-  if (!collectionAddress) {
-    errorMsg = "Wrong collection format. Please check the entered URL.";
+
+  if (collectionAddress) {
+    try {
+      const provider = new ethers.providers.JsonRpcProvider(rpcurl);
+      const contract = new ethers.Contract(NFTMarketplaceAddress, NFTMarketplaceABI, provider);
+      const rawCollectionData = await contract.getCollectionDetails(collectionAddress.toLowerCase());
+
+      // Add additional data fetching logic here if necessary
+
+      // Combine all data into collectionData
+      collectionData = {
+        ...rawCollectionData,
+        // Add additional properties as necessary
+      };
+    } catch (error) {
+      console.error("Error fetching collection details:", error);
+      errorMsg = "Unable to fetch collection details from collection address. Check the URL.";
+    }
   } else {
-    // Convert to lowercase
-    collectionAddress = collectionAddress.toLowerCase();
+    errorMsg = "Collection address not provided or invalid format. Check the URL.";
   }
 
   return {
     props: {
-      collectionAddress,
+      collectionData,
       errorMsg
     },
   };
 }
 
 
-export default CollectionDetails;
 
+
+
+
+export default CollectionDetails;
 
