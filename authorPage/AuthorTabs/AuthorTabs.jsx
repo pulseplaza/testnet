@@ -33,12 +33,12 @@ const AuthorTabs = ({
   const openTab = (e) => {
     const btnText = e.target.innerText;
     console.log(btnText);
-    if (btnText == "Listed NFTs") {
+    if (btnText == "My Listed NFTs") {
       setListed(true);
       setCollectibles(false);
       setMyCollections(false);
       setActiveBtn(1);
-    } else if (btnText == "Owned NFTs") {
+    } else if (btnText == "My Owned NFTs") {
       setListed(false);
       setCollectibles(true);
       setMyCollections(false);
