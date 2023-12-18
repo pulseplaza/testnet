@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 
 import { FaWallet, FaShareAlt } from "react-icons/fa";
 import { FiCopy } from "react-icons/fi";
+import { MdSell } from "react-icons/md";
 
 
 
@@ -254,8 +255,6 @@ const NFTDescription = ({ nft }) => {
                 <p>{displayPrice}</p>
 
 
-
-
               </div>
             </div>
 
@@ -265,8 +264,8 @@ const NFTDescription = ({ nft }) => {
               ) : (currentAccount && nft.owner && currentAccount.toLowerCase() === nft.owner.toLowerCase()) ? (
                 // Resell Button
                 <Button
-                  icon=<FaWallet />
-                  btnName="List on marketplace"
+                  icon=<MdSell />
+                  btnName="List on Marketplace"
                   handleClick={() =>
                     router.push(
                       `/resell-nft?id=${nft.tokenId}&tokenURI=${nft.tokenURI}`

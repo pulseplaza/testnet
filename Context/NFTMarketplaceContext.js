@@ -276,16 +276,6 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
     ///////////////
 
 
@@ -348,6 +338,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
             const contract = await connectingWithSmartContract();
 
             const listingPrice = await contract.listingPrice();
+
 
             const transaction = !isReselling
                 ? await contract.createToken(url, price, {
@@ -492,7 +483,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
     //--------- FETCH SPECIFIC COLLECTION DETAILS
     const fetchCollectionDetails = async (collectionAddress) => {
         console.log("Attempting to fetch collection details for:", collectionAddress);
-        
+
         // Check if the collection address is valid
         if (!collectionAddress) {
             console.error("No collection address provided for fetching details.");
@@ -500,15 +491,15 @@ export const NFTMarketplaceProvider = ({ children }) => {
             setOpenError(true);
             return null; // Returning null to indicate no data could be fetched
         }
-    
+
         try {
             const provider = new ethers.providers.JsonRpcProvider(rpcurl);
             const contract = new ethers.Contract(NFTMarketplaceAddress, NFTMarketplaceABI, provider);
             const collectionDetails = await contract.getCollectionDetails(collectionAddress);
-    
+
             // Log the fetched details for debugging
             console.log("Fetched collection details:", collectionDetails);
-    
+
             return collectionDetails;
         } catch (error) {
             console.error("Error in fetchCollectionDetails:", error);
@@ -517,7 +508,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
             return null; // Returning null in case of an error
         }
     };
-    
+
 
 
 
@@ -651,6 +642,11 @@ export const NFTMarketplaceProvider = ({ children }) => {
     useEffect(() => {
         fetchMyNFTsOrListedNFTs();
     }, []);
+
+
+
+
+
 
 
 

@@ -128,8 +128,8 @@ const NFTDetailsImg = ({ nft }) => {
             <p>
               <small>Owner Address</small>
               <br />
-              {truncatedOwner === '0xb4c364d1dc193d7402db4bde0052722f114ed02a'.toLowerCase()
-                ? "0xb4c364d1dc193d7402db4bde0052722f114ed02a (Pulse Plaza)"
+              {truncatedOwner === '0x518b9493578dd94b7de832b532b64c60b427d289'.toLowerCase()
+                ? "0x518b9493578dd94b7de832b532b64c60b427d289 (Pulse Plaza)"
                 : truncatedOwner}
             </p>
 
@@ -143,7 +143,7 @@ const NFTDetailsImg = ({ nft }) => {
               <small>NFT ID</small>
               <br />
               <a
-                href={`https://scan.v4.testnet.pulsechain.com/token/0xb4c364d1dc193d7402db4bde0052722f114ed02a/instance/${nft.tokenId}`}
+                href={`https://scan.v4.testnet.pulsechain.com/token/0x518b9493578dd94b7de832b532b64c60b427d289/instance/${nft.tokenId}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >

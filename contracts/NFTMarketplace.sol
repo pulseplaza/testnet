@@ -254,8 +254,6 @@ contract NFTMarketplace is ERC721URIStorage {
         revert("Collection not found.");
     }
 
-    
-
     // TOKEN MINT
     function createToken(
         string memory tokenURI,
@@ -309,7 +307,7 @@ contract NFTMarketplace is ERC721URIStorage {
     // TOKEN RE-SALE
     function resellToken(uint256 tokenId, uint256 price) public payable {
         require(
-            idToMarketItem[tokenId].owner == msg.sender,
+            ownerOf(tokenId) == msg.sender,
             "Only item owner can perform this operation."
         );
         require(
@@ -317,8 +315,9 @@ contract NFTMarketplace is ERC721URIStorage {
             "Price must be equal to listing price."
         );
 
-        payable(owner).transfer(listingPrice); // Transfer listingPrice immediately to the contract owner
+        payable(owner).transfer(listingPrice);
 
+        // Update the marketplace item
         idToMarketItem[tokenId].sold = false;
         idToMarketItem[tokenId].price = price;
         idToMarketItem[tokenId].seller = payable(msg.sender);
