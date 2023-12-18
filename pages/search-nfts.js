@@ -7,8 +7,8 @@ import Head from 'next/head';
 //INTERNAL IMPORT
 import Style from "../styles/searchPage.module.css";
 import { SearchWithFilter } from "../SearchPage/searchBarIndex";
-import { Filter, Title, Banner, NFTCardTwo, Slider, Brand, Loader } from "../components/componentsindex";
-import images from "../img";
+import { Title, NFTCardTwo, Brand, Loader } from "../components/componentsindex";
+// import images from "../img";
 
 //SMART CONTRACT IMPORT
 import { NFTMarketplaceContext } from "../Context/NFTMarketplaceContext";
@@ -139,7 +139,7 @@ const SearchPage = () => {
 
 
   // Title and meta tags to be used in Head
-  const metaTitle = "Search Listed NFTs - Pulse Plaza NFT Marketplace";
+  const metaTitle = "Search Listed NFTs - Pulse Plaza";
 
   const metaDescription = "You can search by NFT name, description, collection name/symbol or creator address";
 

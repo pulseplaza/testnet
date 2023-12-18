@@ -1,6 +1,6 @@
 
 
-import React, { useContext } from "react";
+import React from "react";
 import Style from "../../styles/trade.module.css";
 import { Title } from "../../components/componentsindex";
 import Head from 'next/head';
@@ -17,7 +17,7 @@ const Trade = () => {
 
 
   // Title and meta tags to be used in Head
-  const metaTitle = "Trade - Coin - Pulse Plaza NFT Marketplace";
+  const metaTitle = "Trade - Coin - Pulse Plaza";
 
   const metaDescription = "Buy and sell Plaza Coin (PACO) directly on Pulse Plaza";
 

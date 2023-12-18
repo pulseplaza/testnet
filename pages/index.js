@@ -77,12 +77,13 @@ const Home = () => {
   }, []);
 
 
-
-
-
   // //CREATOR LIST
   // const creators = getTopCreators(nfts);
 
+
+  // Title and meta tags to be used in Head
+  const metaTitle = "Welcome to Pulse Plaza - The Creator-focused Decentralized NFT Marketplace on PulseChain";
+ 
 
 
 
@@ -90,7 +91,13 @@ const Home = () => {
     <div className={Style.homePage}>
 
       <Head>
-        <title>Welcome to Pulse Plaza - The Creator-focused Decentralized NFT Marketplace on PulseChain</title>
+        <title>{metaTitle}</title>
+
+        <meta property="og:title" content={metaTitle} />
+        {/* <meta property="og:description" content={metaDescription} /> */}
+
+        <meta name="twitter:title" content={metaTitle} />
+        {/* <meta name="twitter:description" content={metaDescription} /> */}
       </Head>
 
 

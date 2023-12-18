@@ -29,8 +29,8 @@ const NFTDetails = ({ nft, errorMsg }) => {
 
   // Title and meta tags to be used in Head
   const metaTitle = nft.tokenId && nft.name && nft.collectionSymbol ?
-    `NFT: ${nft.name} (${nft.collectionSymbol}) | ID ${nft.tokenId} - Pulse Plaza NFT Marketplace` :
-    "NFT - Pulse Plaza NFT Marketplace";
+    `NFT: ${nft.name} (${nft.collectionSymbol}) | ID ${nft.tokenId} - Pulse Plaza` :
+    "NFT - Pulse Plaza";
 
   const metaDescription = nft.description || "NFT collection minted on Pulse Plaza";
   const defaultImage = "/PLSPLAZA_logo_wide.png";

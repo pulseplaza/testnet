@@ -3,13 +3,7 @@ import React from "react";
 import Head from 'next/head';
 
 
-import {
-    TiSocialFacebook,
-    TiSocialLinkedin,
-    TiSocialTwitter,
-    TiSocialYoutube,
-    TiSocialInstagram,
-} from "react-icons/ti";
+import { TiSocialInstagram } from "react-icons/ti";
 
 import { BsDiscord, BsTwitterX } from "react-icons/bs";
 import { RiFacebookBoxFill, RiMastodonFill } from "react-icons/ri";
@@ -29,7 +23,7 @@ const contactus = () => {
 
 
     // Title and meta tags to be used in Head
-    const metaTitle = "Contact Us - Pulse Plaza NFT Marketplace";
+    const metaTitle = "Contact Us - Pulse Plaza";
 
     const metaDescription = "Any doubts or questions? Feel free to contact us and we will get back to you as soon as possible.";
 

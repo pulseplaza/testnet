@@ -5,11 +5,11 @@ import Head from 'next/head';
 
 //INTERNAL IMPORT
 import Style from "../styles/searchPage.module.css";
-import { Slider, Brand, Loader } from "../components/componentsindex";
+import { Brand, Loader } from "../components/componentsindex";
 import { SearchBar } from "../SearchPage/searchBarIndex";
-import { Filter, Title } from "../components/componentsindex";
-import { Banner, NFTCardTwo } from "../collectionPage/collectionIndex";
-import images from "../img";
+import { Title } from "../components/componentsindex";
+// import { Banner, NFTCardTwo } from "../collectionPage/collectionIndex";
+// import images from "../img";
 import { CollectionCard } from "../collectionPage/collectionIndex";
 
 //SMART CONTRACT IMPORT
@@ -55,7 +55,7 @@ const searchPage = () => {
 
 
   // Title and meta tags to be used in Head
-  const metaTitle = "Search Collections - Pulse Plaza NFT Marketplace";
+  const metaTitle = "Search Collections - Pulse Plaza";
 
   const metaDescription = "You can search by collection name/symbol, description or creator address";
 

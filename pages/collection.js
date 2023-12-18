@@ -46,8 +46,8 @@ const CollectionDetails = ({ collectionData, errorMsg }) => {
 
 
   const metaTitle = collection.name && collection.symbol ?
-    `Collection: ${collection.name} (${collection.symbol}) - Pulse Plaza NFT Marketplace` :
-    "Collection - Pulse Plaza NFT Marketplace";
+    `Collection: ${collection.name} (${collection.symbol}) - Pulse Plaza` :
+    "Collection - Pulse Plaza";
 
   const metaDescription = collection.description || "Collection minted on Pulse Plaza";
   const defaultImage = "/PLSPLAZA_logo_wide.png";

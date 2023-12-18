@@ -44,7 +44,7 @@ const News = () => {
 
 
     // Title and meta tags to be used in Head
-    const metaTitle = "News - Pulse Plaza NFT Marketplace";
+    const metaTitle = "News - Pulse Plaza";
 
     const metaDescription = "Don't miss out the latest and most important Pulse Plaza posts on X";
 

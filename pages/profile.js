@@ -91,7 +91,7 @@ const author = () => {
 
 
   // Title and meta tags to be used in Head
-  const metaTitle = "My Profile - Pulse Plaza NFT Marketplace";
+  const metaTitle = "My Profile - Pulse Plaza";
 
   const metaDescription = "My Listed NFTs, Owned NFTs and My Collections";
 

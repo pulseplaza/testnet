@@ -60,7 +60,7 @@ const tokenomics = () => {
 
 
     // Title and meta tags to be used in Head
-    const metaTitle = "Tokenomics - Coin - Pulse Plaza NFT Marketplace";
+    const metaTitle = "Tokenomics - Coin - Pulse Plaza";
 
     const metaDescription = "What does Plaza Coin (PACO) actually do?";
 

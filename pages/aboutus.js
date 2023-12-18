@@ -13,7 +13,7 @@ const aboutus = () => {
 
 
     // Title and meta tags to be used in Head
-    const metaTitle = "About Us - Pulse Plaza NFT Marketplace";
+    const metaTitle = "About Us - Pulse Plaza";
 
     const metaDescription = "At Pulse Plaza, we're not just an NFT marketplace but a revolution in digital art and creativity. Built on the innovative PulseChain blockchain, we offer a seamless and efficient experience for artists and collectors alike.";
 

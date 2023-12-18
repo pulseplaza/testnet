@@ -45,9 +45,9 @@ const fees = () => {
 
 
     // Title and meta tags to be used in Head
-    const metaTitle = "Fees - Pulse Plaza NFT Marketplace";
-
+    const metaTitle = "Fees - Pulse Plaza";
     const metaDescription = "Pulse Plaza pricing and fees structure";
+
 
     return (
         <div className={Style.Fees}>

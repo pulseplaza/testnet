@@ -60,7 +60,7 @@ const resellToken = () => {
 
 
     // Title and meta tags to be used in Head
-    const metaTitle = "Resell NFT - Pulse Plaza NFT Marketplace";
+    const metaTitle = "Resell NFT - Pulse Plaza";
 
     const metaDescription = "Please set your new price in order to relist the NFT to the marketplace";
 

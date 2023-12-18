@@ -33,7 +33,7 @@ const uploadNFT = () => {
 
 
     // Title and meta tags to be used in Head
-    const metaTitle = "Create New NFT - Pulse Plaza NFT Marketplace";
+    const metaTitle = "Create New NFT - Pulse Plaza NFT";
 
     const metaDescription = "You can set the preferred NFT name and description";
 
