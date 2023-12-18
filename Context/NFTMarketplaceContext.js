@@ -41,7 +41,6 @@ const client = ipfsHttpClient({
 
 
 
-
 //---FETCHING MARKETPLACE SMART CONTRACT
 const fetchContract = (signerOrProvider) =>
     new ethers.Contract(
@@ -579,14 +578,9 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
 
 
-
-
-
     useEffect(() => {
         fetchNFTs();
     }, []);
-
-
 
 
 
