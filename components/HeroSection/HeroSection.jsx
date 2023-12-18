@@ -21,7 +21,7 @@ const HeroSection = () => {
       <div className={Style.heroSection_box}>
         <div className={Style.heroSection_box_left}>
           <h1>PULSE PLAZA</h1>
-          <h2>The Creator-focused Decentralized NFT Marketplace on PulseChain</h2>
+          <h2>Creator-focused Decentralized NFT Marketplace on PulseChain</h2>
           <p>
             Discover the most degen NTFs of the metaverse. Mint your NTFs and sell them on Pulse Plaza.
           </p>
