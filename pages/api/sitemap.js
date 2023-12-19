@@ -24,30 +24,38 @@ export default async function sitemapHandler(req, res) {
 
   // Generate dynamic URLs for collections
   const collectionUrls = collections.map(collection => {
-    return { url: `${baseUrl}/collection?collectionAddress=${collection.collectionAddress}` };
+    return {
+      url: `${baseUrl}/collection?collectionAddress=${collection.collectionAddress}`,
+      changefreq: 'monthly',
+      priority: 0.5
+    };
   });
 
 
   // Generate dynamic URLs for NFTs
   const nftUrls = marketItems.map(item => {
-    return { url: `${baseUrl}/nft?tokenId=${item.tokenId.toString()}` };
+    return {
+      url: `${baseUrl}/nft?tokenId=${item.tokenId.toString()}`,
+      changefreq: 'monthly',
+      priority: 0.5
+    };
   });
 
 
 
   // Static paths
   const staticPaths = [
-    { url: "/", changefreq: 'weekly', priority: 1 },
-    { url: "/search-nfts", changefreq: 'weekly', priority: 0.5 },
-    { url: "/search-collections", changefreq: 'weekly', priority: 0.5 },
-    { url: "/create-nft", changefreq: 'weekly', priority: 0.5 },
-    { url: "/create-collection", changefreq: 'weekly', priority: 0.5 },
-    { url: "/coin/tokenomics", changefreq: 'weekly', priority: 0.5 },
-    { url: "/coin/trade", changefreq: 'weekly', priority: 0.5 },
-    { url: "/aboutus", changefreq: 'weekly', priority: 0.5 },
-    { url: "/news", changefreq: 'weekly', priority: 0.5 },
-    { url: "/fees", changefreq: 'weekly', priority: 0.5 },
-    { url: "/contact", changefreq: 'weekly', priority: 0.5 }
+    { url: "/", changefreq: 'daily', priority: 1 },
+    { url: "/search-nfts", changefreq: 'weekly', priority: 0.7 },
+    { url: "/search-collections", changefreq: 'weekly', priority: 0.7 },
+    { url: "/create-nft", changefreq: 'weekly', priority: 0.7 },
+    { url: "/create-collection", changefreq: 'weekly', priority: 0.7 },
+    { url: "/coin/tokenomics", changefreq: 'weekly', priority: 0.7 },
+    { url: "/coin/trade", changefreq: 'weekly', priority: 0.7 },
+    { url: "/aboutus", changefreq: 'weekly', priority: 0.7 },
+    { url: "/news", changefreq: 'weekly', priority: 0.7 },
+    { url: "/fees", changefreq: 'weekly', priority: 0.7 },
+    { url: "/contact", changefreq: 'weekly', priority: 0.7 }
   ];
 
 
@@ -75,4 +83,5 @@ export default async function sitemapHandler(req, res) {
   res.write(xmlString);
   res.end();
 }
+
 
