@@ -108,7 +108,7 @@ const Home = () => {
 
       <Title
         heading="Latest Collections"
-        paragraph="Explore the most popular NFT collections on PulseChain"
+        paragraph="Explore the most popular NFT collections on Pulse Plaza"
       />
       {collections.length === 0
         ? <Loader />
