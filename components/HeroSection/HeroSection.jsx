@@ -23,7 +23,7 @@ const HeroSection = () => {
           <h1>PULSE PLAZA</h1>
           <h2>Creator-focused Decentralized NFT Marketplace on PulseChain</h2>
           <p>
-            Discover the most degen NTFs of the metaverse. Mint your NTFs and sell them on Pulse Plaza.
+            Discover the most degen NFTs of the metaverse. Mint your NFTs and sell them on Pulse Plaza.
           </p>
           <Button
             btnName="Start your search"
