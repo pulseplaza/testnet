@@ -25,6 +25,7 @@ const HeroSection = () => {
           <p>
             Discover the most degen NFTs of the metaverse. Mint your NFTs, sell them on Pulse Plaza and earn rewards.
           </p>
+          
           <Button
             btnName="Start your search"
             handleClick={() => router.push("/search-nfts")}
