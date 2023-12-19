@@ -1,7 +1,6 @@
 
 
 import { SitemapStream, streamToPromise } from 'sitemap';
-import { Readable } from 'stream';
 import { ethers } from 'ethers';
 import { NFTMarketplaceAddress, NFTMarketplaceABI } from '../../Context/constants';
 
@@ -15,7 +14,7 @@ export default async function sitemapHandler(req, res) {
   // Fetch collections
   const collections = await contract.getCollections();
 
-  // Fetch market items (NFTs)
+  // Fetch NFTs
   const marketItems = await contract.fetchMarketItems();
 
 
@@ -38,27 +37,39 @@ export default async function sitemapHandler(req, res) {
 
   // Static paths
   const staticPaths = [
-    "/",
-    "/search-nfts",
-    "/search-collections",
-    "/create-nft",
-    "/create-collection",
-    "/coin/tokenomics",
-    "/coin/trade",
-    "/aboutus",
-    "/news",
-    "/fees",
-    "/contact",
+    { url: "/", changefreq: 'weekly', priority: 1 },
+    { url: "/search-nfts", changefreq: 'weekly', priority: 0.5 },
+    { url: "/search-collections", changefreq: 'weekly', priority: 0.5 },
+    { url: "/create-nft", changefreq: 'weekly', priority: 0.5 },
+    { url: "/create-collection", changefreq: 'weekly', priority: 0.5 },
+    { url: "/coin/tokenomics", changefreq: 'weekly', priority: 0.5 },
+    { url: "/coin/trade", changefreq: 'weekly', priority: 0.5 },
+    { url: "/aboutus", changefreq: 'weekly', priority: 0.5 },
+    { url: "/news", changefreq: 'weekly', priority: 0.5 },
+    { url: "/fees", changefreq: 'weekly', priority: 0.5 },
+    { url: "/contact", changefreq: 'weekly', priority: 0.5 }
   ];
 
 
   const combinedPaths = [...staticPaths, ...collectionUrls, ...nftUrls];
 
-
+  // Create the sitemap stream
   const sitemapStream = new SitemapStream({ hostname: baseUrl });
-  const xmlString = await streamToPromise(
-    Readable.from(combinedPaths).pipe(sitemapStream)
-  ).then(data => data.toString());
+
+
+
+  // Add the URLs to the sitemap stream
+  combinedPaths.forEach(url => {
+    sitemapStream.write(url);
+  });
+
+
+  sitemapStream.end();
+
+
+  // Generate the XML string and send the response
+  const xmlString = await streamToPromise(sitemapStream).then(data => data.toString());
+
 
   res.setHeader('Content-Type', 'application/xml');
   res.write(xmlString);
