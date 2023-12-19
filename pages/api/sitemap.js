@@ -48,7 +48,7 @@ export default async function sitemapHandler(req, res) {
     "/contact",
   ];
 
-  
+
   const combinedPaths = [...staticPaths, ...nftUrls, ...collectionUrls];
 
   const sitemapStream = new SitemapStream({ hostname: baseUrl });
@@ -60,3 +60,4 @@ export default async function sitemapHandler(req, res) {
   res.write(xmlString);
   res.end();
 }
+
