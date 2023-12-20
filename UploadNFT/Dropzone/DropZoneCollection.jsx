@@ -20,6 +20,7 @@ const DropZone = ({
   setImage,
 }) => {
 
+    
   const [fileUrl, setFileUrl] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
