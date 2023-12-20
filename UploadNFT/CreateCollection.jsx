@@ -1,17 +1,10 @@
 
 import React, { useState, useContext } from "react";
-// import { MdOutlineHttp, MdOutlineAttachFile } from "react-icons/md";
-// import { FaPercent } from "react-icons/fa";
-// import { AiTwotonePropertySafety } from "react-icons/ai";
-// import { TiTick } from "react-icons/ti";
-// import Image from "next/image";
-// import { useRouter } from "next/router";
 
 
 //INTERNAL IMPORT
 import Style from "./UploadNFT.module.css";
 import formStyle from "../components/Form/Form.module.css";
-import images from "../img";
 import { Button, Loader } from "../components/componentsindex.js";
 import { DropZone } from "../UploadNFT/uploadNFTIndex.js";
 

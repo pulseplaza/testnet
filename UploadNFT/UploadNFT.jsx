@@ -1,10 +1,8 @@
 
 import React, { useContext, useState, useEffect } from 'react';
-// import { MdOutlineHttp, MdOutlineAttachFile } from "react-icons/md";
-// import { FaPercent } from "react-icons/fa";
-// import { AiTwotonePropertySafety } from "react-icons/ai";
+
 import { FaHeartPulse } from "react-icons/fa6";
-// import { TiTick } from "react-icons/ti";
+
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Link from 'next/link';
@@ -165,12 +163,12 @@ const UploadNFT = ({ uploadToIPFS, createNFT, mycollections }) => {
 
 
         <div className={formStyle.Form_box_input}>
-          <label htmlFor="name">Choose collection</label>
+          <label htmlFor="name">Collection</label>
 
           <p className={Style.upload_box_input_para}>
             Choose an existing collection or&nbsp;
             <Link href="/create-collection">
-              <a className={Style.yourLinkStyle}>create a new one</a>
+              <a className={Style.yourLinkStyle}>create a new collection</a>
             </Link>
           </p>
 
@@ -215,20 +213,17 @@ const UploadNFT = ({ uploadToIPFS, createNFT, mycollections }) => {
           </div>
 
           <p className={Style.upload_box_input_para}>
-            Selected Collection:&nbsp;
+            Selected collection:&nbsp;
             {isWalletConnected && mycollections.length > 0 ? (
               collection && collection.name ? (
                 collection.name
               ) : (
-                <span style={{ color: 'red' }}>No Collection Selected</span>
+                <span style={{ color: 'red' }}>No collection selected.</span>
               )
             ) : (
-              <span style={{ color: 'red' }}>NO COLLECTION CREATED YET OR NOT CONNECTED WITH WEB3 WALLET!</span>
+              <span style={{ color: 'red' }}>NO COLLECTION CREATED YET. YOU NEED A COLLECTION TO MINT YOUR NFT.</span>
             )}
           </p>
-
-
-
 
 
         </div>
