@@ -20,7 +20,7 @@ const DropZone = ({
   setImage,
 }) => {
 
-    
+
   const [fileUrl, setFileUrl] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -96,9 +96,6 @@ const DropZone = ({
             <div className={Style.DropZone_box_aside_box_preview}>
 
               <div className={Style.DropZone_box_aside_box_preview_one}>
-              <small style={{ color: 'red' }}>⚠️ IF YOU CANNOT SEE THE IMAGE PREVIEW, TRY AGAIN IN A MOMENT.</small>
-              <small style={{ color: 'red' }}>DO NOT UPLOAD WITHOUT IMAGE PREVIEW!</small>
-              <br />
 
                 <h3>Name:</h3>
                 <p>{name || ""}</p>
