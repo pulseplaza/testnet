@@ -6,7 +6,7 @@ import React, { useState, useContext } from "react";
 import Style from "./UploadNFT.module.css";
 import formStyle from "../components/Form/Form.module.css";
 import { Button, Loader } from "../components/componentsindex.js";
-import { DropZone } from "../UploadNFT/uploadNFTIndex.js";
+import { DropZoneCollection } from "../UploadNFT/uploadNFTIndex.js";
 
 
 import { NFTMarketplaceContext } from "../Context/NFTMarketplaceContext";
@@ -60,11 +60,12 @@ const CreateCollection = ({ uploadToIPFS, createCollection }) => {
       )}
 
 
-      <DropZone
+      <DropZoneCollection
         title="Static and animated image files, max 20 MB"
         heading="Drag & drop file"
         subHeading="or browse media on your device"
         name={name}
+        symbol={symbol}
         description={description}
         setImage={setImage}
         uploadToIPFS={uploadToIPFS}
