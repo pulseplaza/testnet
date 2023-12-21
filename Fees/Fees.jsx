@@ -9,7 +9,6 @@ import Style from "../Fees/Fees.module.css";
 // import { Button } from "../components/componentsindex.js";
 
 
-
 const Fees = ({ el, i }) => {
     return (
         <div className={Style.FeesBox}>
