@@ -54,6 +54,19 @@ const MyApp = ({ Component, pageProps }) => {
             gtag('config', 'G-Y9SSVS1LG4');
         }
 
+
+
+        // Add Clarity Tracking Code
+        if (typeof window !== "undefined") {
+            (function (c, l, a, r, i, t, y) {
+                c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+                t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i + "?ref=bwt";
+                y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+            })(window, document, "clarity", "script", "k9m0h1xypz");
+        }
+
+
+
     }, []);
 
 
@@ -114,7 +127,6 @@ const MyApp = ({ Component, pageProps }) => {
                     <script type="application/ld+json">
                         {JSON.stringify(socialMediaJsonLd)}
                     </script>
-
                 </Head>
 
 
