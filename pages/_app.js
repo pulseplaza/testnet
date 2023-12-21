@@ -54,9 +54,26 @@ const MyApp = ({ Component, pageProps }) => {
             gtag('config', 'G-Y9SSVS1LG4');
         }
 
-
     }, []);
 
+
+
+    const domain = process.env.NEXT_PUBLIC_DOMAIN;
+
+
+    const socialMediaJsonLd = {
+        "@context": "http://schema.org",
+        "@type": "CreativeWork",
+        "name": "Pulse Plaza NFT Marketplace",
+        "url": domain,
+        "sameAs": [
+            "https://discord.com/invite/w7tVUW9Fb3",
+            "https://twitter.com/PulsePlazaio",
+            "https://www.facebook.com/PulsePlazaio",
+            "https://instagram.com/pulseplazaio",
+            "https://mastodon.social/@pulseplaza"
+        ]
+    };
 
 
 
@@ -64,14 +81,13 @@ const MyApp = ({ Component, pageProps }) => {
     const defaultTitle = "Pulse Plaza NFT Marketplace";
     const defaultDescription = "The NFT marketplace, which guarantees low fees and supports freedom with no middleman. Experience efficient, fair trading and creator-focused royalties.";
     const defaultImage = "/PLSPLAZA_logo_wide.png"
-    const domain = process.env.NEXT_PUBLIC_DOMAIN;
 
 
     const dynamicTitle = pageProps.title || defaultTitle;
     const dynamicDescription = pageProps.description || defaultDescription;
     const dynamicImage = pageProps.image || `${domain}${defaultImage}`;
 
-    
+
 
     return (
         <div>
@@ -94,6 +110,11 @@ const MyApp = ({ Component, pageProps }) => {
                     <meta name="twitter:description" content={dynamicDescription} />
                     <meta name="twitter:image" content={dynamicImage} />
 
+
+                    <script type="application/ld+json">
+                        {JSON.stringify(socialMediaJsonLd)}
+                    </script>
+
                 </Head>
 
 
@@ -101,7 +122,7 @@ const MyApp = ({ Component, pageProps }) => {
                 <NavBar theme={theme} setTheme={setTheme} />
                 <Component {...pageProps} />
                 <Footer />
-                
+
                 <Analytics />
                 <SpeedInsights />
 
