@@ -92,7 +92,7 @@ const MyApp = ({ Component, pageProps }) => {
 
 
     const defaultTitle = "Pulse Plaza NFT Marketplace";
-    const defaultDescription = "The NFT marketplace, which guarantees low fees and supports freedom with no middleman. Experience efficient, fair trading and creator-focused royalties.";
+    const defaultDescription = "Your NFT marketplace, which guarantees low fees and supports freedom with no middleman. Experience efficient, fair trading and creator-focused royalties.";
     const defaultImage = "/PLSPLAZA_logo_wide.png"
 
 

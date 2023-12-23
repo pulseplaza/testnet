@@ -87,6 +87,7 @@ const Home = () => {
 
 
 
+
   return (
     <div className={Style.homePage}>
 
@@ -112,7 +113,7 @@ const Home = () => {
       />
       {collections.length === 0
         ? <Loader />
-        : <CollectionCard collections={[...collections].reverse().slice(0, 24)} />
+        : <CollectionCard collections={[...collections].reverse().slice(0, 36)} />
       }
 
 
