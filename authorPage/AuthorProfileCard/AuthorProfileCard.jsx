@@ -41,20 +41,23 @@ const AuthorProfileCard = ({ currentAccount }) => {
 
           <div className={Style.AuthorProfileCard_box_info_address}>
 
-          {/* <small>My Address</small> */}
+            {/* <small>My Address</small> */}
             <FiCopy
               onClick={() => copyAddress()}
               className={Style.AuthorProfileCard_box_info_address_icon}
             />
             <small>My Address</small>
-            <input type="text" value={currentAccount} id="myInput" />
-            {/* <span id="myInput">{currentAccount}</span> */}
+
+            <input type="text" value={currentAccount} id="myInput" readOnly />
+
+
+
           </div>
-          <small>Listed NFTs</small>
+          <small>My Listed NFTs</small>
           <p>
             All NFTs which you listed for sale on Pulse Plaza.
           </p>
-          <small>Owned NFTs</small>
+          <small>My Purchased NFTs</small>
           <p>
             All NFTs which you purchased on Pulse Plaza. They remain in your wallet until you relist them on the marketplace.
           </p>
@@ -71,3 +74,4 @@ const AuthorProfileCard = ({ currentAccount }) => {
 };
 
 export default AuthorProfileCard;
+

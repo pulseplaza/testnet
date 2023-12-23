@@ -218,8 +218,6 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
 
 
-    ////////////////
-
 
 
     // Function to fetch all history (initial listing and re-listings) of an NFT
@@ -275,7 +273,15 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
 
 
-    ///////////////
+    ///////////////////////////////////////////////
+
+
+
+
+
+
+    
+    //////////////////////////////////////////////
 
 
 
@@ -696,6 +702,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
         </NFTMarketplaceContext.Provider>
     );
 };
+
 
 
 

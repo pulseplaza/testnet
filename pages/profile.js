@@ -48,8 +48,12 @@ const author = () => {
   useEffect(() => {
     fetchMyNFTsOrListedNFTs("fetchItemsListed")
       .then((items) => {
-        const reversedItems = [...items].reverse();
-        setMyNFTs(reversedItems || []);
+        if (Array.isArray(items)) {
+          const reversedItems = [...items].reverse();
+          setMyNFTs(reversedItems);
+        } else {
+          setMyNFTs([]);
+        }
       })
       .catch(error => {
         console.error("Error fetching listed items:", error);
@@ -63,14 +67,19 @@ const author = () => {
   useEffect(() => {
     fetchMyNFTsOrListedNFTs("fetchMyNFTs")
       .then((items) => {
-        const reversedItems = [...items].reverse();
-        setNfts(reversedItems || []);
+        if (Array.isArray(items)) {
+          const reversedItems = [...items].reverse();
+          setNfts(reversedItems);
+        } else {
+          setNfts([]);
+        }
       })
       .catch(error => {
         console.error("Error fetching NFTs:", error);
         setNfts([]);
       });
   }, [fetchMyNFTsOrListedNFTs]);
+  
 
 
 
@@ -79,15 +88,24 @@ const author = () => {
   useEffect(() => {
     getCollectionsByUser()
       .then((items) => {
-        console.log('My Collections:', items);
-        const reversedItems = [...items].reverse();
-        setMyCollections(reversedItems || []);
+        if (Array.isArray(items)) {
+          console.log('My Collections:', items);
+          const reversedItems = [...items].reverse();
+          setMyCollections(reversedItems);
+        } else {
+          setMyCollections([]);
+        }
       })
       .catch(error => {
         console.error("Error fetching collections:", error);
         setMyCollections([]);
       });
   }, [currentAccount]);
+  
+
+
+
+
 
 
   // Title and meta tags to be used in Head
