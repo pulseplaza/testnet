@@ -34,13 +34,14 @@
     gap: 1.5rem
 }
 
+
 .collectionTokens_box {
     line-height: 0;
     transition: all .3s ease-in;
     border-radius: 1rem;
     overflow: hidden;
     cursor: pointer;
-    padding-bottom: 1rem;
+    padding-bottom: 1.5rem;
     background-color: var(--bg-very-light);
 }
 
