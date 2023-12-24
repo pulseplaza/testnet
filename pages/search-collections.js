@@ -4,12 +4,11 @@ import Head from 'next/head';
 
 
 //INTERNAL IMPORT
-import Style from "../styles/searchPage.module.css";
+import Style from "../styles/search-collections.module.css";
 import { Brand, Loader } from "../components/componentsindex";
 import { SearchBar } from "../SearchPage/searchBarIndex";
 import { Title } from "../components/componentsindex";
-// import { Banner, NFTCardTwo } from "../collectionPage/collectionIndex";
-// import images from "../img";
+
 import { CollectionCard } from "../collectionPage/collectionIndex";
 
 //SMART CONTRACT IMPORT
@@ -20,7 +19,12 @@ import { NFTMarketplaceContext } from "../Context/NFTMarketplaceContext";
 const searchPage = () => {
   const { getAllCollections, setError, currentAccount } = useContext(NFTMarketplaceContext);
   const [collections, setCollections] = useState([]);
-  const [originalCollections, setOriginalCollections] = useState([]); // To store the original dataset
+  const [originalCollections, setOriginalCollections] = useState([]);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 36;
+
+
 
   useEffect(() => {
     getAllCollections()
@@ -47,11 +51,29 @@ const searchPage = () => {
       creatorAddress.toLowerCase().includes(searchTerm)
     );
     setCollections(filteredCollections);
+    setCurrentPage(1);
   };
 
   const onClearSearch = () => {
-    setCollections(originalCollections); // Reset to original collections when search is cleared
+    setCollections(originalCollections);
+    setCurrentPage(1);
   };
+
+
+
+  // Pagination logic
+  const getCurrentPageCollections = () => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    return collections.slice(startIndex, startIndex + itemsPerPage);
+  };
+
+  const totalPages = Math.ceil(collections.length / itemsPerPage);
+
+  const changePage = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
+
 
 
   // Title and meta tags to be used in Head
@@ -87,9 +109,27 @@ const searchPage = () => {
       />
 
 
+      {/* Pagination Controls */}
+      <div className={Style.paginationControls}>
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+          <button key={page} onClick={() => changePage(page)} disabled={page === currentPage}>
+            {page}
+          </button>
+        ))}
+      </div>
 
-      {collections.length === 0 ? <Loader /> : <CollectionCard collections={collections} />}
 
+      {collections.length === 0 ? <Loader /> : <CollectionCard collections={getCurrentPageCollections()} />}
+
+
+      {/* Pagination Controls */}
+      <div className={Style.paginationControls}>
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+          <button key={page} onClick={() => changePage(page)} disabled={page === currentPage}>
+            {page}
+          </button>
+        ))}
+      </div>
 
 
       <Brand />
@@ -98,3 +138,5 @@ const searchPage = () => {
 };
 
 export default searchPage;
+
+

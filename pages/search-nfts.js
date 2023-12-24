@@ -5,10 +5,10 @@ import Head from 'next/head';
 
 
 //INTERNAL IMPORT
-import Style from "../styles/searchPage.module.css";
+import Style from "../styles/search-nfts.module.css";
 import { SearchWithFilter } from "../SearchPage/searchBarIndex";
 import { Title, NFTCardTwo, Brand, Loader } from "../components/componentsindex";
-// import images from "../img";
+
 
 //SMART CONTRACT IMPORT
 import { NFTMarketplaceContext } from "../Context/NFTMarketplaceContext";
@@ -21,6 +21,9 @@ const SearchPage = () => {
   const router = useRouter();
 
   const [sortOption, setSortOption] = useState('newest');
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 60;
 
 
 
@@ -39,15 +42,15 @@ const SearchPage = () => {
   }, []);
 
 
-  
-  
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const items = await fetchNFTs();
         const reversedItems = [...items].reverse();
         setOriginalNfts(reversedItems);
-  
+
         if (router.isReady) {
           const queryParam = router.query.query;
           if (queryParam) {
@@ -63,11 +66,11 @@ const SearchPage = () => {
         setError("Please refresh the browser.", error);
       }
     };
-  
+
     fetchData();
   }, [router.isReady, router.query]);
-  
-  
+
+
 
 
 
@@ -89,13 +92,15 @@ const SearchPage = () => {
     setSearchTerm(value);
     const filteredResults = filterNFTs(value);
     setNfts(filteredResults);
+    setCurrentPage(1);
   };
-  
+
 
 
   const onClearSearch = () => {
     setSearchTerm('');
     setNfts([...originalNfts]);
+    setCurrentPage(1);
   };
 
 
@@ -103,7 +108,7 @@ const SearchPage = () => {
   // Sorting function
   const handleSort = (selectedOption) => {
     let sortedNfts;
-  
+
     switch (selectedOption) {
       case 'newest':
         sortedNfts = searchTerm ? filterNFTs(searchTerm, [...originalNfts]) : [...originalNfts];
@@ -121,10 +126,11 @@ const SearchPage = () => {
       default:
         sortedNfts = [...originalNfts];
     }
-  
+
     setNfts(sortedNfts);
+    setCurrentPage(1);
   };
-  
+
 
 
 
@@ -134,6 +140,20 @@ const SearchPage = () => {
     handleSort(selectedOption);
   };
 
+
+
+
+  // Pagination logic
+  const getCurrentPageNfts = () => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    return nfts.slice(startIndex, startIndex + itemsPerPage);
+  };
+
+  const totalPages = Math.ceil(nfts.length / itemsPerPage);
+
+  const changePage = (newPage) => {
+    setCurrentPage(newPage);
+  };
 
 
 
@@ -173,11 +193,31 @@ const SearchPage = () => {
 
 
 
-      {/* Filter Component */}
-      {/* <Filter onSort={handleSortChange} value={sortOption} /> */}
+
+      {/* Pagination Controls */}
+      <div className={Style.paginationControls}>
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+          <button key={page} onClick={() => changePage(page)} disabled={page === currentPage}>
+            {page}
+          </button>
+        ))}
+      </div>
 
 
-      {nfts.length === 0 ? <Loader /> : <NFTCardTwo NFTData={nfts} />}
+      {nfts.length === 0 ? <Loader /> : <NFTCardTwo NFTData={getCurrentPageNfts()} />}
+
+
+      {/* Pagination Controls */}
+      <div className={Style.paginationControls}>
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+          <button key={page} onClick={() => changePage(page)} disabled={page === currentPage}>
+            {page}
+          </button>
+        ))}
+      </div>
+
+
+
       <Brand />
     </div>
   );
