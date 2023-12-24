@@ -68,10 +68,6 @@
 
 
 
-/* .NFTCardTwo_box:hover .NFTCardTwo_box_img {
-    border-radius: 1rem;
-} */
-
 
 .NFTCardTwo_box:hover .NFTCardTwo_box_img_img {
     transform: scale(1.05);
@@ -188,6 +184,7 @@
         margin: 0 auto;
         display: grid;
         gap: 3rem;
+        margin-bottom: 4rem;
     }
 
     .NFTCardTwo_box {

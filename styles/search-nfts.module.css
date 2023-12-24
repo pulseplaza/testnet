@@ -1,7 +1,24 @@
 
 .paginationControls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+
+.paginationControls_top {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 4rem;
+  }
+
+
+  .paginationControls_bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
     margin-bottom: 4rem;
   }
