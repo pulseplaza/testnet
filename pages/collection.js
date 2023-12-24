@@ -7,9 +7,8 @@ import { Brand, Error } from "../components/componentsindex";
 import { ethers } from "ethers";
 import { NFTMarketplaceAddress, NFTMarketplaceABI } from "../Context/constants";
 
-const rpcurl = "https://pulsechain-testnet.publicnode.com";
 
-
+const rpcurl = process.env.NEXT_PUBLIC_RPC_URL;
 
 
 
@@ -90,13 +89,11 @@ export async function getServerSideProps(context) {
       const contract = new ethers.Contract(NFTMarketplaceAddress, NFTMarketplaceABI, provider);
       const rawCollectionData = await contract.getCollectionDetails(collectionAddress.toLowerCase());
 
-      // Add additional data fetching logic here if necessary
 
-      // Combine all data into collectionData
       collectionData = {
         ...rawCollectionData,
-        // Add additional properties as necessary
       };
+      
     } catch (error) {
       console.error("Error fetching collection details:", error);
       errorMsg = "Unable to fetch collection details from collection address. Check the URL.";
