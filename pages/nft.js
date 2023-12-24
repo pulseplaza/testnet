@@ -11,7 +11,7 @@ import { NFTMarketplaceContext } from "../Context/NFTMarketplaceContext";
 import { NFTMarketplaceAddress, NFTMarketplaceABI } from "../Context/constants";
 
 
-const rpcurl = "https://pulsechain-testnet.publicnode.com";
+const rpcurl = process.env.NEXT_PUBLIC_RPC_URL;
 
 
 
