@@ -229,12 +229,10 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
             const url = `https://scan.v4.testnet.pulsechain.com/api?module=logs&action=getLogs&fromBlock=0&toBlock=latest&address=${contractAddress}&topic0=${topic0}&topic1=${tokenIdHex}&topic0_1_opr=and`;
 
-            // console.log(`Fetching logs from URL: ${url}`);
-
             const response = await fetch(url);
             const data = await response.json();
 
-            // console.log(`API Response:`, data);
+            
 
             if (!data.result || data.result.length === 0) {
                 console.log("No relevant logs found for tokenId:", tokenId);
@@ -242,7 +240,6 @@ export const NFTMarketplaceProvider = ({ children }) => {
             }
 
             const history = data.result.map(log => {
-                // console.log(`Processing log:`, log);
 
                 // Decode non-indexed parameters from 'data'
                 const decodedData = ethers.utils.defaultAbiCoder.decode(
@@ -250,7 +247,6 @@ export const NFTMarketplaceProvider = ({ children }) => {
                     log.data
                 );
 
-                // console.log(`Decoded data:`, decodedData);
 
                 // Extracting price from BigNumber
                 const priceBigNumber = decodedData[3];
@@ -270,19 +266,6 @@ export const NFTMarketplaceProvider = ({ children }) => {
             return [];
         }
     };
-
-
-
-    ///////////////////////////////////////////////
-
-
-
-
-
-
-    
-    //////////////////////////////////////////////
-
 
 
 
