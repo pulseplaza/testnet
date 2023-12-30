@@ -24,7 +24,7 @@ const projectSecretKey = process.env.NEXT_PUBLIC_IPFS_TEST_PROJECT_SECRET_KEY;
 
 const auth = `Basic ${Buffer.from(`${projectId}:${projectSecretKey}`).toString("base64")}`;
 
-const subdomain = process.env.NEXT_PUBLIC_DOMAIN;
+const subdomain = process.env.NEXT_PUBLIC_IPFS_DOMAIN;
 
 const rpcurl = process.env.NEXT_PUBLIC_RPC_URL;
 
