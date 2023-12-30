@@ -1,14 +1,15 @@
 
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Line } from "react-chartjs-2";
-// import Chart from "chart.js/auto";
+import Chart from "chart.js/auto";
 
 //INTERNAL IMPORT
 import Style from "./NFTChart.module.css";
 
 const NFTChart = ({ priceHistory }) => {
     const [windowWidth, setWindowWidth] = useState(undefined);
+    const chartRef = useRef(null);
 
     useEffect(() => {
         // Set the initial value of windowWidth
@@ -21,6 +22,14 @@ const NFTChart = ({ priceHistory }) => {
         window.addEventListener('resize', updateDimensions);
 
         return () => window.removeEventListener('resize', updateDimensions);
+
+        // Destroy chart instance if it exists
+        if (chartRef.current) {
+            chartRef.current.destroy();
+            chartRef.current = null;
+        }
+
+
     }, []);
 
     // Reverse the priceHistory array for chart display
@@ -73,7 +82,15 @@ const NFTChart = ({ priceHistory }) => {
             <div className={Style.chartContainer}>
                 {/* Render chart only if windowWidth is defined (i.e., on the client side) */}
                 {windowWidth !== undefined && (
-                    <Line key={windowWidth} data={chartData} options={chartOptions} />
+                    <Line
+                    key={windowWidth}
+                    data={chartData}
+                    options={chartOptions}
+                    ref={chartInstance => {
+                        // Assign the chart instance to the ref
+                        chartRef.current = chartInstance?.chartInstance;
+                    }}
+                    />
                 )}
             </div>
         </div>
