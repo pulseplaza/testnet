@@ -5,41 +5,12 @@ import { ethers } from "ethers";
 import { useRouter } from "next/router";
 import axios from "axios";
 
-// import { create as ipfsHttpClient } from "ipfs-http-client";
-
 
 import { NFTMarketplaceAddress, NFTMarketplaceABI } from "./constants";
 
 
 
-// // Infura TEST project settings
-// const projectId = process.env.NEXT_PUBLIC_IPFS_TEST_PROJECT_ID;
-// const projectSecretKey = process.env.NEXT_PUBLIC_IPFS_TEST_PROJECT_SECRET_KEY;
-
-
-// // Infura MAIN project settings
-// const projectId = process.env.NEXT_PUBLIC_IPFS_MAIN_PROJECT_ID;
-// const projectSecretKey = process.env.NEXT_PUBLIC_IPFS_MAIN_PROJECT_SECRET_KEY;
-
-
-// const auth = `Basic ${Buffer.from(`${projectId}:${projectSecretKey}`).toString("base64")}`;
-
-// const subdomain = process.env.NEXT_PUBLIC_INFURA_DOMAIN;
-
-
 const rpcurl = process.env.NEXT_PUBLIC_RPC_URL;
-
-
-
-// const client = ipfsHttpClient({
-//     host: "infura-ipfs.io",
-//     port: 5001,
-//     protocol: "https",
-//     headers: {
-//         authorization: auth,
-//     },
-// });
-
 
 
 
@@ -317,8 +288,10 @@ export const NFTMarketplaceProvider = ({ children }) => {
     //---CREATE NFT FUNCTION
 
     const createNFT = async (name, price, image, description, collection) => {
+        console.log("Starting createNFT function");
 
         if (!name || !description || !price || !image || !collection) {
+            console.error("Incomplete data provided for NFT creation");
             setError("Incomplete data! Necessary fields: Image, name, description, collection and price.");
             setOpenError(true);
             return;
@@ -326,18 +299,44 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
         const creator = currentAccount;
 
-        const data = JSON.stringify({ name, description, image, collection, creator });
-        try {
-            const added = await client.add(data);
-            const url = `${subdomain}/ipfs/${added.path}`;
-            console.log(url)
+        // Generate NFT metadata
+        const metadata = JSON.stringify({ name, description, image, collection, creator });
 
-            await createSale(url, price);
+        try {
+            console.log("Sending metadata to NFT.Storage");
+            const response = await fetch('https://api.nft.storage/upload', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${process.env.NEXT_PUBLIC_NFTSTORAGE_KEY}`,
+                    'Content-Type': 'application/json'
+                },
+                body: metadata
+            });
+
+            console.log("Received response from NFT.Storage", response);
+
+            if (!response.ok) {
+                throw new Error(`Error uploading metadata: ${response.statusText}`);
+            }
+
+            const data = await response.json();
+            console.log("Received data from NFT.Storage", data);
+
+            if (!data.ok) {
+                throw new Error(`Error uploading metadata: ${data.error.message}`);
+            }
+
+            const tokenURI = `https://nftstorage.link/ipfs/${data.value.cid}`;
+            console.log("Constructed tokenURI", tokenURI);
+
+            console.log("Calling createSale function");
+            await createSale(tokenURI, price);
             router.push("/search-nfts");
         } catch (error) {
+            console.error("Error in createNFT function", error);
             setError("There was a problem while creating the NFT.", error);
             setOpenError(true);
-            console.log("createNFT:", error)
+            console.log("createNFT error:", error);
         }
     };
 
@@ -373,6 +372,11 @@ export const NFTMarketplaceProvider = ({ children }) => {
             setOpenError(true);
         }
     };
+
+
+
+
+
 
 
     //--- CREATE COLLECTION
@@ -714,7 +718,6 @@ export const NFTMarketplaceProvider = ({ children }) => {
         </NFTMarketplaceContext.Provider>
     );
 };
-
 
 
 

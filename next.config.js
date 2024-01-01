@@ -4,7 +4,7 @@ const nextConfig = {
     swcMinify: true,
     images: {
         domains: [
-            "pulseplazatest.infura-ipfs.io",
+            "pulseplaza.io",
             "testnet.pulseplaza.io",
             "nftstorage.link",
             "ipfs.nftstorage.link",

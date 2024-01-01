@@ -29,14 +29,21 @@ const NFTChart = ({ priceHistory }) => {
             chartRef.current = null;
         }
 
-
     }, []);
+
+
+    const formatDate = (timestamp) => {
+        const date = new Date(timestamp);
+        // Format the date as you prefer, e.g., "YYYY-MM-DD"
+        return date.toISOString().split('T')[0];
+    };
+
 
     // Reverse the priceHistory array for chart display
     const reversedPriceHistory = [...priceHistory].reverse();
 
     const chartData = {
-        labels: reversedPriceHistory.map(item => item.timestamp),
+        labels: reversedPriceHistory.map(item => formatDate(item.timestamp)),
         datasets: [
             {
                 label: "NFT Price in PLS",
@@ -58,6 +65,10 @@ const NFTChart = ({ priceHistory }) => {
                 grid: {
                     color: '#727272',
                 },
+                ticks: {
+                    autoSkip: true,
+                    maxTicksLimit: 10,
+                }
 
             },
             x: {
@@ -66,9 +77,10 @@ const NFTChart = ({ priceHistory }) => {
                 },
 
                 ticks: {
-                    display: false,
+                    autoSkip: true,
+                    maxTicksLimit: 8,
                 }
-                
+
             }
         }
     };
@@ -80,16 +92,15 @@ const NFTChart = ({ priceHistory }) => {
                 <h1 className={Style.title}>Price History</h1>
             </div>
             <div className={Style.chartContainer}>
-                {/* Render chart only if windowWidth is defined (i.e., on the client side) */}
                 {windowWidth !== undefined && (
                     <Line
-                    key={windowWidth}
-                    data={chartData}
-                    options={chartOptions}
-                    ref={chartInstance => {
-                        // Assign the chart instance to the ref
-                        chartRef.current = chartInstance?.chartInstance;
-                    }}
+                        key={windowWidth}
+                        data={chartData}
+                        options={chartOptions}
+                        ref={chartInstance => {
+                            // Assign the chart instance to the ref
+                            chartRef.current = chartInstance?.chartInstance;
+                        }}
                     />
                 )}
             </div>
