@@ -5,6 +5,7 @@ import Image from "next/image";
 // import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 
 // import { useRouter } from 'next/router';
+
 import Style from "./CollectionDetailsImg.module.css";
 
 
@@ -46,9 +47,9 @@ const CollectionDetailsImg = ({ nft }) => {
   };
 
 
-  const truncatedSeller = truncate(nft?.seller);
-  const truncatedOwner = truncate(nft?.owner);
-  const truncatedCreator = truncate(nft?.creator);
+  // const truncatedSeller = truncate(nft?.seller);
+  // const truncatedOwner = truncate(nft?.owner);
+  // const truncatedCreator = truncate(nft?.creator);
 
 
   //DESCRIPTION & DETAILS FUNCTION
@@ -68,7 +69,6 @@ const CollectionDetailsImg = ({ nft }) => {
 
 
   
-
 
   return (
     <div className={Style.CollectionDetailsImg} ref={blockRef}>

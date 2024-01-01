@@ -4,16 +4,17 @@ import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { create as ipfsHttpClient } from "ipfs-http-client";
+
+// import { create as ipfsHttpClient } from "ipfs-http-client";
 
 
 import { NFTMarketplaceAddress, NFTMarketplaceABI } from "./constants";
 
 
 
-// Infura TEST project settings
-const projectId = process.env.NEXT_PUBLIC_IPFS_TEST_PROJECT_ID;
-const projectSecretKey = process.env.NEXT_PUBLIC_IPFS_TEST_PROJECT_SECRET_KEY;
+// // Infura TEST project settings
+// const projectId = process.env.NEXT_PUBLIC_IPFS_TEST_PROJECT_ID;
+// const projectSecretKey = process.env.NEXT_PUBLIC_IPFS_TEST_PROJECT_SECRET_KEY;
 
 
 // // Infura MAIN project settings
@@ -21,22 +22,23 @@ const projectSecretKey = process.env.NEXT_PUBLIC_IPFS_TEST_PROJECT_SECRET_KEY;
 // const projectSecretKey = process.env.NEXT_PUBLIC_IPFS_MAIN_PROJECT_SECRET_KEY;
 
 
+// const auth = `Basic ${Buffer.from(`${projectId}:${projectSecretKey}`).toString("base64")}`;
 
-const auth = `Basic ${Buffer.from(`${projectId}:${projectSecretKey}`).toString("base64")}`;
+// const subdomain = process.env.NEXT_PUBLIC_INFURA_DOMAIN;
 
-const subdomain = process.env.NEXT_PUBLIC_DOMAIN;
 
 const rpcurl = process.env.NEXT_PUBLIC_RPC_URL;
 
 
-const client = ipfsHttpClient({
-    host: "infura-ipfs.io",
-    port: 5001,
-    protocol: "https",
-    headers: {
-        authorization: auth,
-    },
-});
+
+// const client = ipfsHttpClient({
+//     host: "infura-ipfs.io",
+//     port: 5001,
+//     protocol: "https",
+//     headers: {
+//         authorization: auth,
+//     },
+// });
 
 
 
@@ -232,7 +234,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
             const response = await fetch(url);
             const data = await response.json();
 
-            
+
 
             if (!data.result || data.result.length === 0) {
                 console.log("No relevant logs found for tokenId:", tokenId);
@@ -270,19 +272,46 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
 
 
+
     //---UPLOAD TO IPFS FUNCTION
 
     const uploadToIPFS = async (file) => {
-        try {
-            const added = await client.add({ content: file });
-            const url = `${subdomain}/ipfs/${added.path}`;
-            return url;
+        const url = 'https://api.nft.storage/upload';
 
+        // Prepare form data
+        const formData = new FormData();
+        formData.append('file', file);
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${process.env.NEXT_PUBLIC_NFTSTORAGE_KEY}`,
+                },
+                body: formData,
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error: ${response.statusText}`);
+            }
+
+            const data = await response.json();
+
+            if (data.ok) {
+                const cid = data.value.cid;
+                const filename = file.name;
+                return `https://nftstorage.link/ipfs/${cid}/${filename}`;
+            } else {
+                throw new Error(`Error uploading file: ${data.error.message}`);
+            }
         } catch (error) {
-            setError("Data could not be uploaded. File rejected by IPFS.", error);
-            setOpenError(true);
+            console.error('Error uploading to NFT.Storage:', error);
+            throw error;
         }
     };
+
+
+
 
 
     //---CREATE NFT FUNCTION

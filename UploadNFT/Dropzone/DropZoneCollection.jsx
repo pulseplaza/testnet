@@ -9,6 +9,7 @@ import Style from "./DropZone.module.css";
 import images from "../../img";
 
 
+
 const DropZone = ({
   title,
   heading,
@@ -18,12 +19,13 @@ const DropZone = ({
   description,
   uploadToIPFS,
   setImage,
+  onImageLoad,
+  onImageError,
 }) => {
 
 
   const [fileUrl, setFileUrl] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-
 
 
 
@@ -86,6 +88,8 @@ const DropZone = ({
 
             <Image
               src={fileUrl}
+              onLoad={onImageLoad}
+              onError={onImageError}
               alt="Image preview"
               width={200}
               height={200}
@@ -114,4 +118,5 @@ const DropZone = ({
 };
 
 export default DropZone;
+
 

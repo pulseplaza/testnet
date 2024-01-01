@@ -1,4 +1,5 @@
 
+
 import React, { useState, useContext } from "react";
 
 
@@ -20,6 +21,30 @@ const CreateCollection = ({ uploadToIPFS, createCollection }) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const [isCreateEnabled, setIsCreateEnabled] = useState(false);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+
+
+
+  // Update the setImage function in DropZoneCollection props
+  const handleSetImage = (url) => {
+    setImage(url);
+    setIsImageLoaded(false); // Reset isImageLoaded to false when a new image is set
+  };
+
+  // Called when the image loads successfully
+  const onImageLoad = () => {
+    setIsImageLoaded(true); // Set isImageLoaded to true when image is loaded
+    setIsCreateEnabled(true);
+  };
+
+  // Called when there's an error in loading the image
+  const onImageError = () => {
+    setIsImageLoaded(false); // Set isImageLoaded to false on error
+    setIsCreateEnabled(false);
+    console.error("Failed to load image preview.");
+  };
+
   const { validateTextLength } = useContext(NFTMarketplaceContext);
 
 
@@ -27,9 +52,10 @@ const CreateCollection = ({ uploadToIPFS, createCollection }) => {
     if (
       !validateTextLength(name, 'name') ||
       !validateTextLength(symbol, 'symbol') ||
-      !validateTextLength(description, 'description')
+      !validateTextLength(description, 'description') ||
+      !isImageLoaded
     ) {
-      // If validation fails, exit the function
+      alert("Image preview not loaded. Please check your image file.");
       return;
     }
 
@@ -39,7 +65,7 @@ const CreateCollection = ({ uploadToIPFS, createCollection }) => {
     try {
       await createCollection(name, symbol, description, image);
       setIsLoading(false); // Stop loading
-      // Add any post-creation logic here (like redirection)
+
     } catch (error) {
       console.error("Error during collection creation:", error);
       setIsLoading(false); // Stop loading in case of error
@@ -48,8 +74,9 @@ const CreateCollection = ({ uploadToIPFS, createCollection }) => {
 
 
 
+
+
   return (
-    
 
     <div className={Style.upload}>
 
@@ -67,8 +94,10 @@ const CreateCollection = ({ uploadToIPFS, createCollection }) => {
         name={name}
         symbol={symbol}
         description={description}
-        setImage={setImage}
+        setImage={handleSetImage}
         uploadToIPFS={uploadToIPFS}
+        onImageLoad={onImageLoad}
+        onImageError={onImageError}
       />
 
       <div className={Style.upload_box}>
@@ -116,6 +145,7 @@ const CreateCollection = ({ uploadToIPFS, createCollection }) => {
             btnName="Upload"
             handleClick={handleCreateCollection}
             classStyle={Style.upload_box_btn_style}
+            disabled={!isCreateEnabled}
           />
         </div>
       </div>
@@ -124,3 +154,4 @@ const CreateCollection = ({ uploadToIPFS, createCollection }) => {
 };
 
 export default CreateCollection;
+

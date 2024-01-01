@@ -9,6 +9,7 @@ import Style from "./DropZone.module.css";
 import images from "../../img";
 
 
+
 const DropZone = ({
   title,
   heading,
@@ -17,6 +18,8 @@ const DropZone = ({
   description,
   uploadToIPFS,
   setImage,
+  onImageLoad,
+  onImageError,
 }) => {
 
   const [fileUrl, setFileUrl] = useState(null);
@@ -51,6 +54,8 @@ const DropZone = ({
   });
 
 
+
+
   return (
     <div>
       <div className={Style.DropZone_box} {...getRootProps()}>
@@ -59,17 +64,9 @@ const DropZone = ({
           <p>{title}</p>
           <div className={Style.DropZone_box_input_img}>
             {isLoading ? (
-              <p>
-                ⌛ Uploading your file. Please wait.
-              </p>
+              <p>⌛ Uploading your file. Please wait.</p>
             ) : (
-              <Image
-                src={images.upload}
-                alt="Upload"
-                width={100}
-                height={100}
-                className={Style.DropZone_box_input_img_img}
-              />
+              <Image src={images.upload} alt="Upload" width={100} height={100} />
             )}
           </div>
           <p>{heading}</p>
@@ -80,8 +77,6 @@ const DropZone = ({
       {fileUrl && (
         <aside className={Style.DropZone_box_aside}>
           <div className={Style.DropZone_box_aside_box}>
-
-
             <Image
               src={fileUrl}
               alt="Image preview"
@@ -89,18 +84,16 @@ const DropZone = ({
               height={200}
               className={Style.DropZone_box_aside_box_img}
               objectFit="contain"
+              onLoad={onImageLoad}
+              onError={onImageError}
             />
-
             <div className={Style.DropZone_box_aside_box_preview}>
-
               <div className={Style.DropZone_box_aside_box_preview_one}>
-              
                 <h3>Name:</h3>
                 <p>{name || ""}</p>
                 <h3>Description:</h3>
                 <p>{description || ""}</p>
               </div>
-
             </div>
           </div>
         </aside>

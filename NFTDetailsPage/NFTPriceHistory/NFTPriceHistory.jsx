@@ -53,7 +53,10 @@ const NFTPriceHistory = ({ tokenId }) => {
                     </tbody>
                 </table>
             ) : (
-                <p>Please refresh the page to show the price history.</p>
+                <p>Price history could not be fetched from the blockchain explorer.
+                    <br /><br />
+                    Please try again later.
+                </p>
             )}
         </div>
     );

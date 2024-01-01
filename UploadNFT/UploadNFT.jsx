@@ -27,13 +27,11 @@ const UploadNFT = ({ uploadToIPFS, createNFT, mycollections }) => {
   const [price, setPrice] = useState("");
   const [active, setActive] = useState(0);
   const [name, setName] = useState("");
-  // const [website, setWebsite] = useState("");
+
   const [description, setDescription] = useState("");
-  // const [royalties, setRoyalties] = useState("");
-  // const [fileSize, setFileSize] = useState("");
-  // const [category, setCategory] = useState(0);
+
   const [collection, setCollection] = useState("");
-  // const [properties, setProperties] = useState("");
+
   const [image, setImage] = useState(null);
 
   const { validateTextLength } = useContext(NFTMarketplaceContext);
@@ -41,6 +39,9 @@ const UploadNFT = ({ uploadToIPFS, createNFT, mycollections }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [isWalletConnected, setIsWalletConnected] = useState(false);
+
+  const [isMintEnabled, setIsMintEnabled] = useState(false);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
 
   const router = useRouter();
@@ -77,6 +78,24 @@ const UploadNFT = ({ uploadToIPFS, createNFT, mycollections }) => {
   }, []);
 
 
+  // Function called when a new image URL is set
+  const handleSetImage = (url) => {
+    setImage(url);
+    setIsImageLoaded(false); // Reset isImageLoaded to false when a new image is set
+  };
+
+  // Called when the image loads successfully
+  const onImageLoad = () => {
+    setIsImageLoaded(true); // Set isImageLoaded to true when image is loaded
+    setIsMintEnabled(true);
+  };
+
+  // Called when there's an error in loading the image
+  const onImageError = () => {
+    setIsImageLoaded(false); // Set isImageLoaded to false on error
+    setIsMintEnabled(false);
+    console.error("Failed to load image preview.");
+  };
 
 
   const handleDescriptionChange = (e) => {
@@ -88,6 +107,16 @@ const UploadNFT = ({ uploadToIPFS, createNFT, mycollections }) => {
   const handleMintNFT = async () => {
     if (!validateTextLength(name, 'name') || !validateTextLength(description, 'description')) {
       // If the validation fails, exit the function.
+      return;
+    }
+
+    if (!image) {
+      alert("Please upload an image before minting.");
+      return;
+    }
+
+    if (!isImageLoaded) {
+      alert("Image preview not loaded. Please check your image file.");
       return;
     }
 
@@ -121,14 +150,17 @@ const UploadNFT = ({ uploadToIPFS, createNFT, mycollections }) => {
 
 
 
+
       <DropZone
         title="Static and animated image files, max 20MB"
         heading="Drag & drop file"
         subHeading="or browse media on your device"
         name={name}
         description={description}
-        setImage={setImage}
+        setImage={handleSetImage}
         uploadToIPFS={uploadToIPFS}
+        onImageLoad={onImageLoad}
+        onImageError={onImageError}
       />
 
       <div className={Style.upload_box}>
@@ -194,10 +226,12 @@ const UploadNFT = ({ uploadToIPFS, createNFT, mycollections }) => {
                     <div className={Style.upload_box_slider_box_img}>
                       <Image
                         src={collection.image}
-                        alt="background image"
+                        alt="Collection Image"
                         width={70}
                         height={70}
                         className={Style.upload_box_slider_box_img_img}
+                        onLoad={onImageLoad}
+                        onError={onImageError}
                       />
                     </div>
                   </div>
@@ -251,6 +285,7 @@ const UploadNFT = ({ uploadToIPFS, createNFT, mycollections }) => {
             btnName="Upload"
             handleClick={handleMintNFT}
             classStyle={Style.upload_box_btn_style}
+            disabled={!isMintEnabled}
           />
 
         </div>
@@ -260,4 +295,5 @@ const UploadNFT = ({ uploadToIPFS, createNFT, mycollections }) => {
 };
 
 export default UploadNFT;
+
 
