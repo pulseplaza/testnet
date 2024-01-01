@@ -74,6 +74,7 @@ const DropZone = ({
         </div>
       </div>
 
+
       {fileUrl && (
         <aside className={Style.DropZone_box_aside}>
           <div className={Style.DropZone_box_aside_box}>
